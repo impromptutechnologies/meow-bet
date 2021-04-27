@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const profileSchema = new mongoose.Schema({
   userID: { type: String, required: true, unique: true },
   username: { type: String },
-  serverID: { type: String, required: false },
+  serverID: { type: String },
   coins: { type: Number, default: 10 },
 });
 

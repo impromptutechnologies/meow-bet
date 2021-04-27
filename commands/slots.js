@@ -8,7 +8,7 @@ module.exports = {
     min = Math.ceil(0);
     max = Math.floor(10);
     const chances = Math.floor(Math.random() * (max - min) + min);
-    const winnin = Math.floor(Math.random() * (200 - 100) + 100) / 100;
+    const winnin = Math.floor(Math.random() * (200 - 110) + 110) / 110;
     console.log(winnin);
     console.log(chances);
     const user = Profile.findOne({ userID: message.author.id }, (err, prof) => {

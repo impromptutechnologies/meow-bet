@@ -12,10 +12,11 @@ module.exports = async (Discord, client, message) => {
   try {
     profileData = await Profile.findOne({ userID: message.author.id });
     if (!profileData) {
+      console.log(message.guild.id)
       let profile = await Profile.create({
         userID: message.author.id,
         username: message.author.tag,
-        //serverID: message.guild.id,
+        serverID: message.guild.id,
         coins: 10,
       });
       const newEmbed = new Discord.MessageEmbed()
