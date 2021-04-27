@@ -5,7 +5,7 @@ const betSchema = new mongoose.Schema({
   creatorName: { type: String, required: true },
   outcomeID: { type: String, required: true },
   betAmount: { type: Number, required: true },
-  betCode: { type: String, required: true },
+  Code: { type: String, required: true },
   betOdds: { type: Number, required: true },
   possibleWinnings: { type: Number, required: true },
 });

@@ -9,7 +9,7 @@ const outcomeSchema = new mongoose.Schema({
   timeEnd: { type: String, required: true },
   option1: [
     {
-      betCode: {
+      Code: {
         type: String,
         required: true,
       },
@@ -17,7 +17,7 @@ const outcomeSchema = new mongoose.Schema({
         type: Number,
         required: true,
       },
-      betCode2: {
+      Code2: {
         type: String,
         required: true,
       },
@@ -25,7 +25,7 @@ const outcomeSchema = new mongoose.Schema({
         type: Number,
         required: true,
       },
-      betCode3: {
+      Code3: {
         type: String,
       },
       odds3: {
@@ -37,18 +37,18 @@ const outcomeSchema = new mongoose.Schema({
 
 outcomeSchema.methods.addOptions = async function (option1) {
   const user = this;
-  const betCode = option1[0];
+  const Code = option1[0];
   const odds = option1[1];
-  const betCode2 = option1[2];
+  const Code2 = option1[2];
   const odds2 = option1[3];
-  const betCode3 = option1[4];
+  const Code3 = option1[4];
   const odds3 = option1[5];
   user.option1 = user.option1.concat({
-    betCode,
+    Code,
     odds,
-    betCode2,
+    Code2,
     odds2,
-    betCode3,
+    Code3,
     odds3,
   });
   await user.save();

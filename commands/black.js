@@ -46,9 +46,7 @@ module.exports = {
       .setColor("#304281")
       .setTitle(`${message.author.username}'s Blackjack Round`)
       .setDescription(
-        `Your cards are ${dealt1}, ${dealt2} \n
-        Hit or Stay?\n
-        ps. 5 Card Charlie Rules: If you're dealt 5 cards without a bust you automatically win!
+        `Your cards are ${dealt1}, ${dealt2} \nHit or Stay?\nps. 5 Card Charlie Rules: If you're dealt 5 cards without a bust you automatically win!
         `
       )
       .setURL("http://localhost:3000/casino")

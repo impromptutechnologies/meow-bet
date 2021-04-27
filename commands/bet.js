@@ -9,15 +9,14 @@ module.exports = {
     const code = args[1];
     const amt = args[0];
     if (!code) {
-      return message.channel.send(`No BetCode Provided`);
+      return message.channel.send(`No Code Provided`);
     } else if (amt > profileData.coins) {
       return message.channel.send(`Not Enough tokens...`);
     }
-    profileData.coins = profileData.coins - amt;
-    profileData.save();
+    
     try {
       Bet.findOne(
-        { creatorID: message.author.id, betCode: code },
+        { creatorID: message.author.id, Code: code },
         (err, bet) => {
           if (err) {
             return console.log(err);
@@ -27,9 +26,9 @@ module.exports = {
           Outcome.findOne(
             {
               $or: [
-                { "option1.0.betCode": code },
-                { "option1.0.betCode2": code },
-                { "option1.0.betCode3": code },
+                { "option1.0.Code": code },
+                { "option1.0.Code2": code },
+                { "option1.0.Code3": code },
               ],
             },
             (err, outcomeData) => {
@@ -38,8 +37,10 @@ module.exports = {
                 if (err) {
                   return console.log(err);
                 }
-                if (outcomeData.option1[0].betCode == code) {
+                if (outcomeData.option1[0].Code == code) {
                   const odds = outcomeData.option1[0].odds;
+                  profileData.coins = profileData.coins - amt;
+                  profileData.save();
                   Bet.create(
                     {
                       creatorID: message.author.id,
@@ -47,7 +48,7 @@ module.exports = {
                       creatorName: message.author.username,
                       outcomeID: outcomeData.outcomeID,
                       betAmount: amt,
-                      betCode: code,
+                      Code: code,
                       betOdds: odds,
                       possibleWinnings: odds * amt,
                     },
@@ -62,7 +63,7 @@ module.exports = {
                         .setDescription("Good Luck :)")
                         .addFields(
                           { name: "Bet Amount", value: amt },
-                          { name: "BetCode", value: code }
+                          { name: "Code", value: code }
                         )
                         .setFooter(
                           "visit http://localhost:3000/bet to view more bets!"
@@ -72,8 +73,10 @@ module.exports = {
                     }
                   );
                 }
-                if (outcomeData.option1[0].betCode2 == code) {
+                if (outcomeData.option1[0].Code2 == code) {
                   const odds = outcomeData.option1[0].odds2;
+                  profileData.coins = profileData.coins - amt;
+                  profileData.save();
                   Bet.create(
                     {
                       creatorID: message.author.id,
@@ -81,7 +84,7 @@ module.exports = {
                       creatorName: message.author.username,
                       outcomeID: outcomeData.outcomeID,
                       betAmount: amt,
-                      betCode: code,
+                      Code: code,
                       betOdds: odds,
                       possibleWinnings: odds * amt,
                     },
@@ -97,7 +100,7 @@ module.exports = {
                         .setDescription("Good Luck :)")
                         .addFields(
                           { name: "Bet Amount", value: amt },
-                          { name: "BetCode", value: code }
+                          { name: "Code", value: code }
                         )
                         .setFooter(
                           "visit http://localhost:3000/bet to view more bets!"
@@ -107,8 +110,10 @@ module.exports = {
                     }
                   );
                 }
-                if (outcomeData.option1[0].betCode3 == code) {
+                if (outcomeData.option1[0].Code3 == code) {
                   const odds = outcomeData.option1[0].odds3;
+                  profileData.coins = profileData.coins - amt;
+                  profileData.save();
                   Bet.create(
                     {
                       creatorID: message.author.id,
@@ -116,7 +121,7 @@ module.exports = {
                       creatorName: message.author.username,
                       outcomeID: outcomeData.outcomeID,
                       betAmount: amt,
-                      betCode: code,
+                      Code: code,
                       betOdds: odds,
                       possibleWinnings: odds * amt,
                     },
@@ -132,7 +137,7 @@ module.exports = {
                         .setDescription("Good Luck :)")
                         .addFields(
                           { name: "Bet Amount", value: amt },
-                          { name: "BetCode", value: code }
+                          { name: "Code", value: code }
                         )
                         .setFooter(
                           "visit http://localhost:3000/bet to view more bets!"
