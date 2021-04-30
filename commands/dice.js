@@ -31,6 +31,7 @@ module.exports = {
               const newEmbed = new Discord.MessageEmbed()
                 .setColor("#304281")
                 .setTitle(`You rolled a ${chances}`)
+                .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                 .setDescription("Better luck next time :(")
                 .setFooter(
                   "visit http://localhost:3000/casino to view more casino games!"
@@ -49,7 +50,8 @@ module.exports = {
               }
               const newEmbed = new Discord.MessageEmbed()
                 .setColor("#304281")
-                .setTitle(`Congrats ${message.author.username}!`)
+                .setTitle(`Congrats!`)
+                .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                 .setDescription("You managed to win! :)")
                 .addFields(
                   { name: "Bet Amount", value: amt },

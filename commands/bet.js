@@ -59,7 +59,8 @@ module.exports = {
                       res.save();
                       const newEmbed = new Discord.MessageEmbed()
                         .setColor("#304281")
-                        .setTitle(`${message.author.username}'s Bet Ticket`)
+                        .setTitle(`Bet Ticket`)
+                        .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                         .setDescription("Good Luck :)")
                         .addFields(
                           { name: "Bet Amount", value: amt },
@@ -96,7 +97,8 @@ module.exports = {
                       res.save();
                       const newEmbed = new Discord.MessageEmbed()
                         .setColor("#304281")
-                        .setTitle(`${message.author.username}'s Bet Ticket`)
+                        .setTitle(`Bet Ticket`)
+                        .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                         .setDescription("Good Luck :)")
                         .addFields(
                           { name: "Bet Amount", value: amt },
@@ -133,7 +135,8 @@ module.exports = {
                       res.save();
                       const newEmbed = new Discord.MessageEmbed()
                         .setColor("#304281")
-                        .setTitle(`${message.author.username}'s Bet Ticket`)
+                        .setTitle(`Bet Ticket`)
+                        .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                         .setDescription("Good Luck :)")
                         .addFields(
                           { name: "Bet Amount", value: amt },

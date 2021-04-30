@@ -44,7 +44,8 @@ module.exports = {
     }
     const newEmbed = new Discord.MessageEmbed()
       .setColor("#304281")
-      .setTitle(`${message.author.username}'s Blackjack Round`)
+      .setTitle(`Blackjack Round`)
+      .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
       .setDescription(
         `Your cards are ${dealt1}, ${dealt2} \nHit or Stay?\nps. 5 Card Charlie Rules: If you're dealt 5 cards without a bust you automatically win!
         `
@@ -90,7 +91,8 @@ module.exports = {
             );
             const newEmbed = new Discord.MessageEmbed()
               .setColor("#304281")
-              .setTitle(`${message.author.username} Won!`)
+              .setTitle(`You Won!`)
+              .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
               .setDescription(
                 `Your total was ${total}\nYou Won ${((amt * 1.3) - amt).toFixed(2)} tokens!`
               )
@@ -104,7 +106,8 @@ module.exports = {
           if (total > 21) {
             const newEmbed = new Discord.MessageEmbed()
               .setColor("#304281")
-              .setTitle(`${message.author.username} has gone bust!`)
+              .setTitle(`Bust!`)
+              .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
               .setDescription(`Your total was ${total}!`)
               .setURL("http://localhost:3000/casino")
               .setImage(
@@ -115,7 +118,8 @@ module.exports = {
           }
           const newEmbed = new Discord.MessageEmbed()
               .setColor("#304281")
-              .setTitle(`${message.author.username}'s Blackjack Round!`)
+              .setTitle(`Make your Choice!`)
+              .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
               .setDescription(`Your total is ${total}!\nHit or Stay?`)
               .setURL("http://localhost:3000/casino")
               .setImage(
@@ -148,7 +152,8 @@ module.exports = {
                   );
                   const newEmbed = new Discord.MessageEmbed()
                     .setColor("#304281")
-                    .setTitle(`${message.author.username} Won!`)
+                    .setTitle(`You Won!`)
+                    .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                     .setDescription(
                       `Your total was ${total}\nYou Won ${
                         ((amt * 1.3) - amt).toFixed(2)
@@ -173,7 +178,8 @@ module.exports = {
                     );
                     const newEmbed = new Discord.MessageEmbed()
                       .setColor("#304281")
-                      .setTitle(`${message.author.username} has gone bust!`)
+                      .setTitle(`Bust!`)
+                      .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                       .setDescription(`Your total was ${total}!`)
                       .setURL("http://localhost:3000/casino")
                       .setImage(
@@ -184,7 +190,8 @@ module.exports = {
                   }
                   const newEmbed = new Discord.MessageEmbed()
                   .setColor("#304281")
-                  .setTitle(`${message.author.username}'s Blackjack Round!`)
+                  .setTitle(`Make your Choice!`)
+                  .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                   .setDescription(`Your total is ${total}!\nHit or Stay?`)
                   .setURL("http://localhost:3000/casino")
                   .setImage(
@@ -223,7 +230,8 @@ module.exports = {
                           );
                           const newEmbed = new Discord.MessageEmbed()
                     .setColor("#304281")
-                    .setTitle(`${message.author.username} Won!`)
+                    .setTitle(`You Won!`)
+                    .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                     .setDescription(
                       `Your total was ${total}\nYou Won ${
                         ((amt * 1.3) - amt).toFixed(2)
@@ -248,7 +256,8 @@ module.exports = {
                           );
                           const newEmbed = new Discord.MessageEmbed()
                       .setColor("#304281")
-                      .setTitle(`${message.author.username} has gone bust!`)
+                      .setTitle(`Bust!`)
+                      .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                       .setDescription(`Your total was ${total}!`)
                       .setURL("http://localhost:3000/casino")
                       .setImage(
@@ -269,7 +278,8 @@ module.exports = {
                           );
                           const newEmbed = new Discord.MessageEmbed()
                     .setColor("#304281")
-                    .setTitle(`${message.author.username} Won!`)
+                    .setTitle(`You Won!`)
+                    .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                     .setDescription(
                       `5 Card Charlie Rule! You got dealt 5 cards without reaching 21. \nYou Won ${
                         ((amt * 1.3) - amt).toFixed(2)
@@ -295,7 +305,8 @@ module.exports = {
                           );
                           const newEmbed = new Discord.MessageEmbed()
                     .setColor("#304281")
-                    .setTitle(`${message.author.username} Won!`)
+                    .setTitle(`You Won!`)
+                    .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                     .setDescription(
                       `Your total was ${total}\nYou Won ${
                         ((amt * 1.3) - amt).toFixed(2)
@@ -320,7 +331,8 @@ module.exports = {
                           );
                           const newEmbed = new Discord.MessageEmbed()
                       .setColor("#304281")
-                      .setTitle(`${message.author.username} has gone bust!`)
+                      .setTitle(`Bust!`)
+                      .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                       .setDescription(`Your total was ${total}!`)
                       .setURL("http://localhost:3000/casino")
                       .setImage(
@@ -341,7 +353,8 @@ module.exports = {
                           );
                           const newEmbed = new Discord.MessageEmbed()
                     .setColor("#304281")
-                    .setTitle(`${message.author.username} Won!`)
+                    .setTitle(`You Won!`)
+                    .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                     .setDescription(
                       `Your total was ${total}\nYou Won ${
                         ((amt * 1.3) - amt).toFixed(2)
@@ -372,7 +385,8 @@ module.exports = {
                   );
                   const newEmbed = new Discord.MessageEmbed()
                     .setColor("#304281")
-                    .setTitle(`${message.author.username} Won!`)
+                    .setTitle(`You Won!`)
+                    .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                     .setDescription(
                       `Your total was ${total}\nYou Won ${
                         ((amt * 1.3) - amt).toFixed(2)
@@ -397,7 +411,8 @@ module.exports = {
                   );
                   const newEmbed = new Discord.MessageEmbed()
                     .setColor("#304281")
-                    .setTitle(`${message.author.username} lost!`)
+                    .setTitle(`You've Lost`)
+                    .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                     .setDescription(
                       `Your total was ${total}\nDealer total was ${dealer_hand}!`
                     )
@@ -425,7 +440,8 @@ module.exports = {
             );
             const newEmbed = new Discord.MessageEmbed()
                     .setColor("#304281")
-                    .setTitle(`${message.author.username} Won!`)
+                    .setTitle(`You Won!`)
+                    .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                     .setDescription(
                       `Your total was ${total}\nYou Won ${
                         ((amt * 1.3) - amt).toFixed(2)
@@ -449,7 +465,8 @@ module.exports = {
             );
             const newEmbed = new Discord.MessageEmbed()
                     .setColor("#304281")
-                    .setTitle(`${message.author.username} lost!`)
+                    .setTitle(`Better luck next time!`)
+                    .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                     .setDescription(
                       `Your total was ${total}\nDealer total was ${dealer_hand}!`
                     )

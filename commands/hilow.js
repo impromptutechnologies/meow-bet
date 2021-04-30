@@ -25,7 +25,8 @@ module.exports = {
     const hint = Math.floor(Math.random() * (max1 - min1) + min1);
     const newEmbed = new Discord.MessageEmbed()
       .setColor("#304281")
-      .setTitle(`${message.author.username}'s High Low Game`)
+      .setTitle(`High Low Game`)
+      .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
       .setDescription(
         `A random number between 1-100 has been generated. Your hint is ${hint}, Respond with "High", "Low", or "Bingo".\n
     Choose whether you think the hidden number is higher, lower, or the same number as the hint.`
@@ -60,7 +61,8 @@ module.exports = {
           );
           const newEmbed = new Discord.MessageEmbed()
             .setColor("#304281")
-            .setTitle(`High was Right, ${message.author.username}!`)
+            .setTitle(`High was Right!`)
+            .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
             .setDescription(
               `Correctly guessed that ${chances} was higher than ${hint}!`
             )
@@ -87,7 +89,8 @@ module.exports = {
           );
           const newEmbed = new Discord.MessageEmbed()
             .setColor("#304281")
-            .setTitle(`Low was Right, ${message.author.username}!`)
+            .setTitle(`Low was Right!`)
+            .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
             .setDescription(
               `Correctly guessed that ${chances} was lower than ${hint}!`
             )
@@ -114,7 +117,8 @@ module.exports = {
           );
           const newEmbed = new Discord.MessageEmbed()
             .setColor("#304281")
-            .setTitle(`Bingo was Right, ${message.author.username}!`)
+            .setTitle(`Bingo was Right!`)
+            .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
             .setDescription(
               `Correctly guessed that ${chances} is equal to ${hint}!`
             )

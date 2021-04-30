@@ -28,6 +28,7 @@ module.exports = {
               const newEmbed = new Discord.MessageEmbed()
                 .setColor("#304281")
                 .setTitle("Sorry....")
+                .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                 .setDescription("Better luck next time :(")
                 .setFooter(
                   "visit http://localhost:3000/casino to view more casino games!"

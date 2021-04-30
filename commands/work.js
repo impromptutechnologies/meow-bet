@@ -11,7 +11,8 @@ module.exports = {
     const right = number1 + number2;
     const newEmbed = new Discord.MessageEmbed()
       .setColor("#304281")
-      .setTitle(`${message.author.username}'s needs to stop playing!!!`)
+      .setTitle(`Work`)
+      .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
       .setDescription("Solve the problem correctly in 5 seconds and win 100 token!")
       .addFields({ name: "What is..", value: `${number1} + ${number2}`})
       .setFooter("visit http://localhost:3000/tokens to earn tokens!")

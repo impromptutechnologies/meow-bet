@@ -12,8 +12,9 @@ module.exports = {
           const newEmbed = new Discord.MessageEmbed()
             .setColor("#304281")
             .setTitle("Error")
+            .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
             .setDescription("No Bets Placed :(")
-            .addFields({ name: "To Place Bet", value: "visit link" })
+            .addFields({ name: "For Bet commands", value: "visit link" })
             .setFooter("visit http://localhost:3000/bet to view bets!")
             .setURL("http://localhost:3000/bet");
           return message.channel.send(newEmbed);
@@ -33,6 +34,7 @@ module.exports = {
         const newEmbed = new Discord.MessageEmbed()
           .setColor("#304281")
           .setTitle("Open Bets")
+          .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
           .setDescription("Your Open Bets :)")
           .addFields(
             { name: "Code", value: yourbets, inline: true },
