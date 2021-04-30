@@ -6,8 +6,8 @@ module.exports = {
   description: "Simply Blackjack. Test your skills and luck!",
   execute(client, message, args, Discord, profileData) {
     min = Math.ceil(1);
-    max = Math.floor(13);
-    min1 = Math.ceil(16);
+    max = Math.floor(12);
+    min1 = Math.ceil(15);
     max1 = Math.floor(21);
     const coinz = profileData.coins;
     const amt = args[0];
@@ -29,6 +29,8 @@ module.exports = {
       "10",
       "10",
     ];
+    console.log(cards[0])
+    console.log(cards[1])
     const dealt1 = cards[card1];
     const dealt2 = cards[card2];
     const total_cards = 0;
@@ -70,6 +72,8 @@ module.exports = {
         }
         const coinz = profileData.coins;
         let total = parseInt(dealt1) + parseInt(dealt2);
+
+
         if (messageReceived == "hit") {
           const card2 = Math.floor(Math.random() * (max - min) + min);
           const additional = cards[card2];
@@ -206,8 +210,9 @@ module.exports = {
                       const messageReceived = String(
                         messageReceived1
                       ).toLowerCase();
-
+                      console.log('here1')
                       if (messageReceived == "hit") {
+                        console.log('here2')
                         const card4 = Math.floor(
                           Math.random() * (max - min) + min
                         );
@@ -265,7 +270,7 @@ module.exports = {
                       );
 
                     return message.channel.send(newEmbed);
-                        }
+                      }
                         if (total < 21) {
                           Profile.findOneAndUpdate(
                             { userID: message.author.id },
@@ -292,7 +297,14 @@ module.exports = {
 
                   return message.channel.send(newEmbed);
                         }
-                      } else {
+                      } 
+                      
+                      
+                      
+                      
+                      
+                      if (messageReceived == "stay"){
+                        console.log('here1')
                         if (total == 21 && dealer_hand != 21) {
                           Profile.findOneAndUpdate(
                             { userID: message.author.id },
@@ -317,7 +329,7 @@ module.exports = {
                       "https://i2.wp.com/www.thexboxhub.com/wp-content/uploads/2021/03/kaysha-V3qzwMY2ak0-unsplash.jpg?fit=640%2C481&ssl=1"
                     );
 
-                  return message.channel.send(newEmbed);
+                    return message.channel.send(newEmbed);
                         }
                         if (total > 21) {
                           Profile.findOneAndUpdate(
@@ -359,6 +371,31 @@ module.exports = {
                       `Your total was ${total}\nYou Won ${
                         ((amt * 1.3) - amt).toFixed(2)
                       } tokens!`
+                    )
+                    .setURL("http://localhost:3000/casino")
+                    .setImage(
+                      "https://i2.wp.com/www.thexboxhub.com/wp-content/uploads/2021/03/kaysha-V3qzwMY2ak0-unsplash.jpg?fit=640%2C481&ssl=1"
+                    );
+
+                  return message.channel.send(newEmbed);
+
+                        }
+                        if (total < 21 && total < dealer_hand) {
+                          Profile.findOneAndUpdate(
+                            { userID: message.author.id },
+                            { coins: coinz-amt },
+                            (err, user) => {
+                              if (err) {
+                                return console.log(err);
+                              }
+                            }
+                          );
+                          const newEmbed = new Discord.MessageEmbed()
+                    .setColor("#304281")
+                    .setTitle(`You Lost!`)
+                    .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
+                    .setDescription(
+                      `Your total was ${total}\nDealers total was ${total}`
                     )
                     .setURL("http://localhost:3000/casino")
                     .setImage(

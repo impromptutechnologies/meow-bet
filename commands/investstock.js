@@ -18,7 +18,7 @@ module.exports = {
       const investments = await Invest.find({ creatorID: message.author.id });
       console.log(investments.length);
       if (
-        date == moment.utc().format(`${month}-${day} 20:01`) &&
+        date == moment.utc().format(`${month}-${day} 20:02`) &&
         investments.length !== 0
       ) {
         stockPrice((error, highest) => {
@@ -87,16 +87,17 @@ module.exports = {
                             .setURL("http://localhost:3000/betsst");
                           client.channels.cache.get(channelID).send(newEmbed);
                         });
-                        Invest.deleteMany({}, (error, deleted) => {
-                          if(error){
-                            console.log(error)
-                          }
-                        });
+                        
                       }
                     );
                   });
                 }
               });
+            }
+          });
+          Invest.deleteMany({}, (error, deleted) => {
+            if(error){
+              console.log(error)
             }
           });
           
@@ -115,7 +116,7 @@ module.exports = {
     var month = moment.utc().format("MM");
     var date = moment.utc().format("MM-DD HH:mm");
     var date1 = moment.utc().format(`${month}-${parseInt(day)} 13:30`);
-    var date2 = moment.utc().format(`${month}-${parseInt(day)} 20:00`);
+    var date2 = moment.utc().format(`${month}-${parseInt(day)} 20:05`);
     var stillUtc = moment.utc(date1).toDate();
     var stillUtc2 = moment.utc(date2).toDate();
     var local = moment(stillUtc).local().format("hh:mm A");

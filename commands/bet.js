@@ -1,9 +1,10 @@
 const Bet = require("../models/betSchema");
 const Outcome = require("../models/outcomeSchema");
+const moment = require("moment-timezone");
 
 module.exports = {
   name: "bet",
-  cooldown: 30,
+  cooldown: 1,
   description: "Place a bet!",
   execute(client, message, args, Discord, profileData) {
     const code = args[1];
@@ -13,14 +14,22 @@ module.exports = {
     } else if (amt > profileData.coins) {
       return message.channel.send(`Not Enough tokens...`);
     }
-    
+
     try {
-      Bet.findOne(
-        { creatorID: message.author.id, Code: code },
+      Bet.findOne({
+        $and: [
+          {creatorID: message.author.id},
+          { $or: [
+            { "Code": code },
+            { "Code2": code },
+            { "Code3": code },
+          ] }
+        ]},
         (err, bet) => {
           if (err) {
             return console.log(err);
-          } else if (bet) {
+          } 
+          if (bet) {
             return message.channel.send("Bet Exists");
           }
           Outcome.findOne(
@@ -32,7 +41,36 @@ module.exports = {
               ],
             },
             (err, outcomeData) => {
+              if(!outcomeData){
+                return message.channel.send("Perhaps the betCode is wrong?");
+              }
+              const amt = parseInt(args[0]);
+              var day = moment.utc().format("DD");
+              var month = moment.utc().format("MM");
+              var date = moment.utc().format("MM-DD HH:mm");
+              var date1 = outcomeData.timeStart;
+              if (date > date1) {
+                const newEmbed = new Discord.MessageEmbed()
+                  .setColor("#304281")
+                  .setTitle(`Match Already Started!`)
+                  .setAuthor(
+                    message.author.username,
+                    message.author.displayAvatarURL({
+                      format: "png",
+                      dynamic: true,
+                    })
+                  )
+                  .setDescription(
+                    `Please place your bet commands before matches begin.`
+                  )
+                  .setFooter(
+                    "visit http://localhost:3000/bets to view more bets!"
+                  )
+                  .setURL("http://localhost:3000/bets ");
+                return message.channel.send(newEmbed);
+              }
               console.log(outcomeData);
+              console.log(date>date1);
               if (outcomeData) {
                 if (err) {
                   return console.log(err);
@@ -60,7 +98,13 @@ module.exports = {
                       const newEmbed = new Discord.MessageEmbed()
                         .setColor("#304281")
                         .setTitle(`Bet Ticket`)
-                        .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
+                        .setAuthor(
+                          message.author.username,
+                          message.author.displayAvatarURL({
+                            format: "png",
+                            dynamic: true,
+                          })
+                        )
                         .setDescription("Good Luck :)")
                         .addFields(
                           { name: "Bet Amount", value: amt },
@@ -98,7 +142,13 @@ module.exports = {
                       const newEmbed = new Discord.MessageEmbed()
                         .setColor("#304281")
                         .setTitle(`Bet Ticket`)
-                        .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
+                        .setAuthor(
+                          message.author.username,
+                          message.author.displayAvatarURL({
+                            format: "png",
+                            dynamic: true,
+                          })
+                        )
                         .setDescription("Good Luck :)")
                         .addFields(
                           { name: "Bet Amount", value: amt },
@@ -136,7 +186,13 @@ module.exports = {
                       const newEmbed = new Discord.MessageEmbed()
                         .setColor("#304281")
                         .setTitle(`Bet Ticket`)
-                        .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
+                        .setAuthor(
+                          message.author.username,
+                          message.author.displayAvatarURL({
+                            format: "png",
+                            dynamic: true,
+                          })
+                        )
                         .setDescription("Good Luck :)")
                         .addFields(
                           { name: "Bet Amount", value: amt },
