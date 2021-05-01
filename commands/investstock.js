@@ -18,7 +18,7 @@ module.exports = {
       const investments = await Invest.find({ creatorID: message.author.id, category:"stocks"});
       console.log(investments.length);
       if (
-        date == moment.utc().format(`${month}-${day} 20:10`) &&
+        date == moment.utc().format(`${month}-${day} 23:40`) &&
         investments.length !== 0
       ) {
         Stock.find({}, (error, highest) => {
@@ -35,7 +35,7 @@ module.exports = {
         }).limit(1);
       }
       if (
-        date == moment.utc().format(`${month}-${day} 20:20`) &&
+        date == moment.utc().format(`${month}-${day} 23:45`) &&
         investments.length !== 0
       ) {
         Stock.find({}, (error, highest) => {
