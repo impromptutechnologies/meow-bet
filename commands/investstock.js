@@ -133,7 +133,7 @@ module.exports = {
     var local = moment(stillUtc).local().format("hh:mm A");
     var local2 = moment(stillUtc2).local().format("hh:mm A");
      console.log(date1, date2)
-    if (date > date1 && date < date2) {
+    /*if (date > date1 && date < date2) {
       const newEmbed = new Discord.MessageEmbed()
         .setColor("#304281")
         .setTitle(`Market Already Open!`)
@@ -149,7 +149,7 @@ module.exports = {
         )
         .setURL("http://localhost:3000/betsst");
       return message.channel.send(newEmbed);
-    }
+    }*/
     if (!code) {
       return message.channel.send(`No Code Provided`);
     }
