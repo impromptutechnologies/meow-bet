@@ -5,6 +5,11 @@ module.exports = {
   description: "Roll the dice. Get a 6 to win BIG!",
   execute(client, message, args, Discord, profileData) {
     const amt = args[0];
+    if(isNaN(amt)){
+      return message.channel.send(
+        `That's not a number`
+      );
+    }
     min = Math.ceil(1);
     max = Math.floor(7);
     const chances = Math.floor(Math.random() * (max - min) + min);

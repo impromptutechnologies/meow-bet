@@ -5,6 +5,11 @@ module.exports = {
   description: "Play the Slots!",
   execute(client, message, args, Discord, profileData) {
     const amt = args[0];
+    if(isNaN(amt)){
+      return message.channel.send(
+        `That's not a number`
+      );
+    }
     min = Math.ceil(0);
     max = Math.floor(10);
     const chances = Math.floor(Math.random() * (max - min) + min);

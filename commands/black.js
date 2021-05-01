@@ -5,12 +5,17 @@ module.exports = {
   cooldown: 1,
   description: "Simply Blackjack. Test your skills and luck!",
   execute(client, message, args, Discord, profileData) {
-    min = Math.ceil(1);
-    max = Math.floor(12);
-    min1 = Math.ceil(15);
+    min = Math.ceil(0);
+    max = Math.floor(9);
+    min1 = Math.ceil(16);
     max1 = Math.floor(21);
     const coinz = profileData.coins;
     const amt = args[0];
+    if(isNaN(amt)){
+      return message.channel.send(
+        `That's not a number`
+      );
+    }
     const dealer_hand = Math.floor(Math.random() * (max1 - min1) + min1);
     const card1 = Math.floor(Math.random() * (max - min) + min);
     const card2 = Math.floor(Math.random() * (max - min) + min);
@@ -25,16 +30,12 @@ module.exports = {
       "8",
       "9",
       "10",
-      "10",
-      "10",
-      "10",
     ];
-    console.log(cards[0])
-    console.log(cards[1])
     const dealt1 = cards[card1];
     const dealt2 = cards[card2];
     const total_cards = 0;
     const card_deck = [];
+    console.log(cards[0]);
 
     if (!amt) {
       return message.channel.send(
@@ -108,6 +109,15 @@ module.exports = {
             return message.channel.send(newEmbed);
           }
           if (total > 21) {
+            Profile.findOneAndUpdate(
+              { userID: message.author.id },
+              { coins: coinz-amt },
+              (err, user) => {
+                if (err) {
+                  return console.log(err);
+                }
+              }
+            );
             const newEmbed = new Discord.MessageEmbed()
               .setColor("#304281")
               .setTitle(`Bust!`)
@@ -135,16 +145,17 @@ module.exports = {
             .then((collected) => {
               const messageReceived1 = collected.first().content;
 
+
               if (String(messageReceived1).toLowerCase() == "hit") {
                 const card3 = Math.floor(Math.random() * (max - min) + min);
-                const additional = cards[card3];
-                card_deck.push(additional);
+                const additional2 = cards[card3];
+                card_deck.push(additional2);
                 console.log(card_deck);
                 let total = 0;
                 card_deck.forEach((element) => {
                   total = total + parseInt(element);
                 });
-                if (total >= 20 && total < 22 && total > dealer_hand) {
+                if (total < 22 && total > 19 && total > dealer_hand) {
                   Profile.findOneAndUpdate(
                     { userID: message.author.id },
                     { coins: ((amt * 1.3) - amt) + coinz },
@@ -169,8 +180,7 @@ module.exports = {
                     );
 
                   return message.channel.send(newEmbed);
-                } else {
-                  if (total > 21) {
+                } if (total > 21) {
                     Profile.findOneAndUpdate(
                       { userID: message.author.id },
                       { coins: coinz - amt },
@@ -210,7 +220,6 @@ module.exports = {
                       const messageReceived = String(
                         messageReceived1
                       ).toLowerCase();
-                      console.log('here1')
                       if (messageReceived == "hit") {
                         console.log('here2')
                         const card4 = Math.floor(
@@ -235,7 +244,7 @@ module.exports = {
                           );
                           const newEmbed = new Discord.MessageEmbed()
                     .setColor("#304281")
-                    .setTitle(`You Won!`)
+                    .setTitle(`Blackjack!`)
                     .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                     .setDescription(
                       `Your total was ${total}\nYou Won ${
@@ -305,7 +314,9 @@ module.exports = {
                       
                       if (messageReceived == "stay"){
                         console.log('here1')
+                        console.log(dealer_hand)
                         if (total == 21 && dealer_hand != 21) {
+                          
                           Profile.findOneAndUpdate(
                             { userID: message.author.id },
                             { coins: ((amt * 1.3) - amt) + coinz },
@@ -317,7 +328,7 @@ module.exports = {
                           );
                           const newEmbed = new Discord.MessageEmbed()
                     .setColor("#304281")
-                    .setTitle(`You Won!`)
+                    .setTitle(`Blackjack!`)
                     .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                     .setDescription(
                       `Your total was ${total}\nYou Won ${
@@ -395,7 +406,32 @@ module.exports = {
                     .setTitle(`You Lost!`)
                     .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                     .setDescription(
-                      `Your total was ${total}\nDealers total was ${total}`
+                      `Your total was ${total}\nDealers total was ${dealer_hand}`
+                    )
+                    .setURL("http://localhost:3000/casino")
+                    .setImage(
+                      "https://i2.wp.com/www.thexboxhub.com/wp-content/uploads/2021/03/kaysha-V3qzwMY2ak0-unsplash.jpg?fit=640%2C481&ssl=1"
+                    );
+
+                  return message.channel.send(newEmbed);
+
+                        }
+                        if (total == dealer_hand) {
+                          Profile.findOneAndUpdate(
+                            { userID: message.author.id },
+                            { coins: coinz },
+                            (err, user) => {
+                              if (err) {
+                                return console.log(err);
+                              }
+                            }
+                          );
+                          const newEmbed = new Discord.MessageEmbed()
+                    .setColor("#304281")
+                    .setTitle(`Push!`)
+                    .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
+                    .setDescription(
+                      `Your total was ${total}\nDealers total was ${total}\nNo Gain, No Loss`
                     )
                     .setURL("http://localhost:3000/casino")
                     .setImage(
@@ -407,7 +443,6 @@ module.exports = {
                         }
                       }
                     });
-                }
               }
               if (String(messageReceived1).toLowerCase() == "stay") {
                 if (total > dealer_hand && total < 22) {
@@ -436,10 +471,10 @@ module.exports = {
 
                   return message.channel.send(newEmbed);
 
-                } else {
+                } if (total < dealer_hand && total < 22) {
                   Profile.findOneAndUpdate(
                     { userID: message.author.id },
-                    { coins: coinz - amt },
+                    { coins: coinz-amt },
                     (err, user) => {
                       if (err) {
                         return console.log(err);
@@ -448,10 +483,35 @@ module.exports = {
                   );
                   const newEmbed = new Discord.MessageEmbed()
                     .setColor("#304281")
-                    .setTitle(`You've Lost`)
+                    .setTitle(`You Lost!`)
                     .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                     .setDescription(
-                      `Your total was ${total}\nDealer total was ${dealer_hand}!`
+                      `Your total was ${total}\nDealer total was ${dealer_hand}\n`
+                    )
+                    .setURL("http://localhost:3000/casino")
+                    .setImage(
+                      "https://i2.wp.com/www.thexboxhub.com/wp-content/uploads/2021/03/kaysha-V3qzwMY2ak0-unsplash.jpg?fit=640%2C481&ssl=1"
+                    );
+
+                  return message.channel.send(newEmbed);
+
+                }
+                else {
+                  Profile.findOneAndUpdate(
+                    { userID: message.author.id },
+                    { coins: coinz },
+                    (err, user) => {
+                      if (err) {
+                        return console.log(err);
+                      }
+                    }
+                  );
+                  const newEmbed = new Discord.MessageEmbed()
+                    .setColor("#304281")
+                    .setTitle(`Push!`)
+                    .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
+                    .setDescription(
+                      `Your total was ${total}\nDealer total was ${dealer_hand}\nNo Gain, No Loss`
                     )
                     .setURL("http://localhost:3000/casino")
                     .setImage(
@@ -490,10 +550,35 @@ module.exports = {
                     );
 
                   return message.channel.send(newEmbed);
-          } else {
+          } if(total==dealer_hand) {
             Profile.findOneAndUpdate(
               { userID: message.author.id },
-              { coins: coinz - amt },
+              { coins: coinz  },
+              (err, user) => {
+                if (err) {
+                  return console.log(err);
+                }
+              }
+            );
+            const newEmbed = new Discord.MessageEmbed()
+                    .setColor("#304281")
+                    .setTitle(`Push!`)
+                    .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
+                    .setDescription(
+                      `Your total was ${total}\nDealer total was ${dealer_hand}!\nNo Gain, No Loss`
+                    )
+                    .setURL("http://localhost:3000/casino")
+                    .setImage(
+                      "https://i2.wp.com/www.thexboxhub.com/wp-content/uploads/2021/03/kaysha-V3qzwMY2ak0-unsplash.jpg?fit=640%2C481&ssl=1"
+                    );
+
+                  return message.channel.send(newEmbed);
+
+          }
+          else {
+            Profile.findOneAndUpdate(
+              { userID: message.author.id },
+              { coins: coinz-amt  },
               (err, user) => {
                 if (err) {
                   return console.log(err);

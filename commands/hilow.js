@@ -8,6 +8,11 @@ module.exports = {
     min = Math.ceil(1);
     max = Math.floor(101);
     const amt = args[0];
+    if(isNaN(amt)){
+      return message.channel.send(
+        `That's not a number`
+      );
+    }
     if (!amt) {
       return message.channel.send(
         `Please provide the amount of tokens you want to bet.`
@@ -18,6 +23,7 @@ module.exports = {
         `Ur too broke....`
       );
     }
+    
     const chances = Math.floor(Math.random() * (max - min) + min);
     console.log(chances);
     min1 = Math.ceil(50);

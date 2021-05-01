@@ -14,7 +14,11 @@ module.exports = {
     } else if (amt > profileData.coins) {
       return message.channel.send(`Not Enough tokens...`);
     }
-
+    if(isNaN(amt)){
+      return message.channel.send(
+        `That's not a number`
+      );
+    }
     try {
       Bet.findOne({
         $and: [

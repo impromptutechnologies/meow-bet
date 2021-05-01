@@ -6,15 +6,15 @@ module.exports = {
     name: "testing",
     description: "testing testing 123",
     execute(client, message, args, Discord, profileData) {
-        stockPrice((error, highest) => {
-            if (error) {
-              return console.log(error);
+        Stock.find({}, (error, highest) => {
+            if(highest[0].return==0){
+                stockPrice((error, highprice) => {
+                    if (error) {
+                      return console.log(error);
+                    }
+                });
             }
             
-
-    });
-    Stock.find({}, (error, highest) => {
-        console.log(highest[0].ticker)
-    }).sort({return:-1}).limit(1);
+        }).sort({return:-1}).limit(1);
 }
 }

@@ -1,13 +1,13 @@
-const Invest = require("../models/investSchema");
+/*const Invest = require("../models/investSchema");
 const moment = require("moment-timezone");
 const Profile = require("../models/profileSchema");
 const stockPrice = require("../utils/stockprice");
-const Stock = require("../models/stockSchema");
+const Crypto = require("../models/cryptoSchema");
 
 module.exports = {
-  name: "invstock",
+  name: "invcrypto",
   cooldown: 1,
-  description: "Invest stock!",
+  description: "Invest in Crypto!",
   execute(client, message, args, Discord, profileData) {
     const checkForPosts = async () => {
       var day = moment.utc().format("DD");
@@ -187,7 +187,7 @@ module.exports = {
                       creatorID: message.author.id,
                       serverID: message.guild.id,
                       channelID: message.channel.id,
-                      category: "stocks",
+                      category: "crypto",
                       creatorName: message.author.username,
                       investAmount: amt,
                       Code: code,
@@ -229,4 +229,4 @@ module.exports = {
       console.log(err, "hey");
     }
   },
-};
+};*/
