@@ -9,7 +9,7 @@ const stockPrice = (callback) => {
             console.log(stock.ticker)
             const url = `http://api.marketstack.com/v1/eod?access_key=b43c8007a25da9601cd55d83b6d3a6ad&symbols=${stock.ticker}&limit=1`;
             request ({ url, json: true },(error, { body }) => {
-                console.log(body.data[0].close)
+                console.log(body)
                 if (error) {
                   console.log("Unable to connect", undefined);
                 } else if (body.length === 0) {

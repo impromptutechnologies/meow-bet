@@ -16,9 +16,8 @@ module.exports = {
       var date1 = moment.utc().format(`${month}-${day} 13:30`);
       var date2 = moment.utc().format(`${month}-${day} 20:00`);
       const investments = await Invest.find({ creatorID: message.author.id, category:"stocks"});
-      console.log(investments.length);
-      if (
-        date == moment.utc().format(`${month}-${day} 23:40`) &&
+      /*if (
+        date == moment.utc().format(`${month}-${day} 00:11`) &&
         investments.length !== 0
       ) {
         Stock.find({}, (error, highest) => {
@@ -33,9 +32,9 @@ module.exports = {
             });
           }
         }).limit(1);
-      }
+      }*/
       if (
-        date == moment.utc().format(`${month}-${day} 23:45`) &&
+        date == moment.utc().format(`${month}-${day} 03:27`) &&
         investments.length !== 0
       ) {
         Stock.find({}, (error, highest) => {
@@ -99,14 +98,16 @@ module.exports = {
                     );
                   });
                 }
+                Invest.deleteMany({}, (error, deleted) => {
+                  if(error){
+                    console.log(error)
+                  }
+                  console.log(deleted)
+                });
               });
             }
           });
-          Invest.deleteMany({}, (error, deleted) => {
-            if(error){
-              console.log(error)
-            }
-          });
+
           
         }).sort({return:-1}).limit(1);
 
@@ -163,7 +164,7 @@ module.exports = {
         (err, invest) => {
           if (err) {
             return console.log(err);
-          } else if (invest) {
+          } if (invest) {
             return message.channel.send("Investment Exists");
           }
           Stock.findOne(
