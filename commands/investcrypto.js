@@ -1,4 +1,4 @@
-/*const Invest = require("../models/investSchema");
+const Invest = require("../models/investSchema");
 const moment = require("moment-timezone");
 const Profile = require("../models/profileSchema");
 const stockPrice = require("../utils/stockprice");
@@ -15,35 +15,25 @@ module.exports = {
       var date = moment.utc().format("MM-DD HH:mm");
       var date1 = moment.utc().format(`${month}-${day} 13:30`);
       var date2 = moment.utc().format(`${month}-${day} 20:00`);
-      const investments = await Invest.find({ creatorID: message.author.id, category:"stocks"});
-      console.log(investments.length);
+      const investments = await Invest.find({ creatorID: message.author.id, category:"crypto"});
+      console.log(`myinvestscrypto - ${message.author.tag} -`, investments.length)
+      /* For Bets:
+        Set a forloop for each outcome, and then just check if the end date matches the current date. 
+        For sports its predictable, but for esports maybe we need to say its done. Once again depends.
+        
+        This should ideally be done inside the actual investstock and investcrypto files
+*/
       if (
-        date == moment.utc().format(`${month}-${day} 20:10`) &&
+        date == moment.utc().format(`${month}-${day} 16:20`) &&
         investments.length !== 0
       ) {
-        Stock.find({}, (error, highest) => {
-          if(error){
-            console.log(error)
-          }
-          if(highest[0].return==0){
-            stockPrice((error, highest) => {
-              if (error) {
-                return console.log(error);
-              }
-            });
-          }
-        }).limit(1);
-      }
-      if (
-        date == moment.utc().format(`${month}-${day} 20:20`) &&
-        investments.length !== 0
-      ) {
-        Stock.find({}, (error, highest) => {
+        Crypto.find({}, (error, highest) => {
           if (error) {
             return console.log(error);
           }
+          console.log(highest)
 
-          Invest.find({ Code: highest[0].ticker }, (err, successes) => {
+          Invest.find({ Code: highest[0].symbol }, (err, successes) => {
             for (const success of successes) {
               const creatorID = success.creatorID;
               console.log(successes)
@@ -52,8 +42,9 @@ module.exports = {
                 const coinz = profile.coins;
                 const investAmount = success.investAmount;
                 const channelID = success.channelID;
+                console.log(profile)
                 if (profile) {
-                  Stock.findOne({ ticker: success.Code }, (err, inv) => {
+                  Crypto.findOne({ symbol: success.Code }, (err, inv) => {
                     const yourWinnings = 3 * investAmount
                     Profile.findOneAndUpdate(
                       { userID: creatorID },
@@ -93,19 +84,34 @@ module.exports = {
                             )
                             .setURL("http://localhost:3000/betsst");
                           client.channels.cache.get(channelID).send(newEmbed);
+                          Invest.deleteMany({creatorID: creatorID, category:"crypto"}, (error, deleted) => {
+                            if(error){
+                              console.log(error)
+                            }
+                            console.log('deleted with winning')
+                          });
                         });
                         
                       }
                     );
                   });
                 }
+                Invest.deleteMany({creatorID: message.author.id, category:"crypto"}, (error, deleted) => {
+                  if(error){
+                    console.log(error)
+                  }
+                  console.log('deleted')
+                });
               });
+              
+
             }
           });
-          Invest.deleteMany({}, (error, deleted) => {
+          Invest.deleteMany({creatorID: message.author.id, category:"crypto"}, (error, deleted) => {
             if(error){
               console.log(error)
             }
+            console.log('deleted')
           });
           
         }).sort({return:-1}).limit(1);
@@ -132,8 +138,7 @@ module.exports = {
     var stillUtc2 = moment.utc(date2).toDate();
     var local = moment(stillUtc).local().format("hh:mm A");
     var local2 = moment(stillUtc2).local().format("hh:mm A");
-     console.log(date1, date2)
-    if (date > date1 && date < date2) {
+    /*if (date > date1 && date < date2) {
       const newEmbed = new Discord.MessageEmbed()
         .setColor("#304281")
         .setTitle(`Market Already Open!`)
@@ -145,11 +150,11 @@ module.exports = {
           `Please place your investment commands between ${local2} and ${local} in your local time.`
         )
         .setFooter(
-          "visit http://localhost:3000/betsst to view more investments!"
+          "visit http://localhost:3000/betscr to view more crypto!"
         )
-        .setURL("http://localhost:3000/betsst");
+        .setURL("http://localhost:3000/betscr");
       return message.channel.send(newEmbed);
-    }
+    }*/
     if (!code) {
       return message.channel.send(`No Code Provided`);
     }
@@ -166,9 +171,9 @@ module.exports = {
           } else if (invest) {
             return message.channel.send("Investment Exists");
           }
-          Stock.findOne(
+          Crypto.findOne(
             {
-              ticker: code
+              symbol: code
             },
             (err, stockData) => {
               if (err) {
@@ -210,12 +215,12 @@ module.exports = {
                         .setDescription("Good Luck :)")
                         .addFields(
                           { name: "Invested Amount", value: amt },
-                          { name: "Stock", value: code }
+                          { name: "Crypto", value: code }
                         )
                         .setFooter(
-                          "visit http://localhost:3000/betsst to view more stocks!"
+                          "visit http://localhost:3000/betscr to view more cryptos!"
                         )
-                        .setURL("http://localhost:3000/betsst");
+                        .setURL("http://localhost:3000/betscr");
                       message.channel.send(newEmbed);
                       checkForPosts();
                     }
@@ -229,4 +234,4 @@ module.exports = {
       console.log(err, "hey");
     }
   },
-};*/
+};

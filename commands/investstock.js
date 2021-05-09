@@ -16,6 +16,7 @@ module.exports = {
       var date1 = moment.utc().format(`${month}-${day} 13:30`);
       var date2 = moment.utc().format(`${month}-${day} 20:00`);
       const investments = await Invest.find({ creatorID: message.author.id, category:"stocks"});
+      console.log(`myinvests - ${message.author.tag} -`, investments.length)
       /*if (
         date == moment.utc().format(`${month}-${day} 00:11`) &&
         investments.length !== 0
@@ -32,15 +33,28 @@ module.exports = {
             });
           }
         }).limit(1);
-      }*/
+      }
+      
+
+       For Bets:
+        Set a forloop for each outcome, and then just check if the end date matches the current date. 
+        For sports its predictable, but for esports maybe we need to say its done. Once again depends.
+        
+        This should ideally be done inside the actual investstock and investcrypto files
+
+
+        
+      
+      */
       if (
-        date == moment.utc().format(`${month}-${day} 03:27`) &&
+        date == moment.utc().format(`${month}-${day} 16:20`) &&
         investments.length !== 0
       ) {
         Stock.find({}, (error, highest) => {
           if (error) {
             return console.log(error);
           }
+          console.log(highest)
 
           Invest.find({ Code: highest[0].ticker }, (err, successes) => {
             for (const success of successes) {
@@ -92,22 +106,39 @@ module.exports = {
                             )
                             .setURL("http://localhost:3000/betsst");
                           client.channels.cache.get(channelID).send(newEmbed);
+                          Invest.deleteMany({creatorID: creatorID, category:"stocks"}, (error, deleted) => {
+                            if(error){
+                              console.log(error)
+                            }
+                            console.log('deleted with winnings')
+                          });
                         });
+                        
                         
                       }
                     );
                   });
-                }
-                Invest.deleteMany({}, (error, deleted) => {
+                } 
+                Invest.deleteMany({creatorID: message.author.id, category:"stocks"}, (error, deleted) => {
                   if(error){
                     console.log(error)
                   }
-                  console.log(deleted)
+                  console.log('deleted')
                 });
+                
               });
+              
+
             }
           });
-
+          
+          Invest.deleteMany({creatorID: message.author.id, category:"stocks"}, (error, deleted) => {
+            if(error){
+              console.log(error)
+            }
+            console.log('deleted')
+          });
+          
           
         }).sort({return:-1}).limit(1);
 
@@ -133,7 +164,6 @@ module.exports = {
     var stillUtc2 = moment.utc(date2).toDate();
     var local = moment(stillUtc).local().format("hh:mm A");
     var local2 = moment(stillUtc2).local().format("hh:mm A");
-     console.log(date1, date2)
     /*if (date > date1 && date < date2) {
       const newEmbed = new Discord.MessageEmbed()
         .setColor("#304281")
@@ -157,7 +187,6 @@ module.exports = {
     if (amt > profileData.coins) {
       return message.channel.send(`Not Enough tokens...`);
     }
-
     try {
       Invest.findOne(
         { creatorID: message.author.id, Code: code },

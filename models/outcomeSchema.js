@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const outcomeSchema = new mongoose.Schema({
-  outcomeID: { type: String, required: true },
+  outcomeID: { type: String, required: true,  unique:false},
   category: { type: String, required: true },
-  team1: { type: String, required: true },
+  team1: { type: String, required: true},
   team2: { type: String, required: true },
   timeStart: { type: String, required: true },
   timeEnd: { type: String, required: true },
@@ -35,7 +35,7 @@ const outcomeSchema = new mongoose.Schema({
   ],
 });
 
-outcomeSchema.methods.addOptions = async function (option1) {
+outcomeSchema.methods.addOptions = function (option1) {
   const user = this;
   const Code = option1[0];
   const odds = option1[1];
@@ -51,7 +51,6 @@ outcomeSchema.methods.addOptions = async function (option1) {
     Code3,
     odds3,
   });
-  await user.save();
 };
 
 const Outcome = mongoose.model("Outcome", outcomeSchema);

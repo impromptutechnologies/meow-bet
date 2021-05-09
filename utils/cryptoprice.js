@@ -1,37 +1,43 @@
 const request = require("request");
-const Stock = require("../models/stockSchema");
+const Crypto = require("../models/cryptoSchema");
+const rp = require('request-promise');
 
-
-const stockPrice = (callback) => {
-
-    Stock.find({}, (error, stocks) => {
-        stocks.forEach((stock) => {
-            console.log(stock.ticker)
-            const url = `http://api.marketstack.com/v1/eod?access_key=b43c8007a25da9601cd55d83b6d3a6ad&symbols=${stock.ticker}&limit=1`;
-            request ({ url, json: true },(error, { body }) => {
-                console.log(body.data[0].close)
-                if (error) {
-                  console.log("Unable to connect", undefined);
-                } else if (body.length === 0) {
-                  console.log("No Stocks", undefined);
-                } else {
-                  closingChange = (((body.data[0].close)-(body.data[0].open))/(body.data[0].open))*100;
-                  Stock.findOneAndUpdate({ticker: stock.ticker}, { return: closingChange}, (error, stock) => {
-                        if(error){
-                            console.log(error)
-                        }
-                  })
-                }
-              }); 
-          }) 
-
-    });
-    /*Stock.find({}, (error, highest) => {
-        callback(highest)
-    }).sort({return:-1}).limit(1);*/
-    
-      
-
+const cryptoPrice = () => {
+    Crypto.find({}, (error, cryptos) => {
+      cryptos.forEach((crypto) => {
+          console.log(crypto.symbol)
+          const CoinMarketCap = require('coinmarketcap-api')
+          const apiKey = '992b34d4-f844-4fe2-85f0-3979f7a206af'
+          const client = new CoinMarketCap(apiKey)
+          client.getQuotes({symbol: crypto.symbol, convert: 'USD'}).then(response => {
+            console.log(response.data[crypto.symbol].quote.USD.percent_change_24h);
+            Crypto.findOneAndUpdate({symbol: crypto.symbol}, { return: response.data[crypto.symbol].quote.USD.percent_change_24h}, (error, crypto) => {
+                  if(error){
+                      console.log(error)
+                  } 
+            })
+          });
+        }) 
+  });
 };
-
-module.exports = stockPrice;
+/*
+const cryptoPriceOpen = () => {
+  Crypto.find({}, (error, cryptos) => {
+    cryptos.forEach((crypto) => {
+        console.log(crypto.symbol)
+        const CoinMarketCap = require('coinmarketcap-api')
+        const apiKey = '992b34d4-f844-4fe2-85f0-3979f7a206af'
+        const client = new CoinMarketCap(apiKey)
+        client.getQuotes({symbol: crypto.symbol, convert: 'USD'}).then(response => {
+          console.log(response.data[crypto.symbol].quote.USD.percent_change_24h);
+          Crypto.findOneAndUpdate({symbol: crypto.symbol}, { return: response.data[crypto.symbol].quote.USD.percent_change_24h}, (error, crypto) => {
+                if(error){
+                    console.log(error)
+                } 
+          })
+        });
+      }) 
+});
+};
+*/
+module.exports = cryptoPrice;

@@ -10,13 +10,14 @@ module.exports = {
   execute(client, message, args, Discord, profileData) {
     const crypto1 = args[0];
     const symbol = args[1];
-    const dailyChange = args[2];
     try {
       let crypto = Crypto.create(
         {
           Crypto: crypto1,
           symbol: symbol,
-          return: dailyChange,
+          return:0,
+          openPrice:0,
+          closePrice:0,
           Odds: 3,
         },
         (err, res) => {
