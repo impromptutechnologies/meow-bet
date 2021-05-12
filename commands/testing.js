@@ -1,6 +1,5 @@
 const stockPrice = require("../utils/stockprice");
 const newMatchesSoccer = require("../utils/newmatches");
-const setOdds = require("../utils/setodds");
 const newMatchesBasketball = require("../utils/newmatchesb");
 const newMatchesEsports = require("../utils/newmatchese");
 const betResult = require("../utils/betresult");
