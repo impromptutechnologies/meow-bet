@@ -47,7 +47,7 @@ module.exports = {
       
       */
       if (
-        date == moment.utc().format(`${month}-${day} 16:20`) &&
+        date == moment.utc().format(`${month}-${day} 20:32`) &&
         investments.length !== 0
       ) {
         Stock.find({}, (error, highest) => {
@@ -159,12 +159,12 @@ module.exports = {
     var month = moment.utc().format("MM");
     var date = moment.utc().format("MM-DD HH:mm");
     var date1 = moment.utc().format(`${month}-${day} 13:30`);
-    var date2 = moment.utc().format(`${month}-${day} 20:20`);
+    var date2 = moment.utc().format(`${month}-${day} 20:35`);
     var stillUtc = moment.utc(date1).toDate();
     var stillUtc2 = moment.utc(date2).toDate();
     var local = moment(stillUtc).local().format("hh:mm A");
     var local2 = moment(stillUtc2).local().format("hh:mm A");
-    /*if (date > date1 && date < date2) {
+    if (date > date1 && date < date2) {
       const newEmbed = new Discord.MessageEmbed()
         .setColor("#304281")
         .setTitle(`Market Already Open!`)
@@ -173,14 +173,15 @@ module.exports = {
           message.author.displayAvatarURL({ format: "png", dynamic: true })
         )
         .setDescription(
-          `Please place your investment commands between ${local2} and ${local} in your local time.`
+          `Please place your investment commands between ${local2} and ${local} in your local time.
+          The US stock market opens from 9:30am to 4pm ET so place your commands before the market opens.`
         )
         .setFooter(
           "visit http://localhost:3000/betsst to view more investments!"
         )
         .setURL("http://localhost:3000/betsst");
       return message.channel.send(newEmbed);
-    }*/
+    }
     if (!code) {
       return message.channel.send(`No Code Provided`);
     }

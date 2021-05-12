@@ -2,7 +2,7 @@ const request = require("request");
 const Crypto = require("../models/cryptoSchema");
 const rp = require('request-promise');
 
-const cryptoPrice = () => {
+const cryptoPriceOpen = () => {
     Crypto.find({}, (error, cryptos) => {
       cryptos.forEach((crypto) => {
           console.log(crypto.symbol)
@@ -10,9 +10,7 @@ const cryptoPrice = () => {
           const apiKey = '992b34d4-f844-4fe2-85f0-3979f7a206af'
           const client = new CoinMarketCap(apiKey)
           client.getQuotes({symbol: crypto.symbol, convert: 'USD'}).then(response => {
-            console.log(response.data[crypto.symbol].quote.USD.percent_change_24h);
-            const yourReturn = (response.data[crypto.symbol].quote.USD.price - crypto.openPrice)/crypto.openPrice
-            Crypto.findOneAndUpdate({symbol: crypto.symbol}, { return:yourReturn }, (error, crypto) => {
+            Crypto.findOneAndUpdate({symbol: crypto.symbol}, { openPrice: response.data[crypto.symbol].quote.USD.price}, (error, crypto) => {
                   if(error){
                       console.log(error)
                   } 
@@ -20,6 +18,6 @@ const cryptoPrice = () => {
           });
         }) 
   });
-};
+  };
 
-module.exports = cryptoPrice;
+  module.exports = cryptoPriceOpen;

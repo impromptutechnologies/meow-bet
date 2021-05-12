@@ -1,6 +1,7 @@
 var request = require("request");
 const Outcome = require("../models/outcomeSchema");
 const moment = require("moment-timezone");
+const setOddsB = require("../utils/setoddsb");
 
 const newMatchesBasketball = () => {
     var day = moment.utc().format("DD");
@@ -42,14 +43,6 @@ const newMatchesBasketball = () => {
                 if(err){
                   console.log(err)
                 }
-                const code1 = (`${res.team1.substring(0,3).replace(/\s+/g, '').toUpperCase()}${res.team2.substring(0,3).replace(/\s+/g, '').toUpperCase()}1`)
-                const code2 = (`${res.team1.substring(0,3).replace(/\s+/g, '').toUpperCase()}${res.team2.substring(0,3).replace(/\s+/g, '').toUpperCase()}2`)
-                res.addOptions([
-                  code1,
-                  1.3,
-                  code2,
-                  1.5,
-                ]);
                 res.save();
               }
             );
@@ -61,6 +54,7 @@ const newMatchesBasketball = () => {
   
   
       });
+      setTimeout(setOddsB, 10000)
     
   };
 
