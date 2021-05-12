@@ -1,7 +1,7 @@
 var request = require("request");
 const Outcome = require("../models/outcomeSchema");
 const moment = require("moment-timezone");
-const setOddsB = require("../utils/setoddsb");
+const setOddsB = require("../utils/setOddsB");
 
 const newMatchesBasketball = () => {
     var day = moment.utc().format("DD");

@@ -1,7 +1,7 @@
 var request = require("request");
 const Outcome = require("../models/outcomeSchema");
 const moment = require("moment-timezone");
-const setOdds = require("../utils/setodds");
+const setOdds = require("../utils/setOdds");
 
 const newMatchesSoccer = () => {
 
