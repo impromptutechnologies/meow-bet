@@ -11,7 +11,6 @@ const Invest = require("../models/investSchema");
 const Outcome = require("../models/outcomeSchema");
 const moment = require("moment-timezone");
 const cryptoPriceOpen = require("../utils/cryptopriceopen");
-const betResultEsports = require("../utils/betresultesports");
 
 module.exports = {
     name: "testing",
