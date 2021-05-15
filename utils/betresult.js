@@ -33,16 +33,6 @@ const betResult = (id, Discord, client) => {
           if (error) throw new Error(error);
 
           if (data.response[0].fixture.status.short == "FT" || data.response[0].fixture.status.short == "ET") {
-            console.log(
-              "home",
-              data.response[0].teams.home.name,
-              data.response[0].teams.home.winner
-            );
-            console.log(
-              "away",
-              data.response[0].teams.away.name,
-              data.response[0].teams.away.winner
-            );
             team1 = data.response[0].teams.home.name;
             team2 = data.response[0].teams.away.name;
             team1goals = data.response[0].score.fulltime.home;
@@ -151,6 +141,17 @@ const betResult = (id, Discord, client) => {
                   );
                 }
               });
+              Bet.deleteMany(
+                {
+
+                },
+                (error, deleted) => {
+                  if (error) {
+                    console.log(error);
+                  }
+                  console.log("deleted");
+                }
+              );
             }
             if (data.response[0].teams.away.winner == true) {
                 console.log(code2)
@@ -234,6 +235,17 @@ const betResult = (id, Discord, client) => {
                   );
                 }
               });
+              Bet.deleteMany(
+                {
+                  
+                },
+                (error, deleted) => {
+                  if (error) {
+                    console.log(error);
+                  }
+                  console.log("deleted");
+                }
+              );
             } else {
               Bet.find({ Code: code3 }, (err, successes) => {
                 for (const success of successes) {
@@ -315,6 +327,17 @@ const betResult = (id, Discord, client) => {
                   );
                 }
               });
+              Bet.deleteMany(
+                {
+                  
+                },
+                (error, deleted) => {
+                  if (error) {
+                    console.log(error);
+                  }
+                  console.log("deleted");
+                }
+              );
             }
           } else {
             console.log("game still in progress");

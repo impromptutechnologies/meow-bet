@@ -6,6 +6,7 @@ const setOddsB = require("../utils/setOddsB");
 const newMatchesBasketball = () => {
     var day = moment.utc().format("DD");
         var month = moment.utc().format("MM");
+        var year = moment.utc().format("YYYY");
         var date = moment.utc().format("MM-DD HH:mm");
       const options = {
         method: "GET",
@@ -13,7 +14,7 @@ const newMatchesBasketball = () => {
         qs: {
           league: 12,
           season: "2020-2021",
-          date: `2021-${month}-${day}`,
+          date: `${year}-${month}-${day}`,
         },
         headers: {
           "x-rapidapi-host": "v1.basketball.api-sports.io",
@@ -36,7 +37,7 @@ const newMatchesBasketball = () => {
                   .format("MM-DD HH:mm"),
                 timeEnd: moment
                   .utc(element.date)
-                  .add(2, "hours")
+                  .add(3, "hours")
                   .format("MM-DD HH:mm"),
               },
               (err, res) => {
@@ -54,7 +55,7 @@ const newMatchesBasketball = () => {
   
   
       });
-      setTimeout(setOddsB, 10000)
+      setTimeout(setOddsB, 5000)
     
   };
 

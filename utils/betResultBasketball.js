@@ -22,9 +22,7 @@ const betResultBasketball = (id, Discord, client) => {
             method: "GET",
             url: "https://v1.basketball.api-sports.io/games",
             qs: {
-              league: 12,
-              season: "2020-2021",
-              date: `2021-${month}-${day}`,
+              id:id
             },
             headers: {
               "x-rapidapi-host": "v1.basketball.api-sports.io",
@@ -33,20 +31,8 @@ const betResultBasketball = (id, Discord, client) => {
           };
         request(options, (error, response, body) => {
           data = JSON.parse(body);
-          console.log(data.response[0].fixture.status);
           if (error) throw new Error(error);
-
-          if (data.response[0].fixture.status.short == "FT" || data.response[0].fixture.status.short == "AOT") {
-            console.log(
-              "home",
-              data.response[0].teams.home.name,
-              data.response[0].scores.home.total
-            );
-            console.log(
-              "away",
-              data.response[0].teams.away.name,
-              data.response[0].scores.away.total
-            );
+          if (data.response[0].status.short == "FT" || data.response[0].status.short == "AOT") {
             team1 = data.response[0].teams.home.name;
             team2 = data.response[0].teams.away.name;
             team1points = data.response[0].scores.home.total;
@@ -58,14 +44,14 @@ const betResultBasketball = (id, Discord, client) => {
               .substring(0, 3)
               .replace(/\s+/g, "")
               .toUpperCase()}1`;
-            const code2 = `${team1
+            const code3 = `${team1
               .substring(0, 3)
               .replace(/\s+/g, "")
               .toUpperCase()}${team2
               .substring(0, 3)
               .replace(/\s+/g, "")
               .toUpperCase()}2`;
-              console.log(code1, code2)
+              console.log(code1, code3)
             if (data.response[0].scores.home.total > data.response[0].scores.away.total) {
                 console.log(code1)
               Bet.find({ Code: code1 }, (err, successes) => {
@@ -150,8 +136,8 @@ const betResultBasketball = (id, Discord, client) => {
               });
             }
             else {
-                console.log(code2)
-              Bet.find({ Code: code2 }, (err, successes) => {
+                console.log(code3)
+              Bet.find({ Code: code3 }, (err, successes) => {
                 for (const success of successes) {
                   const creatorID = success.creatorID;
                   console.log(successes);

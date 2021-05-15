@@ -15,27 +15,44 @@ const newMatchesEsports = require("../../utils/newmatchese");
 
 module.exports = async (Discord, client) => {
     console.log('bot online')
-    var date = moment.utc().format("MM-DD HH:mm");
-    var day = moment.utc().format("DD");
-    var month = moment.utc().format("MM");
-    /*if (
-      date === moment.utc().format(`${month}-${day} 00:00`)
-    ){
-      console.log('damnson')
-      newMatchesSoccer();
-      newMatchesBasketball();
-      newMatchesEsports();
-    }*/
     const updateMatches = async () => {
       var date = moment.utc().format("MM-DD HH:mm");
       const outcomes = await Outcome.find({timeEnd: { $lt: date }});
       console.log(outcomes);
       if(outcomes.length == 0){
           console.log('no finished matches/games')
+          const soccerGames = await Outcome.find({timeStart: { $gt: date }, category: "soccer", league: "prem"});
+          const soccerGamesc = await Outcome.find({timeStart: { $gt: date }, category: "soccer", league: "champ"});
+          const soccerGamesi = await Outcome.find({timeStart: { $gt: date }, category: "soccer", league: "rest", spec:"seriea"});
+          const soccerGamesl = await Outcome.find({timeStart: { $gt: date }, category: "soccer", league: "rest", spec:"laliga"});
+          //maybe we need to divide la liga and serie a and bundesliga
+          const basketballGames = await Outcome.find({timeStart: { $gt: date }, category: "basketball"});
+          const esports = await Outcome.find({timeStart: { $gt: date }, category: "esp", league: "rest", spec:"laliga"});
+          console.log('Number of not started basketball outcomes - ', basketballGames.length)
+          console.log('Number of not started premier league outcomes - ', soccerGames.length)
+          console.log('Number of not started champions league outcomes - ', soccerGamesc.length)
+          console.log('Number of not started seriea outcomes - ', soccerGamesi.length)
+          console.log('Number of not started laliga outcomes - ', soccerGamesl.length)
+          if(soccerGames.length == 0){
+              newMatchesSoccer("prem");
+          }
+          if(soccerGamesc.length == 0){
+            newMatchesSoccer("champ");
+          }
+          if(soccerGamesi.length == 0){
+            newMatchesSoccer("seriea");
+          }
+          if(soccerGamesl.length == 0){
+            setTimeout(newMatchesSoccer.bind(null, 'laliga'), 10000)
+          }
+          if(basketballGames.length == 0){
+            newMatchesBasketball();
+          }
+          
       } else{
           console.log(outcomes.length)
           outcomes.forEach((element) => {
-              if(element.category == "esportscod"){
+              /*if(element.category == "esportscod"){
                   betResultEsports(element.outcomeID, Discord, client,{
                     method: 'GET',
                     url: `https://api.pandascore.co/codmw/matches/upcoming?filter[id]=${element.outcomeID}`,
@@ -79,7 +96,7 @@ module.exports = async (Discord, client) => {
                     useQueryString: true
                   }
                 });
-            }
+              }*/
               if(element.category == "basketball"){
                   betResultBasketball(element.outcomeID, Discord, client);
               } 
@@ -88,12 +105,11 @@ module.exports = async (Discord, client) => {
               }
           })
           const deleted = await Outcome.deleteMany({timeEnd: { $lt: date }})
-          console.log(deleted)
       }
       
       //setTimeout(updateMatches, 1000 * 10);
   }
-  setInterval(updateMatches, 10000);
+  setInterval(updateMatches, 60000);
   
 
     const checkReturn = async () => {
@@ -106,8 +122,8 @@ module.exports = async (Discord, client) => {
         console.log("crypto invests total:", investmentcrypto.length);
 
         if (
-          date == moment.utc().format(`${month}-${day} 13:30`) &&
-          investmentstock.length !== 0
+          date == moment.utc().format(`${month}-${day} 13:29`) &&
+          investmentcrypto.length !== 0
         ){
           cryptoPriceOpen((error, highest) => {
             if (error) {
@@ -141,7 +157,7 @@ module.exports = async (Discord, client) => {
         }
         //setTimeout(checkReturn, 1000 * 10);
       };
-      setInterval(checkReturn, 10000);
+      setInterval(checkReturn, 60000);
       
 }
     

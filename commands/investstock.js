@@ -164,7 +164,8 @@ module.exports = {
     var stillUtc2 = moment.utc(date2).toDate();
     var local = moment(stillUtc).local().format("hh:mm A");
     var local2 = moment(stillUtc2).local().format("hh:mm A");
-    if (date > date1 && date < date2) {
+    var today = new Date();
+    if (date > date1 && date < date2 && today.getDay() !== 6 && today.getDay() !== 0) {
       const newEmbed = new Discord.MessageEmbed()
         .setColor("#304281")
         .setTitle(`Market Already Open!`)
@@ -175,6 +176,23 @@ module.exports = {
         .setDescription(
           `Please place your investment commands between ${local2} and ${local} in your local time.
           The US stock market opens from 9:30am to 4pm ET so place your commands before the market opens.`
+        )
+        .setFooter(
+          "visit http://localhost:3000/betsst to view more investments!"
+        )
+        .setURL("http://localhost:3000/betsst");
+      return message.channel.send(newEmbed);
+    }
+    if (today.getDay() == 6 || today.getDay() == 0) {
+      const newEmbed = new Discord.MessageEmbed()
+        .setColor("#304281")
+        .setTitle(`Its the Weekend!`)
+        .setAuthor(
+          message.author.username,
+          message.author.displayAvatarURL({ format: "png", dynamic: true })
+        )
+        .setDescription(
+          `Please place your investment commands on weekdays.`
         )
         .setFooter(
           "visit http://localhost:3000/betsst to view more investments!"

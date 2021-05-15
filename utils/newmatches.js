@@ -3,10 +3,17 @@ const Outcome = require("../models/outcomeSchema");
 const moment = require("moment-timezone");
 const setOdds = require("../utils/setOdds");
 
-const newMatchesSoccer = () => {
+const newMatchesSoccer = (choice) => {
 
     var date = moment.utc().format("YYYY-MM-DD");
+    var date2 = moment.utc(date).add(1, "months").format("YYYY-MM-DD")
+    console.log(date2)
     var date1 = moment.utc(date).add(2, "days").format("YYYY-MM-DD")
+    //Maybe get all matches for the next two weeks?? and fill our the odds yourself or have a fucntion chekc for the matches of the day and then fill out the odds.
+    //Might be a good idea. yuppio
+
+    //Check every 3 mins if the odds are available. So if statement without an else. if its available do it if not eh. 
+    
       const options = {
         method: "GET",
         url: "https://v3.football.api-sports.io/fixtures",
@@ -21,46 +28,246 @@ const newMatchesSoccer = () => {
           "x-rapidapi-key": "e40fc324e790e08e5f948456fd4d1049",
         },
       };
-      request(options, (error, response, body) => {
-        data = JSON.parse(body);
-        if (error) throw new Error(error);
-        for (const element of data.response) {
-          Outcome.create(
-            {
-              outcomeID: element.fixture.id,
-              category: "soccer",
-              team1: element.teams.home.name,
-              team2: element.teams.away.name,
-              timeStart: moment
-                .utc(element.fixture.date)
-                .format("MM-DD HH:mm"),
-              timeEnd: moment
-                .utc(element.fixture.date)
-                .add(2, "hours")
-                .format("MM-DD HH:mm"),
-            },
-            (err, res) => {
-              if(err){
-                console.log(err)
-              }
-              /*const code1 = (`${res.team1.substring(0,3).replace(/\s+/g, '').toUpperCase()}${res.team2.substring(0,3).replace(/\s+/g, '').toUpperCase()}1`)
-              const code2 = (`${res.team1.substring(0,3).replace(/\s+/g, '').toUpperCase()}${res.team2.substring(0,3).replace(/\s+/g, '').toUpperCase()}2`)
-              const code3 = (`${res.team1.substring(0,3).replace(/\s+/g, '').toUpperCase()}${res.team2.substring(0,3).replace(/\s+/g, '').toUpperCase()}3`) 
-              res.addOptions([
-                code1,
-                1.3,
-                code2,
-                1.5,
-                code3,
-                2.1,
-              ]);*/
-              res.save();
+      const optionsc = {
+        method: "GET",
+        url: "https://v3.football.api-sports.io/fixtures",
+        qs: {
+          league: 2,
+          from: date,
+          to:date2,
+          season: 2020
+        },
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": "e40fc324e790e08e5f948456fd4d1049",
+        },
+      };
+      const optionsi = {
+        method: "GET",
+        url: "https://v3.football.api-sports.io/fixtures",
+        qs: {
+          league: 135,
+          from: date,
+          to:date1,
+          season: 2020
+        },
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": "e40fc324e790e08e5f948456fd4d1049",
+        },
+      };
+      const optionss = {
+        method: "GET",
+        url: "https://v3.football.api-sports.io/fixtures",
+        qs: {
+          league: 140,
+          from: date,
+          to:date1,
+          season: 2020
+        },
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": "e40fc324e790e08e5f948456fd4d1049",
+        },
+      };
+/*
+              &&
+              (element.teams.home.name == 'Real Madrid' || element.teams.home.name == 'Barcelona' || element.teams.home.name == 'Atletico Madrid' || 
+              element.teams.away.name == 'Atletico Madrid' || element.teams.away.name == 'Real Madrid' || element.teams.away.name == 'Barcelona')
+            */
+
+
+              /*const optionss = {
+        method: "GET",
+        url: "https://v3.football.api-sports.io/fixtures",
+        qs: {
+          league: 78,
+          from: date,
+          to:date1,
+          season: 2020
+        },
+        headers: {
+          "x-rapidapi-host": "v3.football.api-sports.io",
+          "x-rapidapi-key": "e40fc324e790e08e5f948456fd4d1049",
+        },
+      };
+              &&
+              (element.teams.home.name == 'Bayern Munich' || element.teams.home.name == 'Borussia Dortmund' || element.teams.home.name == 'RB Leipzig' || 
+              element.teams.away.name == 'RB Leipzig' || element.teams.away.name == 'Borussia Dortmund' || element.teams.away.name == 'Bayern Munich')
+            */
+           
+      if(choice == 'prem'){
+        request(options, (error, response, body) => {
+          data = JSON.parse(body);
+          if (error) throw new Error(error);
+          for (const element of data.response) {
+            if(element.fixture.status.long == 'Not Started'
+            
+              &&
+              (element.teams.home.name == 'Liverpool' || element.teams.home.name == 'Manchester United' || element.teams.home.name == 'Manchester City' || element.teams.home.name == 'Tottenham' || element.teams.home.name == 'Leicester'
+              || element.teams.home.name == 'Arsenal' || element.teams.home.name == 'Chelsea' || element.teams.away.name == 'Liverpool' || element.teams.away.name == 'Manchester United' || element.teams.away.name == 'Manchester City' || element.teams.away.name == 'Tottenham' || element.teams.away.name == 'Leicester'
+              || element.teams.home.name == 'Arsenal' || element.teams.home.name == 'Chelsea')
+            ){
+              Outcome.create(
+                {
+                  outcomeID: element.fixture.id,
+                  category: "soccer",
+                  league: "prem",
+                  team1: element.teams.home.name,
+                  team2: element.teams.away.name,
+                  timeStart: moment
+                    .utc(element.fixture.date)
+                    .format("MM-DD HH:mm"),
+                  timeEnd: moment
+                    .utc(element.fixture.date)
+                    .add(2, "hours")
+                    .format("MM-DD HH:mm"),
+                },
+                (err, res) => {
+                  if(err){
+                    console.log(err)
+                  }
+                  res.save();
+                }
+              );
             }
-          );
-        }
+            
+          }
+          
+        });
+        setTimeout(setOdds.bind(null, 'prem'), 10000)
+
+      }
+      if(choice == 'champ'){
+        request(optionsc, (error, response, body) => {
+          datac = JSON.parse(body);
+          console.log(datac);
+          if (error) throw new Error(error);
+          for (const element of datac.response) {
+            if(element.fixture.status.long == 'Not Started'){
+              Outcome.create(
+                {
+                  outcomeID: element.fixture.id,
+                  category: "soccer",
+                  league: "champ",
+                  team1: element.teams.home.name,
+                  team2: element.teams.away.name,
+                  timeStart: moment
+                    .utc(element.fixture.date)
+                    .format("MM-DD HH:mm"),
+                  timeEnd: moment
+                    .utc(element.fixture.date)
+                    .add(2, "hours")
+                    .format("MM-DD HH:mm"),
+                },
+                (err, res) => {
+                  if(err){
+                    console.log(err)
+                  }
+                  res.save();
+                }
+              );
+            }
+            
+          }
+          
+        });
+        setTimeout(setOdds.bind(null, 'champ'), 5000)
         
-      });
-      setTimeout(setOdds, 10000)
+      }
+
+      if(choice == 'seriea'){
+        request(optionsi, (error, response, body) => {
+          datai = JSON.parse(body);
+          if (error) throw new Error(error);
+            for (const element of datai.response) {
+              if(element.fixture.status.long == 'Not Started' 
+              
+              &&
+              (element.teams.home.name == 'Juventus' || element.teams.home.name == 'Inter' || element.teams.home.name == 'AC Milan' || element.teams.home.name == 'Napoli' || element.teams.home.name == 'AS Roma' || 
+              element.teams.away.name == 'Juventus' || element.teams.away.name == 'Inter' || element.teams.away.name == 'AC Milan' || element.teams.away.name == 'Napoli' || element.teams.away.name == 'AS Roma') 
+              
+              ){
+                Outcome.create( 
+                  {
+                    outcomeID: element.fixture.id,
+                    category: "soccer",
+                    league: "rest",
+                    spec: "seriea",
+                    team1: element.teams.home.name,
+                    team2: element.teams.away.name,
+                    timeStart: moment
+                      .utc(element.fixture.date)
+                      .format("MM-DD HH:mm"),
+                    timeEnd: moment
+                      .utc(element.fixture.date)
+                      .add(2, "hours")
+                      .format("MM-DD HH:mm"),
+                  },
+                  (err, res) => {
+                    if(err){
+                      console.log(err)
+                    }
+                    res.save();
+                  }
+                );
+              }
+              
+            }
+        
+          
+        });
+        setTimeout(setOdds.bind(null, 'rest'), 5000)
+        
+      }
+
+      if(choice == 'laliga'){
+        request(optionss, (error, response, body) => {
+          datai = JSON.parse(body);
+          if (error) throw new Error(error);
+            for (const element of datai.response) {
+              if(element.fixture.status.long == 'Not Started' 
+              &&
+              (element.teams.home.name == 'Atletico Madrid' || element.teams.home.name == 'Real Madrid' || element.teams.home.name == 'Barcelona'
+              || element.teams.away.name == 'Atletico Madrid' || element.teams.away.name == 'Real Madrid' || element.teams.away.name == 'Barcelona') 
+              
+              ){
+                Outcome.create( 
+                  {
+                    outcomeID: element.fixture.id,
+                    category: "soccer",
+                    league: "rest",
+                    spec: "laliga",
+                    team1: element.teams.home.name,
+                    team2: element.teams.away.name,
+                    timeStart: moment
+                      .utc(element.fixture.date)
+                      .format("MM-DD HH:mm"),
+                    timeEnd: moment
+                      .utc(element.fixture.date)
+                      .add(2, "hours")
+                      .format("MM-DD HH:mm"),
+                  },
+                  (err, res) => {
+                    console.log(res)
+                    if(err){
+                      console.log(err)
+                    }
+                    res.save();
+                  }
+                );
+              }
+              
+            }
+        
+          
+        });
+        setTimeout(setOdds.bind(null, 'rest'), 5000)
+        
+      }
+   
+      
+    
 
   
 };

@@ -58,7 +58,7 @@ module.exports = {
         if (messageReceived == "high" && chances > hint) {
           Profile.findOneAndUpdate(
             { userID: message.author.id },
-            { coins: ((amt * 1.5)-amt) + coinz },
+            { coins: ((amt * 1.4)-amt) + coinz },
             (err, user) => {
               if (err) {
                 return console.log(err);

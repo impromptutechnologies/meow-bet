@@ -1,7 +1,7 @@
 const Profile = require("../models/profileSchema");
 module.exports = {
   name: "slots",
-  cooldown: 10,
+  cooldown: 1,
   description: "Play the Slots!",
   execute(client, message, args, Discord, profileData) {
     const amt = args[0];
@@ -11,18 +11,17 @@ module.exports = {
       );
     }
     min = Math.ceil(0);
-    max = Math.floor(10);
+    max = Math.floor(11);
     const chances = Math.floor(Math.random() * (max - min) + min);
-    const winnin = Math.floor(Math.random() * (200 - 110) + 110) / 110;
-    console.log(winnin);
     console.log(chances);
+    const winnin = Math.floor(Math.random() * (200 - 115) + 115) / 115;
     const user = Profile.findOne({ userID: message.author.id }, (err, prof) => {
       if (err) {
         console.log(err);
       }
       if (prof.coins >= amt) {
         const coinz = prof.coins;
-        if (chances >= 4) {
+        if (chances >= 5) {
           Profile.findOneAndUpdate(
             { userID: message.author.id },
             { coins: coinz - parseInt(amt) },

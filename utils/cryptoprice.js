@@ -10,7 +10,6 @@ const cryptoPrice = () => {
           const apiKey = '992b34d4-f844-4fe2-85f0-3979f7a206af'
           const client = new CoinMarketCap(apiKey)
           client.getQuotes({symbol: crypto.symbol, convert: 'USD'}).then(response => {
-            console.log(response.data[crypto.symbol].quote.USD.percent_change_24h);
             const yourReturn = (response.data[crypto.symbol].quote.USD.price - crypto.openPrice)/crypto.openPrice
             Crypto.findOneAndUpdate({symbol: crypto.symbol}, { return:yourReturn }, (error, crypto) => {
                   if(error){

@@ -23,7 +23,7 @@ const newMatchesEsports = () => {
 
         const optionscsgo = {
           method: 'GET',
-          url: 'https://api.pandascore.co/csgo/matches/upcoming?filter[league_id]=4569,4573,4568',
+          url: 'https://api.pandascore.co/csgo/matches/upcoming?filter[league_id]=4551,4568,4569,4572',
           headers: {
             'Authorization': 'Bearer hCHqW_AKX0xtmdSF5ZACti9M9LcLsWKKa52M70hWWy7aGEaql5M',
             'host': 'api.pandascore.co',
@@ -33,7 +33,7 @@ const newMatchesEsports = () => {
 
         const optionsdota = {
           method: 'GET',
-          url: 'https://api.pandascore.co/dota2/matches/upcoming?filter[league_id]=4567,4552,4541,4517,4487,4481,4447,4400,4391,4362',
+          url: 'https://api.pandascore.co/dota2/matches/upcoming?filter[league_id]=4447,4487,4517',
           headers: {
             'Authorization': 'Bearer hCHqW_AKX0xtmdSF5ZACti9M9LcLsWKKa52M70hWWy7aGEaql5M',
             'host': 'api.pandascore.co',
@@ -43,7 +43,7 @@ const newMatchesEsports = () => {
 
         const optionsleague = {
           method: 'GET',
-          url: 'https://api.pandascore.co/lol/matches/upcoming?filter[league_id]=2711,4140,4568,4004,4199,4553,4198,4197,4407,4288,4533,1003,4141',
+          url: 'https://api.pandascore.co/lol/matches/upcoming?filter[league_id]=4198,4394,4197,4407,300',
           headers: {
             'Authorization': 'Bearer hCHqW_AKX0xtmdSF5ZACti9M9LcLsWKKa52M70hWWy7aGEaql5M',
             'host': 'api.pandascore.co',
@@ -51,12 +51,12 @@ const newMatchesEsports = () => {
           }
         };
         
-      request(options, (error, response, body) => {
+      /*request(options, (error, response, body) => {
         data = JSON.parse(body);
         if (error) throw new Error(error);
         data.forEach((element) => {
           if(!(element.opponents.length < 2)){
-            if(((moment
+            if((element.status == 'not_started') && ((moment
               .utc(element.begin_at)
               .format("MM-DD HH:mm") < date) == false) && ((moment
                 .utc(element.begin_at)
@@ -84,9 +84,9 @@ const newMatchesEsports = () => {
                       const code2 = (`${element.opponents[0].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}${element.opponents[1].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}2`)
                       res.addOptions([
                         code1,
-                        1.3,
+                        0.0,
                         code2,
-                        1.5,
+                        0.0,
                       ]);
                       res.save();
                     }
@@ -142,7 +142,7 @@ const newMatchesEsports = () => {
           }
         })
       });
-
+      
       request(optionsdota, (error, response, body) => {
         data = JSON.parse(body);
         if (error) throw new Error(error);
@@ -176,9 +176,9 @@ const newMatchesEsports = () => {
                       const code2 = (`${element.opponents[0].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}${element.opponents[1].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}2`)
                       res.addOptions([
                         code1,
-                        1.3,
+                        0.0,
                         code2,
-                        1.5,
+                        0.0,
                       ]);
                       res.save();
                     }
@@ -186,7 +186,7 @@ const newMatchesEsports = () => {
               }
           }
         })
-      });
+      });*/
 
 
       request(optionsleague, (error, response, body) => {
@@ -222,9 +222,9 @@ const newMatchesEsports = () => {
                       const code2 = (`${element.opponents[0].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}${element.opponents[1].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}2`)
                       res.addOptions([
                         code1,
-                        1.3,
+                        0.0,
                         code2,
-                        1.5,
+                        0.0,
                       ]);
                       res.save();
                     }

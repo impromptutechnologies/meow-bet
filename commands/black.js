@@ -2,7 +2,7 @@ const Profile = require("../models/profileSchema");
 
 module.exports = {
   name: "black",
-  cooldown: 1,
+  cooldown: 10,
   description: "Simply Blackjack. Test your skills and luck!",
   execute(client, message, args, Discord, profileData) {
     min = Math.ceil(0);

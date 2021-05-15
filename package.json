@@ -14,7 +14,7 @@
     "coingecko-api": "^1.0.10",
     "coinmarketcap-api": "^3.1.1",
     "discord.js": "^12.5.3",
-    "dotenv": "^8.2.0",
+    "dotenv": "^8.6.0",
     "fs": "0.0.1-security",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
