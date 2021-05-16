@@ -25,6 +25,7 @@ const newMatchesBasketball = () => {
         data = JSON.parse(body);
         if (error) throw new Error(error);
         data.response.forEach((element)=>{
+          console.log(element.date, element.teams.home.name);
           if(element.status.long == 'Not Started'){
             Outcome.create(
               {
@@ -55,7 +56,7 @@ const newMatchesBasketball = () => {
   
   
       });
-      setTimeout(setOddsB, 5000)
+      setTimeout(setOddsB, 10000)
     
   };
 

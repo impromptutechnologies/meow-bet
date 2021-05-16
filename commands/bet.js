@@ -139,7 +139,6 @@ module.exports = {
                       if (err) {
                         return console.log(err);
                       }
-                      console.log(res);
                       res.save();
                       const newEmbed = new Discord.MessageEmbed()
                         .setColor("#304281")
@@ -184,7 +183,6 @@ module.exports = {
                       if (err) {
                         return console.log(err);
                       }
-                      console.log(res);
                       res.save();
                       const newEmbed = new Discord.MessageEmbed()
                         .setColor("#304281")

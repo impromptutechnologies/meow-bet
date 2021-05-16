@@ -18,17 +18,7 @@ module.exports = {
   name: "testing",
   description: "testing testing 123",
   execute(client, message, args, Discord, profileData) {
-    newMatchesEsports();
-  }
-
-}
-
-
-
-
-
-
-/*Outcome.find(
+    /*Outcome.find(
       {
         category: "basketball",
         'option1.0.odds': 0,
@@ -70,3 +60,30 @@ module.exports = {
             });
           })
       });*/
+      const options = {
+        method: "GET",
+        url: "https://v1.basketball.api-sports.io/odds",
+        qs: {
+          game: 109254,
+          bet: "2", 
+          bookmaker: "2"
+        },
+        headers: {
+          "x-rapidapi-host": "v1.basketball.api-sports.io",
+          "x-rapidapi-key": "e40fc324e790e08e5f948456fd4d1049",
+        },
+      };
+      request(options, (error, response, body) => {
+        data = JSON.parse(body);
+        console.log(data)
+
+      });
+  }
+
+}
+
+
+
+
+
+

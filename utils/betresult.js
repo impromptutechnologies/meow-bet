@@ -143,7 +143,7 @@ const betResult = (id, Discord, client) => {
               });
               Bet.deleteMany(
                 {
-
+                    $or: [ { Code: code2 }, { Code: code3 } ]
                 },
                 (error, deleted) => {
                   if (error) {
@@ -237,7 +237,7 @@ const betResult = (id, Discord, client) => {
               });
               Bet.deleteMany(
                 {
-                  
+                  $or: [ { Code: code1 }, { Code: code3 } ]
                 },
                 (error, deleted) => {
                   if (error) {
@@ -329,7 +329,7 @@ const betResult = (id, Discord, client) => {
               });
               Bet.deleteMany(
                 {
-                  
+                  $or: [ { Code: code1 }, { Code: code2 } ]
                 },
                 (error, deleted) => {
                   if (error) {

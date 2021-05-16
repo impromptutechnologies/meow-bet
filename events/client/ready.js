@@ -26,6 +26,7 @@ module.exports = async (Discord, client) => {
           const soccerGamesi = await Outcome.find({timeStart: { $gt: date }, category: "soccer", league: "rest", spec:"seriea"});
           const soccerGamesl = await Outcome.find({timeStart: { $gt: date }, category: "soccer", league: "rest", spec:"laliga"});
           //maybe we need to divide la liga and serie a and bundesliga
+          //what if there is none???????
           const basketballGames = await Outcome.find({timeStart: { $gt: date }, category: "basketball"});
           const esports = await Outcome.find({timeStart: { $gt: date }, category: "esp", league: "rest", spec:"laliga"});
           console.log('Number of not started basketball outcomes - ', basketballGames.length)
@@ -39,12 +40,12 @@ module.exports = async (Discord, client) => {
           if(soccerGamesc.length == 0){
             newMatchesSoccer("champ");
           }
-          if(soccerGamesi.length == 0){
+          /*if(soccerGamesi.length == 0){
             newMatchesSoccer("seriea");
-          }
-          if(soccerGamesl.length == 0){
+          }*/
+          /*if(soccerGamesl.length == 0){
             setTimeout(newMatchesSoccer.bind(null, 'laliga'), 10000)
-          }
+          }*/
           if(basketballGames.length == 0){
             newMatchesBasketball();
           }
