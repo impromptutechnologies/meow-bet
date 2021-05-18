@@ -7,6 +7,9 @@ const Profile = require("../models/profileSchema");
 
 const moment = require("moment-timezone");
 
+
+
+//convert to async and see if it works
 const betResultBasketball = (id, Discord, client) => {
     var day = moment.utc().format("DD");
         var month = moment.utc().format("MM");
@@ -31,6 +34,7 @@ const betResultBasketball = (id, Discord, client) => {
           };
         request(options, (error, response, body) => {
           data = JSON.parse(body);
+          console.log(data)
           if (error) throw new Error(error);
           if (data.response[0].status.short == "FT" || data.response[0].status.short == "AOT") {
             team1 = data.response[0].teams.home.name;
@@ -120,18 +124,6 @@ const betResultBasketball = (id, Discord, client) => {
                       );
                     }
                   });
-                  Bet.deleteMany(
-                    {
-                      creatorID: creatorID,
-                      outcomeID: success.outcomeID,
-                    },
-                    (error, deleted) => {
-                      if (error) {
-                        console.log(error);
-                      }
-                      console.log("deleted");
-                    }
-                  );
                 }
               });
             }
@@ -204,21 +196,20 @@ const betResultBasketball = (id, Discord, client) => {
                       );
                     }
                   });
-                  Bet.deleteMany(
-                    {
-                      creatorID: creatorID,
-                      outcomeID: success.outcomeID,
-                    },
-                    (error, deleted) => {
-                      if (error) {
-                        console.log(error);
-                      }
-                      console.log("deleted");
-                    }
-                  );
                 }
               });
             } 
+            Bet.deleteMany(
+              {
+                  $or: [ { Code: code1 }, { Code: code3 } ]
+              },
+              (error, deleted) => {
+                if (error) {
+                  console.log(error);
+                }
+                console.log("deleted");
+              }
+            );
           } else {
             console.log("game still in progress");
           }

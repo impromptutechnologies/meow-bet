@@ -1,24 +1,25 @@
 const Outcome = require("../models/outcomeSchema");
 
-const setOdds = (league) => {
+const setOdds = (league, outcomeID) => {
   var request = require("request");
-  console.log(league);
+  console.log(league, outcomeID);
   //find the outcomes by the date
-  Outcome.find(
+  Outcome.findOne(
     {
       category: "soccer",
       league: league,
+      outcomeID:outcomeID
     },
     (err, res) => {
       if (err) {
         console.log(err);
       }
-      for (const element of res) {
-        if (element.option1.length == 0) {
+      console.log(res);
+        if (res.option1.length == 0) {
           var options = {
             method: "GET",
             url: "https://v3.football.api-sports.io/odds",
-            qs: { bet: "1", bookmaker: "1", fixture: element.outcomeID },
+            qs: { bet: "1", bookmaker: "1", fixture: outcomeID },
             headers: {
               "x-rapidapi-host": "v3.football.api-sports.io",
               "x-rapidapi-key": "e40fc324e790e08e5f948456fd4d1049",
@@ -28,30 +29,29 @@ const setOdds = (league) => {
             if (error) throw new Error(error);
             data = JSON.parse(body);
             console.log(data);
-            
             if(data.response[0] !== undefined){
-              const code1 = `${element.team1
+              const code1 = `${res.team1
                 .substring(0, 3)
                 .replace(/\s+/g, "")
-                .toUpperCase()}${element.team2
+                .toUpperCase()}${res.team2
                 .substring(0, 3)
                 .replace(/\s+/g, "")
                 .toUpperCase()}1`;
-              const code2 = `${element.team1
+              const code2 = `${res.team1
                 .substring(0, 3)
                 .replace(/\s+/g, "")
-                .toUpperCase()}${element.team2
+                .toUpperCase()}${res.team2
                 .substring(0, 3)
                 .replace(/\s+/g, "")
                 .toUpperCase()}2`;
-              const code3 = `${element.team1
+              const code3 = `${res.team1
                 .substring(0, 3)
                 .replace(/\s+/g, "")
-                .toUpperCase()}${element.team2
+                .toUpperCase()}${res.team2
                 .substring(0, 3)
                 .replace(/\s+/g, "")
                 .toUpperCase()}3`;
-              element.addOptions([
+              res.addOptions([
                 code1,
                 parseFloat(data.response[0].bookmakers[0].bets[0].values[0].odd),
                 code2,
@@ -59,46 +59,48 @@ const setOdds = (league) => {
                 code3,
                 parseFloat(data.response[0].bookmakers[0].bets[0].values[1].odd),
               ]);
-              element.save();
-
-            } else{
-              const code1 = `${element.team1
-                .substring(0, 3)
-                .replace(/\s+/g, "")
-                .toUpperCase()}${element.team2
-                .substring(0, 3)
-                .replace(/\s+/g, "")
-                .toUpperCase()}1`;
-              const code2 = `${element.team1
-                .substring(0, 3)
-                .replace(/\s+/g, "")
-                .toUpperCase()}${element.team2
-                .substring(0, 3)
-                .replace(/\s+/g, "")
-                .toUpperCase()}2`;
-              const code3 = `${element.team1
-                .substring(0, 3)
-                .replace(/\s+/g, "")
-                .toUpperCase()}${element.team2
-                .substring(0, 3)
-                .replace(/\s+/g, "")
-                .toUpperCase()}3`;
-              element.addOptions([
-                code1,
-                0.00,
-                code2,
-                0.00,
-                code3,
-                0.00,
-              ]);
-              element.save();
+              res.save();
             }
-            
           });
         }
-      }
     }
   );
 };
 
 module.exports = setOdds;
+
+
+/*
+else{
+              const code1 = `${res.team1
+                .substring(0, 3)
+                .replace(/\s+/g, "")
+                .toUpperCase()}${res.team2
+                .substring(0, 3)
+                .replace(/\s+/g, "")
+                .toUpperCase()}1`;
+              const code2 = `${res.team1
+                .substring(0, 3)
+                .replace(/\s+/g, "")
+                .toUpperCase()}${res.team2
+                .substring(0, 3)
+                .replace(/\s+/g, "")
+                .toUpperCase()}2`;
+              const code3 = `${res.team1
+                .substring(0, 3)
+                .replace(/\s+/g, "")
+                .toUpperCase()}${res.team2
+                .substring(0, 3)
+                .replace(/\s+/g, "")
+                .toUpperCase()}3`;
+              res.addOptions([
+                code1,
+                0.0,
+                code2,
+                0.0,
+                code3,
+                0.0,
+              ]);
+              res.save();
+
+            }*/

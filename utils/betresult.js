@@ -29,6 +29,7 @@ const betResult = (id, Discord, client) => {
         };
         request(options, (error, response, body) => {
           data = JSON.parse(body);
+          console.log(data);
           console.log(data.response[0].fixture.status);
           if (error) throw new Error(error);
 
@@ -62,7 +63,7 @@ const betResult = (id, Discord, client) => {
             if (data.response[0].teams.home.winner == true) {
                 console.log(code1)
               Bet.find({ Code: code1 }, (err, successes) => {
-                for (const success of successes) {
+                successes.forEach((success) => {
                   const creatorID = success.creatorID;
                   console.log(successes);
                   Profile.findOne({ userID: creatorID }, (err, profile) => {
@@ -127,36 +128,13 @@ const betResult = (id, Discord, client) => {
                       );
                     }
                   });
-                  Bet.deleteMany(
-                    {
-                      creatorID: creatorID,
-                      outcomeID: success.outcomeID,
-                    },
-                    (error, deleted) => {
-                      if (error) {
-                        console.log(error);
-                      }
-                      console.log("deleted");
-                    }
-                  );
-                }
-              });
-              Bet.deleteMany(
-                {
-                    $or: [ { Code: code2 }, { Code: code3 } ]
-                },
-                (error, deleted) => {
-                  if (error) {
-                    console.log(error);
-                  }
-                  console.log("deleted");
                 }
               );
-            }
+            });
             if (data.response[0].teams.away.winner == true) {
                 console.log(code2)
               Bet.find({ Code: code2 }, (err, successes) => {
-                for (const success of successes) {
+                successes.forEach((success) => {
                   const creatorID = success.creatorID;
                   console.log(successes);
                   Profile.findOne({ userID: creatorID }, (err, profile) => {
@@ -221,34 +199,12 @@ const betResult = (id, Discord, client) => {
                       );
                     }
                   });
-                  Bet.deleteMany(
-                    {
-                      creatorID: creatorID,
-                      outcomeID: success.outcomeID,
-                    },
-                    (error, deleted) => {
-                      if (error) {
-                        console.log(error);
-                      }
-                      console.log("deleted");
-                    }
-                  );
-                }
-              });
-              Bet.deleteMany(
-                {
-                  $or: [ { Code: code1 }, { Code: code3 } ]
-                },
-                (error, deleted) => {
-                  if (error) {
-                    console.log(error);
-                  }
-                  console.log("deleted");
-                }
-              );
+                });
+                });
+              };
             } else {
               Bet.find({ Code: code3 }, (err, successes) => {
-                for (const success of successes) {
+                successes.forEach((success) => {
                   const creatorID = success.creatorID;
                   console.log(successes);
                   Profile.findOne({ userID: creatorID }, (err, profile) => {
@@ -313,32 +269,20 @@ const betResult = (id, Discord, client) => {
                       );
                     }
                   });
-                  Bet.deleteMany(
-                    {
-                      creatorID: creatorID,
-                      outcomeID: success.outcomeID,
-                    },
-                    (error, deleted) => {
-                      if (error) {
-                        console.log(error);
-                      }
-                      console.log("deleted");
-                    }
-                  );
-                }
+                });
               });
-              Bet.deleteMany(
-                {
-                  $or: [ { Code: code1 }, { Code: code2 } ]
-                },
-                (error, deleted) => {
-                  if (error) {
-                    console.log(error);
-                  }
-                  console.log("deleted");
-                }
-              );
             }
+            Bet.deleteMany(
+              {
+                  $or: [ { Code: code2 }, { Code: code3 } ]
+              },
+              (error, deleted) => {
+                if (error) {
+                  console.log(error);
+                }
+                console.log("deleted");
+              }
+            );
           } else {
             console.log("game still in progress");
           }
