@@ -126,6 +126,17 @@ const betResultBasketball = (id, Discord, client) => {
                   });
                 }
               });
+              Bet.deleteMany(
+                {
+                    $or: [ { Code: code3 }]
+                },
+                (error, deleted) => {
+                  if (error) {
+                    console.log(error);
+                  }
+                  console.log("deleted");
+                }
+              );
             }
             else {
                 console.log(code3)
@@ -198,18 +209,19 @@ const betResultBasketball = (id, Discord, client) => {
                   });
                 }
               });
-            } 
-            Bet.deleteMany(
-              {
-                  $or: [ { Code: code1 }, { Code: code3 } ]
-              },
-              (error, deleted) => {
-                if (error) {
-                  console.log(error);
+              Bet.deleteMany(
+                {
+                    $or: [ { Code: code1 }]
+                },
+                (error, deleted) => {
+                  if (error) {
+                    console.log(error);
+                  }
+                  console.log("deleted");
                 }
-                console.log("deleted");
-              }
-            );
+              );
+            } 
+            
           } else {
             console.log("game still in progress");
           }
