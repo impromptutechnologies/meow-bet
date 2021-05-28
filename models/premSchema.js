@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const casinoSchema = new mongoose.Schema({
+const premSchema = new mongoose.Schema({
   command: { type: String, required: true },
   description: { type: String, required: true },
 });
-const Casino = mongoose.model("Casino", casinoSchema);
+const Prem = mongoose.model("Prem", premSchema);
 
-module.exports = Casino;
+module.exports = Prem;

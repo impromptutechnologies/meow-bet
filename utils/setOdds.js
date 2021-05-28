@@ -14,7 +14,7 @@ const setOdds = (league, outcomeID) => {
       if (err) {
         console.log(err);
       }
-      console.log(res);
+      console.log(res)
         if (res.option1.length == 0) {
           var options = {
             method: "GET",

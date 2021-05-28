@@ -8,7 +8,6 @@ const newMatchesEsports = () => {
         var month = moment.utc().format("MM");
         var date = moment.utc().format("MM-DD HH:mm");
         var date2 = moment.utc().add(2, "days").format("MM-DD HH:mm");
-        console.log(date)
         const request = require('request');
 
         const options = {
@@ -51,7 +50,7 @@ const newMatchesEsports = () => {
           }
         };
         
-      /*request(options, (error, response, body) => {
+      request(options, (error, response, body) => {
         data = JSON.parse(body);
         if (error) throw new Error(error);
         data.forEach((element) => {
@@ -95,6 +94,7 @@ const newMatchesEsports = () => {
           }
         })
       });
+      /*
 
 
 
@@ -145,6 +145,7 @@ const newMatchesEsports = () => {
       
       request(optionsdota, (error, response, body) => {
         data = JSON.parse(body);
+        console.log(data);
         if (error) throw new Error(error);
         data.forEach((element) => {
           if(!(element.opponents.length < 2)){
@@ -186,11 +187,12 @@ const newMatchesEsports = () => {
               }
           }
         })
-      });*/
+      });
 
-
+     
       request(optionsleague, (error, response, body) => {
         data = JSON.parse(body);
+        console.log(data);
         if (error) throw new Error(error);
         data.forEach((element) => {
           if(!(element.opponents.length < 2)){
@@ -232,7 +234,7 @@ const newMatchesEsports = () => {
               }
           }
         })
-      });
+      });*/
     
   };
 

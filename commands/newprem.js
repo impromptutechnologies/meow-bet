@@ -1,33 +1,23 @@
-const Outcome = require("../models/outcomeSchema");
+const Prem = require("../models/premSchema");
 const moment = require("moment-timezone");
 const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
-  name: "randomoutcomes",
+  name: "prem",
   cooldown: 10,
   description: "Create Random Outcome!",
   execute(client, message, args, Discord, profileData) {
     try {
-      var day = moment.utc().format("DD");
-      var month = moment.utc().format("MM");
-      var date = moment.utc().format("MM-DD HH:mm");
-      var date2 = moment.utc().format(`${month}-${day} 20:45`);
-      var date1 = moment.utc().format(`${month}-${day} 19:00`);
-      let outcome = Outcome.create(
+      let command = Prem.create(
         {
-          outcomeID: uuidv4(),
-          category: "random",
-          team1: "Leicester",
-          team2: "Southhampton",
-          timeStart: date1,
-          timeEnd: date2,
+          command: "PRETTY",
+          description: "A pretty girl",
         },
         (err, res) => {
           if (err) {
             return console.log(err);
           }
           res.save();
-          res.addOptions(["LEISOU1", 1.3, "LEISOU2",1.5, "LEISOU3", 2.1]);
         }
       );
     } catch (err) {
@@ -36,3 +26,14 @@ module.exports = {
     message.channel.send("outcome created");
   },
 };
+
+//Prettyk
+//Prettyk
+
+//Money
+//Dark Humor (OFFENSIVE)
+//Cat Images
+//Fun Fact
+//Lofi Track
+//Cute videos
+

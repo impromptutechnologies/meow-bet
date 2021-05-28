@@ -52,11 +52,13 @@ const newMatchesBasketball = (daye) => {
         console.log('1')
         request(options, (error, response, body) => {
           data = JSON.parse(body);
+          console.log(data);
           if (error) throw new Error(error);
           data.response.forEach((element)=>{
             console.log(element.date, element.teams.home.name);
             Outcome.findOne({category: "basketball", outcomeID: element.id}, (err, res) => {
               if(element.status.long == 'Not Started' && res == null){
+                console.log('created')
                 Outcome.create(
                   {
                     outcomeID: element.id,
@@ -90,11 +92,13 @@ const newMatchesBasketball = (daye) => {
         console.log('2')
         request(options1, (error, response, body) => {
           data = JSON.parse(body);
+          console.log(data);
           if (error) throw new Error(error);
           data.response.forEach((element)=>{
             console.log(element.date, element.teams.home.name);
             Outcome.findOne({category: "basketball", outcomeID: element.id}, (err, res) => {
               if(element.status.long == 'Not Started' && res == null){
+                console.log('created')
                 Outcome.create(
                   {
                     outcomeID: element.id,
@@ -128,11 +132,13 @@ const newMatchesBasketball = (daye) => {
         console.log('3')
         request(options2, (error, response, body) => {
           data = JSON.parse(body);
+          console.log(data);
           if (error) throw new Error(error);
           data.response.forEach((element)=>{
             console.log(element.date, element.teams.home.name);
             Outcome.findOne({category: "basketball", outcomeID: element.id}, (err, res) => {
               if(element.status.long == 'Not Started' && res == null){
+                console.log('created')
                 Outcome.create(
                   {
                     outcomeID: element.id,

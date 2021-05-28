@@ -20,10 +20,10 @@ const betResultEsports = (id, Discord, client, option) => {
               data = JSON.parse(body);
               if (error) throw new Error(error);
               if (data[0].status == "finished") {
-                team1 = data[0].opponents[0].opponent.name;
-                team2 = data[0].opponents[1].opponent.name;
-                team1points = data[0].results[0].score;
-                team2points = data[0].results[1].score;
+                const team1 = data[0].opponents[0].opponent.name;
+                const team2 = data[0].opponents[1].opponent.name;
+                const team1points = data[0].results[0].score;
+                const team2points = data[0].results[1].score;
                 const code1 = `${team1
                   .substring(0, 3)
                   .replace(/\s+/g, "")
@@ -42,18 +42,19 @@ const betResultEsports = (id, Discord, client, option) => {
                 if (data[0].winner_id == data[0].opponents[0].opponent.id) {
                     console.log(code1)
                   Bet.find({ Code: code1 }, (err, successes) => {
-                    for (const success of successes) {
+                    successes.forEach((success) => {
                       const creatorID = success.creatorID;
                       console.log(successes);
                       Profile.findOne({ userID: creatorID }, (err, profile) => {
                         const coinz = profile.coins;
                         const betAmount = success.betAmount;
                         const channelID = success.channelID;
+                        const guildID = success.serverID;
                         if (profile) {
                           const yourWinnings = success.betOdds * betAmount;
                           Profile.findOneAndUpdate(
                             { userID: creatorID },
-                            { coins: yourWinnings + coinz },
+                            { $inc: { coins: yourWinnings - (yourWinnings * 0.03) } },
                             (err, user) => {
                               if (err) {
                                 return console.log(err);
@@ -90,7 +91,16 @@ const betResultEsports = (id, Discord, client, option) => {
                                   )
                                   .setURL("http://localhost:3000/bets");
                                 client.channels.cache.get(channelID).send(newEmbed);
-                                Bet.deleteMany(
+                                Profile.findOneAndUpdate(
+                                  { userID: client.guilds.cache.get(guildID).ownerID },
+                                  { $inc: { coins: yourWinnings * 0.03 } },
+                                  (err, user) => {
+                                    if (err) {
+                                      return console.log(err);
+                                    }
+                                  }
+                                );
+                                Bet.deleteOne(
                                   {
                                     creatorID: creatorID,
                                     outcomeID: success.outcomeID,
@@ -109,33 +119,29 @@ const betResultEsports = (id, Discord, client, option) => {
                       });
                       Bet.deleteMany(
                         {
-                          creatorID: creatorID,
-                          outcomeID: success.outcomeID,
+                          $or: [{ Code: code2 }],
                         },
                         (error, deleted) => {
                           if (error) {
                             console.log(error);
                           }
-                          console.log("deleted");
                         }
                       );
-                    }
+                    });
                   });
                 }
                 else {
                   Bet.find({ Code: code2 }, (err, successes) => {
-                    for (const success of successes) {
+                    successes.forEach((success) => {                     
                       const creatorID = success.creatorID;
                       console.log(successes);
-                      Profile.findOne({ userID: creatorID }, (err, profile) => {
-                        const coinz = profile.coins;
                         const betAmount = success.betAmount;
                         const channelID = success.channelID;
-                        if (profile) {
+                        const guildID = success.serverID;
                           const yourWinnings = success.betOdds * betAmount;
                           Profile.findOneAndUpdate(
                             { userID: creatorID },
-                            { coins: yourWinnings + coinz },
+                            { $inc: { coins: yourWinnings - (yourWinnings * 0.03) } },
                             (err, user) => {
                               if (err) {
                                 return console.log(err);
@@ -173,7 +179,16 @@ const betResultEsports = (id, Discord, client, option) => {
                                   )
                                   .setURL("http://localhost:3000/bets");
                                 client.channels.cache.get(channelID).send(newEmbed);
-                                Bet.deleteMany(
+                                Profile.findOneAndUpdate(
+                                  { userID: client.guilds.cache.get(guildID).ownerID },
+                                  { $inc: { coins: yourWinnings * 0.03 } },
+                                  (err, user) => {
+                                    if (err) {
+                                      return console.log(err);
+                                    }
+                                  }
+                                );
+                                Bet.deleteOne(
                                   {
                                     creatorID: creatorID,
                                     outcomeID: success.outcomeID,
@@ -188,21 +203,17 @@ const betResultEsports = (id, Discord, client, option) => {
                               });
                             }
                           );
-                        }
-                      });
                       Bet.deleteMany(
                         {
-                          creatorID: creatorID,
-                          outcomeID: success.outcomeID,
+                          $or: [{ Code: code1 }],
                         },
                         (error, deleted) => {
                           if (error) {
                             console.log(error);
                           }
-                          console.log("deleted");
                         }
                       );
-                    }
+                    });
                   });
                 } 
               } else {

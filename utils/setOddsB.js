@@ -28,7 +28,7 @@ const setOddsB = (outcomeID) => {
             data = JSON.parse(body);
             console.log(data);
 
-            if (!data.response[0]) {
+            if (data.response[0] !== undefined) {
               const code1 = `${res.team1
                 .substring(0, 3)
                 .replace(/\s+/g, "")
@@ -45,39 +45,11 @@ const setOddsB = (outcomeID) => {
                 .toUpperCase()}2`;
               res.addOptions([
                 code1,
-                0.0,
+                data.response[0].bookmakers[0].bets[0].values[0].odd,
                 /*code2,
                 parseFloat(data.response[0].bookmakers[0].bets[0].values[2].odd),*/
                 code3,
-                0.0,
-              ]);
-              res.save();
-            } else {
-              const code1 = `${res.team1
-                .substring(0, 3)
-                .replace(/\s+/g, "")
-                .toUpperCase()}${res.team2
-                .substring(0, 3)
-                .replace(/\s+/g, "")
-                .toUpperCase()}1`;
-              const code3 = `${res.team1
-                .substring(0, 3)
-                .replace(/\s+/g, "")
-                .toUpperCase()}${res.team2
-                .substring(0, 3)
-                .replace(/\s+/g, "")
-                .toUpperCase()}2`;
-              res.addOptions([
-                code1,
-                parseFloat(
-                  data.response[0].bookmakers[0].bets[0].values[0].odd
-                ),
-                /*code2,
-                parseFloat(data.response[0].bookmakers[0].bets[0].values[2].odd),*/
-                code3,
-                parseFloat(
-                  data.response[0].bookmakers[0].bets[0].values[1].odd
-                ),
+                data.response[0].bookmakers[0].bets[0].values[1].odd
               ]);
               res.save();
             }

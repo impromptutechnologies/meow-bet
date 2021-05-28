@@ -21,12 +21,59 @@ module.exports = {
   name: "testing",
   description: "testing testing 123",
   execute(client, message, args, Discord, profileData) {
+    newMatchesEsports();
     //newMatchesBasketball('1')
     //newMatchesBasketball('2')
-    newMatchesBasketball('3')
-    newMatchesSoccer('champ')
+    //newMatchesBasketball('3')
+    //newMatchesSoccer('laliga')
+    //newMatchesSoccer('prem')
+    //newMatchesSoccer('champ')
+    //newMatchesSoccer('champ')
+    //newMatchesSoccer('seriea')
+  
+    /*Outcome.find(
+      {
+        category: "soccer",
+        option1: { $exists: true, $eq: [] },
+      },
+      (err, res) => {
+        console.log(res);
+        res.forEach((element) => {
+          setOdds('euros', element.outcomeID);
+        });
+      }
+    );
+  Outcome.find(
+      {
+        category: "basketball",
+        option1: { $exists: true, $eq: [] },
+      },
+      (err, res) => {
+        console.log(res);
+        res.forEach((element) => {
+          setOddsB(element.outcomeID);
+        });
+      }
+    );*/
+  
   },
+
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*var date = moment.utc().format("YYYY-MM-DD");
     var date2 = moment.utc(date).add(1, "months").format("YYYY-MM-DD")

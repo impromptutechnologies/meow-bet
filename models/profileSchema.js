@@ -6,6 +6,7 @@ const profileSchema = new mongoose.Schema({
   username: { type: String, required: true },
   serverID: { type: String },
   coins: { type: Number, default: 10 },
+  payments:[]
 });
 
 const Profile = mongoose.model("Profile", profileSchema);

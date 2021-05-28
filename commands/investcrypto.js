@@ -34,7 +34,7 @@ module.exports = {
           console.log(highest)
 
           Invest.find({ Code: highest[0].symbol }, (err, successes) => {
-            for (const success of successes) {
+            successes.forEach((success) => {
               const creatorID = success.creatorID;
               console.log(successes)
 
@@ -105,7 +105,7 @@ module.exports = {
               });
               
 
-            }
+            });
           });
           Invest.deleteMany({creatorID: message.author.id, category:"crypto"}, (error, deleted) => {
             if(error){
@@ -148,7 +148,7 @@ module.exports = {
         )
         .setDescription(
           `Please place your crypto invest commands between ${local2} and ${local} in your local time.\n
-          Meowbot crypto follows the same hours of the stock market when judging returns.`
+          Meow crypto bets follows the same hours of the stock market when judging returns.`
         )
         .setFooter(
           "visit http://localhost:3000/betscr to view more crypto!"

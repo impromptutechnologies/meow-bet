@@ -50,7 +50,7 @@ module.exports = {
               var month = moment.utc().format("MM");
               var date = moment.utc().format("MM-DD HH:mm");
               var date1 = outcomeData.timeStart;
-              if (date > date1) {
+              /*if (date > date1) {
                 const newEmbed = new Discord.MessageEmbed()
                   .setColor("#304281")
                   .setTitle(`Match Already Started!`)
@@ -69,7 +69,7 @@ module.exports = {
                   )
                   .setURL("http://localhost:3000/bets ");
                 return message.channel.send(newEmbed);
-              }
+              }*/
               console.log(outcomeData);
               if (outcomeData) {
                 if (err) {
@@ -98,7 +98,8 @@ module.exports = {
                       res.save();
                       const newEmbed = new Discord.MessageEmbed()
                         .setColor("#304281")
-                        .setTitle(`Bet Ticket`)
+                        .setTitle(`Bet Placed!`)
+                        .setThumbnail('https://altvaton.sirv.com/Images/meowbasketball%20copy.png')
                         .setAuthor(
                           message.author.username,
                           message.author.displayAvatarURL({
@@ -110,7 +111,7 @@ module.exports = {
                         .addFields(
                           { name: "Bet Amount", value: amt },
                           { name: "Code", value: code }
-                        )
+                        )                        
                         .setFooter(
                           "visit http://localhost:3000/bet to view more bets!"
                         )
@@ -143,6 +144,7 @@ module.exports = {
                       const newEmbed = new Discord.MessageEmbed()
                         .setColor("#304281")
                         .setTitle(`Bet Ticket`)
+                        .setThumbnail('https://altvaton.sirv.com/Images/meowbasketball%20copy.png')
                         .setAuthor(
                           message.author.username,
                           message.author.displayAvatarURL({
@@ -154,6 +156,9 @@ module.exports = {
                         .addFields(
                           { name: "Bet Amount", value: amt },
                           { name: "Code", value: code }
+                        )
+                        .setImage(
+                          "https://i.ibb.co/rb7tvdr/meowbasketball-copy.png"
                         )
                         .setFooter(
                           "visit http://localhost:3000/bet to view more bets!"
@@ -184,9 +189,11 @@ module.exports = {
                         return console.log(err);
                       }
                       res.save();
+                      const file = new Discord.MessageAttachment('./images/meowsoccer copy.png');
                       const newEmbed = new Discord.MessageEmbed()
                         .setColor("#304281")
                         .setTitle(`Bet Ticket`)
+                        .setThumbnail('https://altvaton.sirv.com/Images/meowbasketball%20copy.png')
                         .setAuthor(
                           message.author.username,
                           message.author.displayAvatarURL({
@@ -199,6 +206,10 @@ module.exports = {
                           { name: "Bet Amount", value: amt },
                           { name: "Code", value: code }
                         )
+                        .setImage(
+                          "https://i.ibb.co/rb7tvdr/meowbasketball-copy.png"
+                        )
+                      
                         .setFooter(
                           "visit http://localhost:3000/bet to view more bets!"
                         )
