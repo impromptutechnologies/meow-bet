@@ -54,44 +54,46 @@ const newMatchesEsports = () => {
         data = JSON.parse(body);
         if (error) throw new Error(error);
         data.forEach((element) => {
-          if(!(element.opponents.length < 2)){
-            if((element.status == 'not_started') && ((moment
-              .utc(element.begin_at)
-              .format("MM-DD HH:mm") < date) == false) && ((moment
+          Outcome.findOne({outcomeID: element.id}, (err, res) => {
+            if(!(element.opponents.length < 2 && res == null)){
+              if((element.status == 'not_started') && ((moment
                 .utc(element.begin_at)
-                .format("MM-DD HH:mm") < date2))){
-                  console.log(element.begin_at)
-                  Outcome.create(
-                    {
-                      outcomeID: element.id,
-                      category: "esportscod",
-                      team1: element.opponents[0].opponent.name,
-                      team2: element.opponents[1].opponent.name,
-                      timeStart: moment
-                        .utc(element.begin_at)
-                        .format("MM-DD HH:mm"),
-                      timeEnd: moment
-                        .utc(element.begin_at)
-                        .add(1, "hours")
-                        .format("MM-DD HH:mm"),
-                    },
-                    (err, res) => {
-                      if(err){
-                        console.log(err)
+                .format("MM-DD HH:mm") < date) == false) && ((moment
+                  .utc(element.begin_at)
+                  .format("MM-DD HH:mm") < date2))){
+                    console.log(element.begin_at)
+                    Outcome.create(
+                      {
+                        outcomeID: element.id,
+                        category: "esportscod",
+                        team1: element.opponents[0].opponent.name,
+                        team2: element.opponents[1].opponent.name,
+                        timeStart: moment
+                          .utc(element.begin_at)
+                          .format("MM-DD HH:mm"),
+                        timeEnd: moment
+                          .utc(element.begin_at)
+                          .add(1, "hours")
+                          .format("MM-DD HH:mm"),
+                      },
+                      (err, res) => {
+                        if(err){
+                          console.log(err)
+                        }
+                        const code1 = (`${element.opponents[0].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}${element.opponents[1].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}1`)
+                        const code2 = (`${element.opponents[0].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}${element.opponents[1].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}2`)
+                        res.addOptions([
+                          code1,
+                          0.0,
+                          code2,
+                          0.0,
+                        ]);
+                        res.save();
                       }
-                      const code1 = (`${element.opponents[0].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}${element.opponents[1].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}1`)
-                      const code2 = (`${element.opponents[0].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}${element.opponents[1].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}2`)
-                      res.addOptions([
-                        code1,
-                        0.0,
-                        code2,
-                        0.0,
-                      ]);
-                      res.save();
-                    }
-                  );
-              }
-          }
+                    );
+                }
+            }
+          });
         })
       });
       /*
@@ -102,7 +104,8 @@ const newMatchesEsports = () => {
         data = JSON.parse(body);
         if (error) throw new Error(error);
         data.forEach((element) => {
-          if(!(element.opponents.length < 2)){
+          Outcome.findOne({outcomeID: element.id}, (err, res) => {
+            if(!(element.opponents.length < 2 && res == null)){
             if(((moment
               .utc(element.begin_at)
               .format("MM-DD HH:mm") < date) == false) && ((moment
@@ -140,6 +143,8 @@ const newMatchesEsports = () => {
                   );
               }
           }
+          })
+          
         })
       });
       

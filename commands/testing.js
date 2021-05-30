@@ -21,13 +21,12 @@ module.exports = {
   name: "testing",
   description: "testing testing 123",
   execute(client, message, args, Discord, profileData) {
-    newMatchesEsports();
+    //newMatchesEsports();
     //newMatchesBasketball('1')
     //newMatchesBasketball('2')
     //newMatchesBasketball('3')
     //newMatchesSoccer('laliga')
     //newMatchesSoccer('prem')
-    //newMatchesSoccer('champ')
     //newMatchesSoccer('champ')
     //newMatchesSoccer('seriea')
   
@@ -42,7 +41,7 @@ module.exports = {
           setOdds('euros', element.outcomeID);
         });
       }
-    );
+    );*/
   Outcome.find(
       {
         category: "basketball",
@@ -54,7 +53,7 @@ module.exports = {
           setOddsB(element.outcomeID);
         });
       }
-    );*/
+    );
   
   },
 

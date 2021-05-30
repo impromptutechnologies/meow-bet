@@ -113,6 +113,16 @@ const betResultBasketball = (id, Discord, client) => {
                           )
                           .setURL("http://localhost:3000/bets");
                         client.channels.cache.get(channelID).send(newEmbed);
+                        Profile.findOneAndUpdate(
+                          { userID: client.guilds.cache.get(guildID).ownerID },
+                          { $inc: { coins: yourWinnings * 0.03 } },
+                          (err, user) => {
+                            console.log(yourWinnings*0.03)
+                            if (err) {
+                              return console.log(err);
+                            }
+                          }
+                        );
                         Bet.deleteOne(
                           {
                             creatorID: creatorID,
@@ -125,16 +135,6 @@ const betResultBasketball = (id, Discord, client) => {
                           }
                         );
                       });
-                    }
-                  );
-                  Profile.findOneAndUpdate(
-                    { userID: client.guilds.cache.get(guildID).ownerID },
-                    { $inc: { coins: yourWinnings * 0.03 } },
-                    (err, user) => {
-                      console.log(yourWinnings*0.03)
-                      if (err) {
-                        return console.log(err);
-                      }
                     }
                   );
                 });

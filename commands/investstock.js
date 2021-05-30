@@ -249,7 +249,9 @@ module.exports = {
                       const newEmbed = new Discord.MessageEmbed()
                         .setColor("#304281")
                         .setTitle(`Investment Ticket`)
+                        .setThumbnail("https://altvaton.sirv.com/Images/194312417_1218343265288417_112965584957259991_n.png")
                         .setAuthor(
+            
                           message.author.username,
                           message.author.displayAvatarURL({
                             format: "png",

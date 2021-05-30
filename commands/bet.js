@@ -99,7 +99,7 @@ module.exports = {
                       const newEmbed = new Discord.MessageEmbed()
                         .setColor("#304281")
                         .setTitle(`Bet Placed!`)
-                        .setThumbnail('https://altvaton.sirv.com/Images/meowbasketball%20copy.png')
+                        .setThumbnail("https://altvaton.sirv.com/Images/187021818_235092514616298_5622261190586926658_n.png")
                         .setAuthor(
                           message.author.username,
                           message.author.displayAvatarURL({
@@ -144,7 +144,7 @@ module.exports = {
                       const newEmbed = new Discord.MessageEmbed()
                         .setColor("#304281")
                         .setTitle(`Bet Ticket`)
-                        .setThumbnail('https://altvaton.sirv.com/Images/meowbasketball%20copy.png')
+                        .setThumbnail("https://altvaton.sirv.com/Images/187021818_235092514616298_5622261190586926658_n.png")
                         .setAuthor(
                           message.author.username,
                           message.author.displayAvatarURL({
@@ -193,7 +193,7 @@ module.exports = {
                       const newEmbed = new Discord.MessageEmbed()
                         .setColor("#304281")
                         .setTitle(`Bet Ticket`)
-                        .setThumbnail('https://altvaton.sirv.com/Images/meowbasketball%20copy.png')
+                        .setThumbnail("https://altvaton.sirv.com/Images/187021818_235092514616298_5622261190586926658_n.png")
                         .setAuthor(
                           message.author.username,
                           message.author.displayAvatarURL({
