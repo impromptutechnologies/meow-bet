@@ -12,6 +12,9 @@ const betResultEsports = require("../../utils/betResultEsports");
 const newMatchesSoccer = require("../../utils/newmatches");
 const newMatchesBasketball = require("../../utils/newmatchesb");
 const newMatchesEsports = require("../../utils/newmatchese");
+const schedule = require('node-schedule')
+const setOddsB = require("../../utils/setOddsB");
+const setOdds = require("../../utils/setOdds");
 
 module.exports = async (Discord, client) => {
   console.log("bot online");
@@ -89,15 +92,18 @@ module.exports = async (Discord, client) => {
   //still need to check if there are any with odds of 0 and then run the command maybe every hr?
 
   const newMatches = async () => {
-    newMatchesBasketball("2");
+    newMatchesEsports();
+    newMatchesBasketball("1");
     setTimeout(newMatchesBasketball.bind(null, '2'), 60000)
     setTimeout(newMatchesBasketball.bind(null, '3'), 120000)
-    setTimeout(newMatchesSoccer.bind(null, 'prem'), 60000)
-    setTimeout(newMatchesSoccer.bind(null, 'champ'), 120000)
-    setTimeout(newMatchesSoccer.bind(null, 'seriea'), 180000)
-    setTimeout(newMatchesSoccer.bind(null, 'laliga'), 240000)
+    //setTimeout(newMatchesSoccer.bind(null, 'prem'), 60000)
+    //setTimeout(newMatchesSoccer.bind(null, 'champ'), 120000)
+    //setTimeout(newMatchesSoccer.bind(null, 'seriea'), 180000)
+    setTimeout(newMatchesSoccer.bind(null, 'euro'), 180000)
   }
-//setInterval(newMatches, 60000);
+ schedule.scheduleJob('0 */12 * * *', ()=>{
+    newMatches();
+  })
 
 
 const checkOdds = async () => {
@@ -107,25 +113,28 @@ const checkOdds = async () => {
       option1: { $exists: true, $eq: [] },
     },
     (err, res) => {
+      console.log(res);
       res.forEach((element) => {
         setOdds(element.league, element.outcomeID);
       });
     }
   );
-  Outcome.find(
+Outcome.find(
     {
       category: "basketball",
       option1: { $exists: true, $eq: [] },
     },
     (err, res) => {
+      console.log(res);
       res.forEach((element) => {
         setOddsB(element.outcomeID);
       });
     }
   );
 }
-
-//setInterval(checkOdds, 60000);
+schedule.scheduleJob('0 */6 * * *', ()=>{
+  checkOdds();
+})
 
   
 
@@ -173,7 +182,6 @@ const checkOdds = async () => {
         }
       });
     }
-    //setTimeout(checkReturn, 1000 * 10);
   };
   setInterval(checkReturn, 60000);
 };

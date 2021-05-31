@@ -50,7 +50,7 @@ module.exports = {
               var month = moment.utc().format("MM");
               var date = moment.utc().format("MM-DD HH:mm");
               var date1 = outcomeData.timeStart;
-              /*if (date > date1) {
+              if (date > date1) {
                 const newEmbed = new Discord.MessageEmbed()
                   .setColor("#304281")
                   .setTitle(`Match Already Started!`)
@@ -69,7 +69,7 @@ module.exports = {
                   )
                   .setURL("http://localhost:3000/bets ");
                 return message.channel.send(newEmbed);
-              }*/
+              }
               console.log(outcomeData);
               if (outcomeData) {
                 if (err) {
