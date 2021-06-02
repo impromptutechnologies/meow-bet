@@ -7,14 +7,17 @@ const newMatchesBasketball = (daye) => {
     var day = moment.utc().format("DD");
         var month = moment.utc().format("MM");
         var year = moment.utc().format("YYYY");
-        var date = moment.utc().format("MM-DD HH:mm");
+        var date = moment.utc().format("YYYY-MM-DD");
+        var date2 = moment.utc().add(1, "days").format("YYYY-MM-DD");
+        var date3 = moment.utc().add(2, "days").format("YYYY-MM-DD");
+        var date4 = moment.utc().add(3, "days").format("YYYY-MM-DD");
       const options = {
         method: "GET",
         url: "https://v1.basketball.api-sports.io/games",
         qs: {
           league: 12,
           season: "2020-2021",
-          date: `${year}-${month}-${day}`,
+          date: date,
         },
         headers: {
           "x-rapidapi-host": "v1.basketball.api-sports.io",
@@ -27,7 +30,7 @@ const newMatchesBasketball = (daye) => {
         qs: {
           league: 12,
           season: "2020-2021",
-          date: `${year}-${month}-${String(parseInt(day)+1)}`,
+          date: date2,
         },
         headers: {
           "x-rapidapi-host": "v1.basketball.api-sports.io",
@@ -40,7 +43,7 @@ const newMatchesBasketball = (daye) => {
         qs: {
           league: 12,
           season: "2020-2021",
-          date: `${year}-${month}-${String(parseInt(day)+2)}`,
+          date: date3,
         },
         headers: {
           "x-rapidapi-host": "v1.basketball.api-sports.io",

@@ -2,12 +2,12 @@ var request = require("request");
 const Outcome = require("../models/outcomeSchema");
 const moment = require("moment-timezone");
 
-const newMatchesEsports = () => {
+const newMatchesEsports = (choice) => {
   
     var day = moment.utc().format("DD");
         var month = moment.utc().format("MM");
         var date = moment.utc().format("MM-DD HH:mm");
-        var date2 = moment.utc().add(2, "days").format("MM-DD HH:mm");
+        var date2 = moment.utc().add(5, "days").format("MM-DD HH:mm");
         const request = require('request');
 
         const options = {
@@ -49,23 +49,123 @@ const newMatchesEsports = () => {
             useQueryString: true
           }
         };
+
+
+        request(options, (error, response, body) => {
+          data = JSON.parse(body);
+          console.log(data)
+          if (error) throw new Error(error);
+          data.forEach((element) => {
+            console.log(element.begin_at)
+            Outcome.findOne({outcomeID: element.id}, (err, res) => {
+              if(!(element.opponents.length < 2) && res == null){
+                if((element.status == 'not_started') && ((moment
+                  .utc(element.begin_at)
+                  .format("MM-DD HH:mm") < date) == false) && ((moment
+                    .utc(element.begin_at)
+                    .format("MM-DD HH:mm") < date2))){
+                      Outcome.create(
+                        {
+                          outcomeID: element.id,
+                          category: "esportscod",
+                          team1: element.opponents[0].opponent.name,
+                          team2: element.opponents[1].opponent.name,
+                          timeStart: moment
+                            .utc(element.begin_at)
+                            .format("MM-DD HH:mm"),
+                          timeEnd: moment
+                            .utc(element.begin_at)
+                            .add(1, "hours")
+                            .format("MM-DD HH:mm"),
+                        },
+                        (err, res) => {
+                          if(err){
+                            console.log(err)
+                          }
+                          const code1 = (`${element.opponents[0].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}${element.opponents[1].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}1`)
+                          const code2 = (`${element.opponents[0].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}${element.opponents[1].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}2`)
+                          res.addOptions([
+                            code1,
+                            0.0,
+                            code2,
+                            0.0,
+                          ]);
+                          res.save();
+                        }
+                      );
+                  }
+              }
+            });
+          })
+        });
+
+
+      
+        request(optionscsgo, (error, response, body) => {
+          data = JSON.parse(body);
+          console.log(data)
+          if (error) throw new Error(error);
+          data.forEach((element) => {
+            console.log(element.begin_at)
+            Outcome.findOne({outcomeID: element.id}, (err, res) => {
+              if(!(element.opponents.length < 2) && res == null){
+                if((element.status == 'not_started') && ((moment
+                  .utc(element.begin_at)
+                  .format("MM-DD HH:mm") < date) == false) && ((moment
+                    .utc(element.begin_at)
+                    .format("MM-DD HH:mm") < date2))){
+                      Outcome.create(
+                        {
+                          outcomeID: element.id,
+                          category: "esportscsgo",
+                          team1: element.opponents[0].opponent.name,
+                          team2: element.opponents[1].opponent.name,
+                          timeStart: moment
+                            .utc(element.begin_at)
+                            .format("MM-DD HH:mm"),
+                          timeEnd: moment
+                            .utc(element.begin_at)
+                            .add(1, "hours")
+                            .format("MM-DD HH:mm"),
+                        },
+                        (err, res) => {
+                          if(err){
+                            console.log(err)
+                          }
+                          const code1 = (`${element.opponents[0].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}${element.opponents[1].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}1`)
+                          const code2 = (`${element.opponents[0].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}${element.opponents[1].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}2`)
+                          res.addOptions([
+                            code1,
+                            0.0,
+                            code2,
+                            0.0,
+                          ]);
+                          res.save();
+                        }
+                      );
+                  }
+              }
+            });
+          })
+        });
         
-      request(options, (error, response, body) => {
+      request(optionsdota, (error, response, body) => {
         data = JSON.parse(body);
+        console.log(data)
         if (error) throw new Error(error);
         data.forEach((element) => {
+          console.log(element.begin_at)
           Outcome.findOne({outcomeID: element.id}, (err, res) => {
-            if(!(element.opponents.length < 2 && res == null)){
+            if(!(element.opponents.length < 2) && res == null){
               if((element.status == 'not_started') && ((moment
                 .utc(element.begin_at)
                 .format("MM-DD HH:mm") < date) == false) && ((moment
                   .utc(element.begin_at)
                   .format("MM-DD HH:mm") < date2))){
-                    console.log(element.begin_at)
                     Outcome.create(
                       {
                         outcomeID: element.id,
-                        category: "esportscod",
+                        category: "esportsdota",
                         team1: element.opponents[0].opponent.name,
                         team2: element.opponents[1].opponent.name,
                         timeStart: moment
@@ -96,150 +196,56 @@ const newMatchesEsports = () => {
           });
         })
       });
-      /*
-
-
-
-      request(optionscsgo, (error, response, body) => {
-        data = JSON.parse(body);
-        if (error) throw new Error(error);
-        data.forEach((element) => {
-          Outcome.findOne({outcomeID: element.id}, (err, res) => {
-            if(!(element.opponents.length < 2 && res == null)){
-            if(((moment
-              .utc(element.begin_at)
-              .format("MM-DD HH:mm") < date) == false) && ((moment
-                .utc(element.begin_at)
-                .format("MM-DD HH:mm") < date2))){
-                  console.log(element.begin_at)
-                  Outcome.create(
-                    {
-                      outcomeID: element.id,
-                      category: "esportscsgo",
-                      team1: element.opponents[0].opponent.name,
-                      team2: element.opponents[1].opponent.name,
-                      timeStart: moment
-                        .utc(element.begin_at)
-                        .format("MM-DD HH:mm"),
-                      timeEnd: moment
-                        .utc(element.begin_at)
-                        .add(1, "hours")
-                        .format("MM-DD HH:mm"),
-                    },
-                    (err, res) => {
-                      if(err){
-                        console.log(err)
-                      }
-                      const code1 = (`${element.opponents[0].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}${element.opponents[1].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}1`)
-                      const code2 = (`${element.opponents[0].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}${element.opponents[1].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}2`)
-                      res.addOptions([
-                        code1,
-                        1.3,
-                        code2,
-                        1.5,
-                      ]);
-                      res.save();
-                    }
-                  );
-              }
-          }
-          })
-          
-        })
-      });
-      
-      request(optionsdota, (error, response, body) => {
-        data = JSON.parse(body);
-        console.log(data);
-        if (error) throw new Error(error);
-        data.forEach((element) => {
-          if(!(element.opponents.length < 2)){
-            if(((moment
-              .utc(element.begin_at)
-              .format("MM-DD HH:mm") < date) == false) && ((moment
-                .utc(element.begin_at)
-                .format("MM-DD HH:mm") < date2))){
-                  console.log(element.begin_at)
-                  Outcome.create(
-                    {
-                      outcomeID: element.id,
-                      category: "esportsdota",
-                      team1: element.opponents[0].opponent.name,
-                      team2: element.opponents[1].opponent.name,
-                      timeStart: moment
-                        .utc(element.begin_at)
-                        .format("MM-DD HH:mm"),
-                      timeEnd: moment
-                        .utc(element.begin_at)
-                        .add(1, "hours")
-                        .format("MM-DD HH:mm"),
-                    },
-                    (err, res) => {
-                      if(err){
-                        console.log(err)
-                      }
-                      const code1 = (`${element.opponents[0].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}${element.opponents[1].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}1`)
-                      const code2 = (`${element.opponents[0].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}${element.opponents[1].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}2`)
-                      res.addOptions([
-                        code1,
-                        0.0,
-                        code2,
-                        0.0,
-                      ]);
-                      res.save();
-                    }
-                  );
-              }
-          }
-        })
-      });
-
      
+      
+
       request(optionsleague, (error, response, body) => {
         data = JSON.parse(body);
-        console.log(data);
+        console.log(data)
         if (error) throw new Error(error);
         data.forEach((element) => {
-          if(!(element.opponents.length < 2)){
-            if(((moment
-              .utc(element.begin_at)
-              .format("MM-DD HH:mm") < date) == false) && ((moment
+          console.log(element.begin_at)
+          Outcome.findOne({outcomeID: element.id}, (err, res) => {
+            if(!(element.opponents.length < 2) && res == null){
+              if((element.status == 'not_started') && ((moment
                 .utc(element.begin_at)
-                .format("MM-DD HH:mm") < date2))){
-                  console.log(element.begin_at)
-                  Outcome.create(
-                    {
-                      outcomeID: element.id,
-                      category: "esportsleague",
-                      team1: element.opponents[0].opponent.name,
-                      team2: element.opponents[1].opponent.name,
-                      timeStart: moment
-                        .utc(element.begin_at)
-                        .format("MM-DD HH:mm"),
-                      timeEnd: moment
-                        .utc(element.begin_at)
-                        .add(1, "hours")
-                        .format("MM-DD HH:mm"),
-                    },
-                    (err, res) => {
-                      if(err){
-                        console.log(err)
+                .format("MM-DD HH:mm") < date) == false) && ((moment
+                  .utc(element.begin_at)
+                  .format("MM-DD HH:mm") < date2))){
+                    Outcome.create(
+                      {
+                        outcomeID: element.id,
+                        category: "esportslol",
+                        team1: element.opponents[0].opponent.name,
+                        team2: element.opponents[1].opponent.name,
+                        timeStart: moment
+                          .utc(element.begin_at)
+                          .format("MM-DD HH:mm"),
+                        timeEnd: moment
+                          .utc(element.begin_at)
+                          .add(1, "hours")
+                          .format("MM-DD HH:mm"),
+                      },
+                      (err, res) => {
+                        if(err){
+                          console.log(err)
+                        }
+                        const code1 = (`${element.opponents[0].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}${element.opponents[1].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}1`)
+                        const code2 = (`${element.opponents[0].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}${element.opponents[1].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}2`)
+                        res.addOptions([
+                          code1,
+                          0.0,
+                          code2,
+                          0.0,
+                        ]);
+                        res.save();
                       }
-                      const code1 = (`${element.opponents[0].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}${element.opponents[1].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}1`)
-                      const code2 = (`${element.opponents[0].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}${element.opponents[1].opponent.name.substring(0,3).replace(/\s+/g, '').toUpperCase()}2`)
-                      res.addOptions([
-                        code1,
-                        0.0,
-                        code2,
-                        0.0,
-                      ]);
-                      res.save();
-                    }
-                  );
-              }
-          }
+                    );
+                }
+            }
+          });
         })
-      });*/
+      });
     
   };
 

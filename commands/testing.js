@@ -14,6 +14,7 @@ const moment = require("moment-timezone");
 const cryptoPriceOpen = require("../utils/cryptopriceopen");
 const cryptoPrice = require("../utils/cryptoprice");
 const betResultBasketball = require("../utils/betResultBasketball");
+const betResultInv = require("../utils/betResultInv");
 var request = require("request");
 const setOdds = require("../utils/setOdds");
 
@@ -21,16 +22,18 @@ module.exports = {
   name: "testing",
   description: "testing testing 123",
   execute(client, message, args, Discord, profileData) {
+    
+
     //newMatchesEsports();
-    newMatchesBasketball('1')
-    newMatchesBasketball('2')
-    newMatchesBasketball('3')
+    //newMatchesBasketball('1')
+    //newMatchesBasketball('2')
+    //newMatchesBasketball('3')
     //newMatchesSoccer('laliga')
     //newMatchesSoccer('prem')
     //newMatchesSoccer('champ')
     //newMatchesSoccer('seriea')
   
-    /*Outcome.find(
+    Outcome.find(
       {
         category: "soccer",
         option1: { $exists: true, $eq: [] },
@@ -53,7 +56,7 @@ module.exports = {
           setOddsB(element.outcomeID);
         });
       }
-    );*/
+    );
   
   },
 

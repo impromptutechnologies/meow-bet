@@ -1,14 +1,14 @@
+const Outcome = require("../../models/outcomeSchema");
+const Invest = require("../../models/investSchema");
 const Stock = require("../../models/stockSchema");
 const Crypto = require("../../models/cryptoSchema");
-const Outcome = require("../../models/outcomeSchema");
-const Bet = require("../../models/betSchema");
-const Invest = require("../../models/investSchema");
 const moment = require("moment-timezone");
 const stockPrice = require("../../utils/stockprice");
 const cryptoPrice = require("../../utils/cryptoprice");
 const betResult = require("../../utils/betresult");
 const betResultBasketball = require("../../utils/betResultBasketball");
 const betResultEsports = require("../../utils/betResultEsports");
+const betResultInv = require("../../utils/betResultinv");
 const newMatchesSoccer = require("../../utils/newmatches");
 const newMatchesBasketball = require("../../utils/newmatchesb");
 const newMatchesEsports = require("../../utils/newmatchese");
@@ -63,7 +63,6 @@ module.exports = async (Discord, client) => {
             },
           });
         }
-
         if (element.category == "esportsleague") {
           betResultEsports(element.outcomeID, Discord, client, {
             method: "GET",
@@ -88,8 +87,8 @@ module.exports = async (Discord, client) => {
   };
   setInterval(updateMatches, 60000);
 
-  //how about just update matches every single day at 00:00 UTC
-  //still need to check if there are any with odds of 0 and then run the command maybe every hr?
+
+
 
   const newMatches = async () => {
     newMatchesEsports();
@@ -101,9 +100,13 @@ module.exports = async (Discord, client) => {
     //setTimeout(newMatchesSoccer.bind(null, 'seriea'), 180000)
     setTimeout(newMatchesSoccer.bind(null, 'euro'), 180000)
   }
- schedule.scheduleJob('0 */12 * * *', ()=>{
+ schedule.scheduleJob('0 */7 * * *', ()=>{
     newMatches();
   })
+
+
+
+
 
 
 const checkOdds = async () => {
@@ -132,11 +135,13 @@ Outcome.find(
     }
   );
 }
-schedule.scheduleJob('0 */6 * * *', ()=>{
+schedule.scheduleJob('0 */3 * * *', ()=>{
   checkOdds();
 })
 
   
+
+
 
 
 
@@ -152,7 +157,7 @@ schedule.scheduleJob('0 */6 * * *', ()=>{
     console.log("crypto invests total:", investmentcrypto.length);
 
     if (
-      date == moment.utc().format(`${month}-${day} 13:29`) &&
+      date == moment.utc().format(`${month}-${day} 13:20`) &&
       investmentcrypto.length !== 0
     ) {
       cryptoPriceOpen((error, highest) => {
@@ -170,7 +175,7 @@ schedule.scheduleJob('0 */6 * * *', ()=>{
         if (error) {
           return console.log(error);
         }
-      });
+      })
     }
     if (
       date == moment.utc().format(`${month}-${day} 20:30`) &&
@@ -182,6 +187,16 @@ schedule.scheduleJob('0 */6 * * *', ()=>{
         }
       });
     }
+    if (
+      date == moment.utc().format(`${month}-${day} 20:35`) &&
+      (investmentcrypto.length !== 0 || investmentstock.length !== 0)
+    ) {
+      const higheststock = await Stock.findOne({}).sort({return:-1}).limit(1);;
+      const highestcrypto = await Crypto.findOne({}).sort({return:-1}).limit(1);;
+      console.log(highestcrypto.symbol, higheststock.ticker);
+      betResultInv(higheststock.ticker, "stocks", Discord, client);
+      betResultInv(highestcrypto.symbol, "crypto", Discord, client);
+    };
   };
   setInterval(checkReturn, 60000);
 };

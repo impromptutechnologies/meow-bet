@@ -9,7 +9,7 @@ module.exports = {
   cooldown: 1,
   description: "Invest in Crypto!",
   execute(client, message, args, Discord, profileData) {
-    const checkForPosts = async () => {
+    /*const checkForPosts = async () => {
       var day = moment.utc().format("DD");
       var month = moment.utc().format("MM");
       var date = moment.utc().format("MM-DD HH:mm");
@@ -17,12 +17,7 @@ module.exports = {
       var date2 = moment.utc().format(`${month}-${day} 20:00`);
       const investments = await Invest.find({ creatorID: message.author.id, category:"crypto"});
       console.log(`myinvestscrypto - ${message.author.tag} -`, investments.length)
-      /* For Bets:
-        Set a forloop for each outcome, and then just check if the end date matches the current date. 
-        For sports its predictable, but for esports maybe we need to say its done. Once again depends.
-        
-        This should ideally be done inside the actual investstock and investcrypto files
-*/
+      
       if (
         date == moment.utc().format(`${month}-${day} 20:32`) &&
         investments.length !== 0
@@ -120,8 +115,11 @@ module.exports = {
         
       }
       setTimeout(checkForPosts, 1000 * 10);
-    };
+    };*/
     
+
+
+
     const code = args[1];
     const amt = parseInt(args[0]);
     if(isNaN(amt)){
@@ -224,7 +222,6 @@ module.exports = {
                         )
                         .setURL("http://localhost:3000/betscr");
                       message.channel.send(newEmbed);
-                      checkForPosts();
                     }
                   );
               }
