@@ -98,7 +98,7 @@ module.exports = async (Discord, client) => {
     //setTimeout(newMatchesSoccer.bind(null, 'prem'), 60000)
     //setTimeout(newMatchesSoccer.bind(null, 'champ'), 120000)
     //setTimeout(newMatchesSoccer.bind(null, 'seriea'), 180000)
-    setTimeout(newMatchesSoccer.bind(null, 'euro'), 180000)
+    setTimeout(newMatchesSoccer.bind(null, 'euros'), 180000)
   }
  schedule.scheduleJob('0 */2 * * *', ()=>{
     newMatches();
