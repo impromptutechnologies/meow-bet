@@ -91,7 +91,7 @@ module.exports = async (Discord, client) => {
 
 
   const newMatches = async () => {
-    newMatchesEsports();
+    //newMatchesEsports();
     newMatchesBasketball("1");
     setTimeout(newMatchesBasketball.bind(null, '2'), 60000)
     setTimeout(newMatchesBasketball.bind(null, '3'), 120000)
