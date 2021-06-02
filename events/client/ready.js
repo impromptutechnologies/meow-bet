@@ -100,7 +100,7 @@ module.exports = async (Discord, client) => {
     //setTimeout(newMatchesSoccer.bind(null, 'seriea'), 180000)
     setTimeout(newMatchesSoccer.bind(null, 'euro'), 180000)
   }
- schedule.scheduleJob('0 */5 * * *', ()=>{
+ schedule.scheduleJob('0 */3 * * *', ()=>{
     newMatches();
   })
 
@@ -135,7 +135,7 @@ Outcome.find(
     }
   );
 }
-schedule.scheduleJob('*/5 * * * *', ()=>{
+schedule.scheduleJob('0 */1 * * *', ()=>{
   checkOdds();
 })
 
