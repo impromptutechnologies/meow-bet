@@ -168,7 +168,7 @@ schedule.scheduleJob('*/55 * * * *', ()=>{
     }
 
     if (
-      date == moment.utc().format(`${month}-${day} 20:30`) &&
+      date == moment.utc().format(`${month}-${day} 21:30`) &&
       investmentstock.length !== 0
     ) {
       stockPrice((error, highest) => {
@@ -178,7 +178,7 @@ schedule.scheduleJob('*/55 * * * *', ()=>{
       })
     }
     if (
-      date == moment.utc().format(`${month}-${day} 20:30`) &&
+      date == moment.utc().format(`${month}-${day} 21:30`) &&
       investmentcrypto.length !== 0
     ) {
       cryptoPrice((error, highest) => {
@@ -188,7 +188,7 @@ schedule.scheduleJob('*/55 * * * *', ()=>{
       });
     }
     if (
-      date == moment.utc().format(`${month}-${day} 20:35`) &&
+      date == moment.utc().format(`${month}-${day} 21:35`) &&
       (investmentcrypto.length !== 0 || investmentstock.length !== 0)
     ) {
       const higheststock = await Stock.findOne({}).sort({return:-1}).limit(1);;

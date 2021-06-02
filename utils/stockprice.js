@@ -1,13 +1,16 @@
 const request = require("request");
 const Stock = require("../models/stockSchema");
 
+const moment = require("moment-timezone");
 
 const stockPrice = (callback) => {
 
     Stock.find({}, (error, stocks) => {
+        const date = moment.utc().format("YYYY-MM-DD");
+        console.log(date);
         stocks.forEach((stock) => {
             console.log(stock.ticker)
-            const url = `http://api.marketstack.com/v1/eod?access_key=b43c8007a25da9601cd55d83b6d3a6ad&symbols=${stock.ticker}&limit=1`;
+            const url = `http://api.marketstack.com/v1/eod/${date}?access_key=b43c8007a25da9601cd55d83b6d3a6ad&symbols=${stock.ticker}&limit=1`;
             console.log(url)
             request ({ url, json: true },(error, { body }) => {
                 console.log(body)

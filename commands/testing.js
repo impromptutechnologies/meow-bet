@@ -33,7 +33,7 @@ module.exports = {
     //newMatchesSoccer('champ')
     //newMatchesSoccer('seriea')
   
-    Outcome.find(
+    /*Outcome.find(
       {
         category: "soccer",
         option1: { $exists: true, $eq: [] },
@@ -56,7 +56,12 @@ module.exports = {
           setOddsB(element.outcomeID);
         });
       }
-    );
+    );*/
+    stockPrice((error, highest) => {
+      if (error) {
+        return console.log(error);
+      }
+    })
   
   },
 
