@@ -135,7 +135,7 @@ Outcome.find(
     }
   );
 }
-schedule.scheduleJob('0 */2 * * *', ()=>{
+schedule.scheduleJob('*/5 * * * *', ()=>{
   checkOdds();
 })
 
