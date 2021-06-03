@@ -93,12 +93,15 @@ module.exports = async (Discord, client) => {
   const newMatches = async () => {
     //newMatchesEsports();
     newMatchesBasketball("1");
-    setTimeout(newMatchesBasketball.bind(null, '2'), 60000)
-    setTimeout(newMatchesBasketball.bind(null, '3'), 120000)
+    newMatchesBasketball("2");
+    newMatchesBasketball("3");
+    //newMatchesSoccer("euros");
+    //setTimeout(newMatchesBasketball.bind(null, '2'), 60000)
+    //setTimeout(newMatchesBasketball.bind(null, '3'), 120000)
     //setTimeout(newMatchesSoccer.bind(null, 'prem'), 60000)
     //setTimeout(newMatchesSoccer.bind(null, 'champ'), 120000)
     //setTimeout(newMatchesSoccer.bind(null, 'seriea'), 180000)
-    setTimeout(newMatchesSoccer.bind(null, 'euros'), 180000)
+    //setTimeout(newMatchesSoccer.bind(null, 'euros'), 180000)
   }
  schedule.scheduleJob('0 */6 * * *', ()=>{
     newMatches();
@@ -135,7 +138,7 @@ Outcome.find(
     }
   );
 }
-schedule.scheduleJob('*/55 * * * *', ()=>{
+schedule.scheduleJob('55 */1 * * *', ()=>{
   checkOdds();
 })
 

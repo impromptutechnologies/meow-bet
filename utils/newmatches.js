@@ -75,7 +75,7 @@ const newMatchesSoccer = (choice) => {
         qs: {
           league: 4,
           from: date,
-          to:date2,
+          to:date1,
           season: 2020
         },
         headers: {
