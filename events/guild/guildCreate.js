@@ -14,7 +14,7 @@ module.exports = async (client, discord, guild) => {
     if (!channeltoSend) return;
     const newEmbed = new Discord.MessageEmbed()
       .setColor("#304281")
-      .setTitle(`Welcome to Meow, ${member.user.username}!`)
+      .setTitle(`Welcome to Meow!`)
       .setThumbnail(`https://altvaton.sirv.com/Images/heart.png`)
       .setDescription(`Our bot allows you to bet on major sports matches, stock/crypto prices, 
       and a host of cool casino games such as blackjack, dice, slots and more! We give you 100 free tokens a day or you can purchase a lootbox containing tokens, premium commands and the monthly giveaway/lottery. 
