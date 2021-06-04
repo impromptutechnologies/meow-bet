@@ -71,7 +71,7 @@ const betResult = (id, Discord, client) => {
                   const guildID = success.serverID;
                   const betAmount = success.betAmount;
                   const channelID = success.channelID;
-                  const yourWinnings = success.betOdds * betAmount;
+                  const yourWinnings = success.possibleWinnings;
                   Profile.findOneAndUpdate(
                     { userID: creatorID },
                     { $inc: { coins: (yourWinnings-(yourWinnings*0.05)) } },
@@ -163,7 +163,7 @@ const betResult = (id, Discord, client) => {
                     const betAmount = success.betAmount;
                     const channelID = success.channelID;
                     if (profile) {
-                      const yourWinnings = success.betOdds * betAmount;
+                      const yourWinnings = success.possibleWinnings;
                       Profile.findOneAndUpdate(
                         { userID: creatorID },
                         { coins: (yourWinnings-(yourWinnings*0.05)) + coinz },
@@ -255,7 +255,7 @@ const betResult = (id, Discord, client) => {
                     const betAmount = success.betAmount;
                     const channelID = success.channelID;
                     if (profile) {
-                      const yourWinnings = success.betOdds * betAmount;
+                      const yourWinnings = success.possibleWinnings;
                       Profile.findOneAndUpdate(
                         { userID: creatorID },
                         { coins: (yourWinnings-(yourWinnings*0.05)) + coinz },

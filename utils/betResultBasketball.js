@@ -69,7 +69,7 @@ const betResultBasketball = (id, Discord, client) => {
                   const betAmount = success.betAmount;
                   const channelID = success.channelID;
                   const guildID = success.serverID;
-                  const yourWinnings = success.betOdds * betAmount;
+                  const yourWinnings = success.possibleWinnings;
                   console.log(yourWinnings)
                   Profile.findOneAndUpdate(
                     { userID: creatorID },
@@ -166,7 +166,7 @@ const betResultBasketball = (id, Discord, client) => {
                     const betAmount = success.betAmount;
                     const channelID = success.channelID;
                     const guildID = success.serverID;
-                      const yourWinnings = success.betOdds * betAmount;
+                      const yourWinnings = success.possibleWinnings;
                       Profile.findOneAndUpdate(
                         { userID: creatorID },
                         { $inc: { coins: yourWinnings - (yourWinnings * 0.03) } },

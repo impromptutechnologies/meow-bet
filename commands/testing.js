@@ -57,11 +57,7 @@ module.exports = {
         });
       }
     );*/
-    stockPrice((error, highest) => {
-      if (error) {
-        return console.log(error);
-      }
-    })
+
   
   },
 
