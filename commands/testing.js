@@ -22,10 +22,11 @@ module.exports = {
   name: "testing",
   description: "testing testing 123",
   execute(client, message, args, Discord, profileData) {
+
     
 
-    //newMatchesEsports();
-    //newMatchesBasketball('1')
+    newMatchesEsports();
+    //ewMatchesBasketball('1')
     //newMatchesBasketball('2')
     //newMatchesBasketball('3')
     //newMatchesSoccer('laliga')

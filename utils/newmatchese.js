@@ -125,7 +125,7 @@ const newMatchesEsports = (choice) => {
                             .format("MM-DD HH:mm"),
                           timeEnd: moment
                             .utc(element.begin_at)
-                            .add(1, "hours")
+                            .add(2, "hours")
                             .format("MM-DD HH:mm"),
                         },
                         (err, res) => {
@@ -173,7 +173,7 @@ const newMatchesEsports = (choice) => {
                           .format("MM-DD HH:mm"),
                         timeEnd: moment
                           .utc(element.begin_at)
-                          .add(1, "hours")
+                          .add(2, "hours")
                           .format("MM-DD HH:mm"),
                       },
                       (err, res) => {
@@ -223,7 +223,7 @@ const newMatchesEsports = (choice) => {
                           .format("MM-DD HH:mm"),
                         timeEnd: moment
                           .utc(element.begin_at)
-                          .add(1, "hours")
+                          .add(2, "hours")
                           .format("MM-DD HH:mm"),
                       },
                       (err, res) => {

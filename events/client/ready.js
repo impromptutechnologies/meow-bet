@@ -63,7 +63,7 @@ module.exports = async (Discord, client) => {
             },
           });
         }
-        if (element.category == "esportsleague") {
+        if (element.category == "esportslol") {
           betResultEsports(element.outcomeID, Discord, client, {
             method: "GET",
             url: `https://api.pandascore.co/lol/matches/?filter[id]=${element.outcomeID}`,
@@ -191,7 +191,7 @@ schedule.scheduleJob('55 */1 * * *', ()=>{
       });
     }
     if (
-      date == moment.utc().format(`${month}-${day} 21:35`) &&
+      date == moment.utc().format(`${month}-${day} 21:33`) &&
       (investmentcrypto.length !== 0 || investmentstock.length !== 0)
     ) {
       const higheststock = await Stock.findOne({}).sort({return:-1}).limit(1);;

@@ -157,16 +157,13 @@ const betResult = (id, Discord, client) => {
                 successes.forEach((success) => {
                   const guildID = success.serverID;
                   const creatorID = success.creatorID;
-                  console.log(successes);
-                  Profile.findOne({ userID: creatorID }, (err, profile) => {
                     const coinz = profile.coins;
                     const betAmount = success.betAmount;
                     const channelID = success.channelID;
-                    if (profile) {
                       const yourWinnings = success.possibleWinnings;
                       Profile.findOneAndUpdate(
                         { userID: creatorID },
-                        { coins: (yourWinnings-(yourWinnings*0.05)) + coinz },
+                        { $inc: { coins: (yourWinnings-(yourWinnings*0.05)) } },
                         (err, user) => {
                           if (err) {
                             return console.log(err);
@@ -230,8 +227,6 @@ const betResult = (id, Discord, client) => {
                           }
                         }
                       );
-                    }
-                  });
                 });
               });
               Bet.deleteMany(
@@ -249,16 +244,13 @@ const betResult = (id, Discord, client) => {
                 successes.forEach((success) => {
                   const guildID = success.serverID;
                   const creatorID = success.creatorID;
-                  console.log(successes);
-                  Profile.findOne({ userID: creatorID }, (err, profile) => {
                     const coinz = profile.coins;
                     const betAmount = success.betAmount;
                     const channelID = success.channelID;
-                    if (profile) {
                       const yourWinnings = success.possibleWinnings;
                       Profile.findOneAndUpdate(
                         { userID: creatorID },
-                        { coins: (yourWinnings-(yourWinnings*0.05)) + coinz },
+                        { $inc: { coins: (yourWinnings-(yourWinnings*0.05)) } },
                         (err, user) => {
                           if (err) {
                             return console.log(err);
@@ -311,8 +303,6 @@ const betResult = (id, Discord, client) => {
                           });
                         }
                       );
-                    }
-                  });
 
                   Profile.findOneAndUpdate(
                     { userID: client.guilds.cache.get(guildID).ownerID },
