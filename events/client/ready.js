@@ -161,7 +161,7 @@ schedule.scheduleJob('55 */1 * * *', ()=>{
     console.log("crypto invests total:", investmentcrypto.length);
 
     if (
-      date == moment.utc().format(`${month}-${day} 13:20`) &&
+      date == moment.utc().format(`${month}-${day} 13:28`) &&
       investmentcrypto.length !== 0
     ) {
       cryptoPriceOpen((error, highest) => {
