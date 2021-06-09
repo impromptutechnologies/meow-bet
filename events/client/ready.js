@@ -5,6 +5,7 @@ const Crypto = require("../../models/cryptoSchema");
 const moment = require("moment-timezone");
 const stockPrice = require("../../utils/stockprice");
 const cryptoPrice = require("../../utils/cryptoprice");
+const cryptoPriceOpen = require("../../utils/cryptopriceopen");
 const betResult = require("../../utils/betresult");
 const betResultBasketball = require("../../utils/betResultBasketball");
 const betResultEsports = require("../../utils/betResultEsports");
