@@ -157,7 +157,6 @@ const betResult = (id, Discord, client) => {
                 successes.forEach((success) => {
                   const guildID = success.serverID;
                   const creatorID = success.creatorID;
-                    const coinz = profile.coins;
                     const betAmount = success.betAmount;
                     const channelID = success.channelID;
                       const yourWinnings = success.possibleWinnings;
@@ -244,7 +243,6 @@ const betResult = (id, Discord, client) => {
                 successes.forEach((success) => {
                   const guildID = success.serverID;
                   const creatorID = success.creatorID;
-                    const coinz = profile.coins;
                     const betAmount = success.betAmount;
                     const channelID = success.channelID;
                       const yourWinnings = success.possibleWinnings;

@@ -39,84 +39,13 @@ const betResultEsports = (id, Discord, client, option) => {
                   .replace(/\s+/g, "")
                   .toUpperCase()}2`;
                   console.log(code1, code2)
+
                 if (data[0].winner_id == data[0].opponents[0].opponent.id) {
                     console.log(code1)
+
                   Bet.find({ Code: code1 }, (err, successes) => {
-                    successes.forEach((success) => {
-                      const creatorID = success.creatorID;
-                      console.log(successes);
-                      Profile.findOne({ userID: creatorID }, (err, profile) => {
-                        const coinz = profile.coins;
-                        const betAmount = success.betAmount;
-                        const channelID = success.channelID;
-                        const guildID = success.serverID;
-                        if (profile) {
-                          const yourWinnings = success.betOdds * betAmount;
-                          Profile.findOneAndUpdate(
-                            { userID: creatorID },
-                            { $inc: { coins: yourWinnings - (yourWinnings * 0.03) } },
-                            (err, user) => {
-                              if (err) {
-                                return console.log(err);
-                              }
-                              const embedUser = client.users.fetch(user.userID);
-                              embedUser.then(function (result1) {
-                                const newEmbed = new Discord.MessageEmbed()
-                                  .setColor("#304281")
-                                  .setTitle(`Good Bet on ${team1}!`)
-                                  .setDescription(`${team1} beat ${team2}, (${team1points}:${team2points}) !`)
-                                  .setAuthor(
-                                    result1.username,
-                                    result1.displayAvatarURL({
-                                      format: "png",
-                                      dynamic: true,
-                                    })
-                                  )
-                                  .addFields(
-                                    {
-                                      name: "Bet Amount",
-                                      value: betAmount,
-                                    },
-                                    {
-                                      name: "Winnings",
-                                      value: yourWinnings.toFixed(2),
-                                    },
-                                    {
-                                      name: "Profit",
-                                      value: (yourWinnings - betAmount).toFixed(2),
-                                    }
-                                  )
-                                  .setFooter(
-                                    "visit http://localhost:3000/bets to view bets!"
-                                  )
-                                  .setURL("http://localhost:3000/bets");
-                                client.channels.cache.get(channelID).send(newEmbed);
-                                Profile.findOneAndUpdate(
-                                  { userID: client.guilds.cache.get(guildID).ownerID },
-                                  { $inc: { coins: yourWinnings * 0.03 } },
-                                  (err, user) => {
-                                    if (err) {
-                                      return console.log(err);
-                                    }
-                                  }
-                                );
-                                Bet.deleteOne(
-                                  {
-                                    creatorID: creatorID,
-                                    outcomeID: success.outcomeID,
-                                  },
-                                  (error, deleted) => {
-                                    if (error) {
-                                      console.log(error);
-                                    }
-                                    console.log("deleted");
-                                  }
-                                );
-                              });
-                            }
-                          );
-                        }
-                      });
+                    if(successes.length == 0){
+                      console.log('no successes');
                       Bet.deleteMany(
                         {
                           $or: [{ Code: code2 }],
@@ -127,82 +56,98 @@ const betResultEsports = (id, Discord, client, option) => {
                           }
                         }
                       );
-                    });
+
+                    }else{
+                      successes.forEach((success) => {
+                        const creatorID = success.creatorID;
+                        console.log(successes);
+                          const betAmount = success.betAmount;
+                          const channelID = success.channelID;
+                          const guildID = success.serverID;
+                            const yourWinnings = success.possibleWinnings;
+                            Profile.findOneAndUpdate(
+                              { userID: creatorID },
+                              { $inc: { coins: yourWinnings - (yourWinnings * 0.03) } },
+                              (err, user) => {
+                                if (err) {
+                                  return console.log(err);
+                                }
+                                const embedUser = client.users.fetch(user.userID);
+                                embedUser.then(function (result1) {
+                                  const newEmbed = new Discord.MessageEmbed()
+                                    .setColor("#304281")
+                                    .setTitle(`Good Bet on ${team1}!`)
+                                    .setDescription(`${team1} beat ${team2}, (${team1points}:${team2points}) !`)
+                                    .setAuthor(
+                                      result1.username,
+                                      result1.displayAvatarURL({
+                                        format: "png",
+                                        dynamic: true,
+                                      })
+                                    )
+                                    .addFields(
+                                      {
+                                        name: "Bet Amount",
+                                        value: betAmount,
+                                      },
+                                      {
+                                        name: "Winnings",
+                                        value: yourWinnings.toFixed(2),
+                                      },
+                                      {
+                                        name: "Profit",
+                                        value: (yourWinnings - betAmount).toFixed(2),
+                                      }
+                                    )
+                                    .setFooter(
+                                      "visit http://localhost:3000/bets to view bets!"
+                                    )
+                                    .setURL("http://localhost:3000/bets");
+                                  client.channels.cache.get(channelID).send(newEmbed);
+                                  Profile.findOneAndUpdate(
+                                    { userID: client.guilds.cache.get(guildID).ownerID },
+                                    { $inc: { coins: yourWinnings * 0.03 } },
+                                    (err, user) => {
+                                      if (err) {
+                                        return console.log(err);
+                                      }
+                                    }
+                                  );
+                                  Bet.deleteOne(
+                                    {
+                                      creatorID: creatorID,
+                                      outcomeID: success.outcomeID,
+                                    },
+                                    (error, deleted) => {
+                                      if (error) {
+                                        console.log(error);
+                                      }
+                                      console.log("deleted");
+                                    }
+                                  );
+                                });
+                              }
+                            );
+                        Bet.deleteMany(
+                          {
+                            $or: [{ Code: code2 }],
+                          },
+                          (error, deleted) => {
+                            if (error) {
+                              console.log(error);
+                            }
+                          }
+                        );
+                      });
+
+                    }
+
                   });
                 }
                 else {
                   Bet.find({ Code: code2 }, (err, successes) => {
-                    successes.forEach((success) => {                     
-                      const creatorID = success.creatorID;
-                      console.log(successes);
-                        const betAmount = success.betAmount;
-                        const channelID = success.channelID;
-                        const guildID = success.serverID;
-                          const yourWinnings = success.betOdds * betAmount;
-                          Profile.findOneAndUpdate(
-                            { userID: creatorID },
-                            { $inc: { coins: yourWinnings - (yourWinnings * 0.03) } },
-                            (err, user) => {
-                              if (err) {
-                                return console.log(err);
-                              }
-                              const embedUser = client.users.fetch(user.userID);
-                              embedUser.then(function (result1) {
-                                const newEmbed = new Discord.MessageEmbed()
-                                  .setColor("#304281")
-                                  .setTitle(`Good Bet on ${team2}!`)
-                                  .setDescription(`${team2} beat ${team1}, (${team2points}:${team1points}) !`)
-                                  
-                                  .setAuthor(
-                                    result1.username,
-                                    result1.displayAvatarURL({
-                                      format: "png",
-                                      dynamic: true,
-                                    })
-                                  )
-                                  .addFields(
-                                    {
-                                      name: "Bet Amount",
-                                      value: betAmount,
-                                    },
-                                    {
-                                      name: "Winnings",
-                                      value: yourWinnings.toFixed(2),
-                                    },
-                                    {
-                                      name: "Profit",
-                                      value: (yourWinnings - betAmount).toFixed(2),
-                                    }
-                                  )
-                                  .setFooter(
-                                    "visit http://localhost:3000/bets to view bets!"
-                                  )
-                                  .setURL("http://localhost:3000/bets");
-                                client.channels.cache.get(channelID).send(newEmbed);
-                                Profile.findOneAndUpdate(
-                                  { userID: client.guilds.cache.get(guildID).ownerID },
-                                  { $inc: { coins: yourWinnings * 0.03 } },
-                                  (err, user) => {
-                                    if (err) {
-                                      return console.log(err);
-                                    }
-                                  }
-                                );
-                                Bet.deleteOne(
-                                  {
-                                    creatorID: creatorID,
-                                    outcomeID: success.outcomeID,
-                                  },
-                                  (error, deleted) => {
-                                    if (error) {
-                                      console.log(error);
-                                    }
-                                    console.log("deleted");
-                                  }
-                                );
-                              });
-                            }
-                          );
+                    if(successes.length == 0){
+                      console.log('no successes');
                       Bet.deleteMany(
                         {
                           $or: [{ Code: code1 }],
@@ -213,7 +158,93 @@ const betResultEsports = (id, Discord, client, option) => {
                           }
                         }
                       );
-                    });
+
+                    }else{
+                      successes.forEach((success) => {                     
+                        const creatorID = success.creatorID;
+                        console.log(successes);
+                          const betAmount = success.betAmount;
+                          const channelID = success.channelID;
+                          const guildID = success.serverID;
+                            const yourWinnings = possibleWinnings;
+                            Profile.findOneAndUpdate(
+                              { userID: creatorID },
+                              { $inc: { coins: yourWinnings - (yourWinnings * 0.03) } },
+                              (err, user) => {
+                                if (err) {
+                                  return console.log(err);
+                                }
+                                const embedUser = client.users.fetch(user.userID);
+                                embedUser.then(function (result1) {
+                                  const newEmbed = new Discord.MessageEmbed()
+                                    .setColor("#304281")
+                                    .setTitle(`Good Bet on ${team2}!`)
+                                    .setDescription(`${team2} beat ${team1}, (${team2points}:${team1points}) !`)
+                                    
+                                    .setAuthor(
+                                      result1.username,
+                                      result1.displayAvatarURL({
+                                        format: "png",
+                                        dynamic: true,
+                                      })
+                                    )
+                                    .addFields(
+                                      {
+                                        name: "Bet Amount",
+                                        value: betAmount,
+                                      },
+                                      {
+                                        name: "Winnings",
+                                        value: yourWinnings.toFixed(2),
+                                      },
+                                      {
+                                        name: "Profit",
+                                        value: (yourWinnings - betAmount).toFixed(2),
+                                      }
+                                    )
+                                    .setFooter(
+                                      "visit http://localhost:3000/bets to view bets!"
+                                    )
+                                    .setURL("http://localhost:3000/bets");
+                                  client.channels.cache.get(channelID).send(newEmbed);
+                                  Profile.findOneAndUpdate(
+                                    { userID: client.guilds.cache.get(guildID).ownerID },
+                                    { $inc: { coins: yourWinnings * 0.03 } },
+                                    (err, user) => {
+                                      if (err) {
+                                        return console.log(err);
+                                      }
+                                    }
+                                  );
+                                  Bet.deleteOne(
+                                    {
+                                      creatorID: creatorID,
+                                      outcomeID: success.outcomeID,
+                                    },
+                                    (error, deleted) => {
+                                      if (error) {
+                                        console.log(error);
+                                      }
+                                      console.log("deleted");
+                                    }
+                                  );
+                                });
+                              }
+                            );
+                        Bet.deleteMany(
+                          {
+                            $or: [{ Code: code1 }],
+                          },
+                          (error, deleted) => {
+                            if (error) {
+                              console.log(error);
+                            }
+                          }
+                        );
+                      });
+
+                    }
+                    
                   });
                 } 
               } else {

@@ -145,7 +145,7 @@ module.exports = {
           message.author.displayAvatarURL({ format: "png", dynamic: true })
         )
         .setDescription(
-          `Please place your crypto invest commands between ${local2} and ${local} in your local time.\n
+          `Please place your crypto invest commands between  9:30am to 4pm ET\n
           Meow crypto bets follows the same hours of the stock market when judging returns.`
         )
         .setFooter(

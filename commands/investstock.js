@@ -157,8 +157,7 @@ module.exports = {
           message.author.displayAvatarURL({ format: "png", dynamic: true })
         )
         .setDescription(
-          `Please place your investment commands between ${local2} and ${local} in your local time.
-          The US stock market opens from 9:30am to 4pm ET so place your commands before the market opens.`
+          `The US stock market opens from 9:30am to 4pm ET so place your commands before the market opens.`
         )
         .setFooter(
           "visit http://localhost:3000/betsst to view more investments!"
