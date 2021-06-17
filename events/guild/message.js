@@ -10,14 +10,14 @@ module.exports = async (Discord, client, message) => {
 
   let profileData;
   try {
-    profileData = await Profile.findOne({ userID: message.author.id });
+    profileData = await Profile.findOne({ userID: message.author.id }).lean();
     if (!profileData) {
       console.log(message.guild.id)
       let profile = await Profile.create({
         userID: message.author.id,
         username: message.author.tag,
         serverID: message.guild.id,
-        coins: 100,
+        coins: 1000,
       });
       const newEmbed = new Discord.MessageEmbed()
       .setColor("#304281")

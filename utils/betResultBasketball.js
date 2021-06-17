@@ -56,7 +56,6 @@ const betResultBasketball = (id, Discord, client) => {
               .substring(0, 3)
               .replace(/\s+/g, "")
               .toUpperCase()}2`;
-            console.log(code1, code3);
             if (
               data.response[0].scores.home.total >
               data.response[0].scores.away.total
@@ -65,12 +64,10 @@ const betResultBasketball = (id, Discord, client) => {
               Bet.find({ Code: code1 }, (err, successes) => {
                 successes.forEach((success) => {
                   const creatorID = success.creatorID;
-                  console.log(successes);
                   const betAmount = success.betAmount;
                   const channelID = success.channelID;
                   const guildID = success.serverID;
                   const yourWinnings = success.possibleWinnings;
-                  console.log(yourWinnings)
                   Profile.findOneAndUpdate(
                     { userID: creatorID },
                     { $inc: { coins: yourWinnings - (yourWinnings * 0.03) } },
@@ -117,7 +114,6 @@ const betResultBasketball = (id, Discord, client) => {
                           { userID: client.guilds.cache.get(guildID).ownerID },
                           { $inc: { coins: yourWinnings * 0.03 } },
                           (err, user) => {
-                            console.log(yourWinnings*0.03)
                             if (err) {
                               return console.log(err);
                             }
@@ -162,7 +158,6 @@ const betResultBasketball = (id, Discord, client) => {
                 }*/
                 successes.forEach((success) => {
                   const creatorID = success.creatorID;
-                  console.log(successes);
                     const betAmount = success.betAmount;
                     const channelID = success.channelID;
                     const guildID = success.serverID;

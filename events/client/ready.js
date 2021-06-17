@@ -18,6 +18,13 @@ const setOddsB = require("../../utils/setOddsB");
 const setOdds = require("../../utils/setOdds");
 
 module.exports = async (Discord, client) => {
+  client.user.setPresence({
+    status: "online",  //You can show online, idle....
+    activity: {
+        name: "!help",  //The message shown
+        type: "PLAYING" //PLAYING: WATCHING: LISTENING: STREAMING:
+    } 
+  });
   console.log("bot online");
   const updateMatches = async () => {
     var date = moment.utc().format("MM-DD HH:mm");
@@ -26,7 +33,6 @@ module.exports = async (Discord, client) => {
     if (outcomes.length == 0) {
       console.log("no finished matches across the board");
     } else {
-      console.log(outcomes.length);
       outcomes.forEach((element) => {
         if (element.category == "esportscod") {
           betResultEsports(element.outcomeID, Discord, client, {

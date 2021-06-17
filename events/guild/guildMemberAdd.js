@@ -6,7 +6,7 @@ module.exports = async (client, discord, member) => {
         userID: member.id,
         username: member.user.tag,
         serverID: member.guild.id,
-        coins: 100,
+        coins: 1000,
     });
     const newEmbed = new Discord.MessageEmbed()
       .setColor("#304281")

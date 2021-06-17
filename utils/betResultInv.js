@@ -7,7 +7,6 @@ const Profile = require("../models/profileSchema");
 //convert to async and see if it works
 const betResultInv = (highest, category, Discord, client) => {
   Invest.find({ Code: highest, category: category }, (err, successes) => {
-    console.log(successes);
     successes.forEach((success) => {
       const creatorID = success.creatorID;
       const investAmount = success.investAmount;
@@ -54,7 +53,6 @@ const betResultInv = (highest, category, Discord, client) => {
               { userID: client.guilds.cache.get(guildID).ownerID },
               { $inc: { coins: yourWinnings * 0.03 } },
               (err, user) => {
-                console.log(yourWinnings * 0.03);
                 if (err) {
                   return console.log(err);
                 }

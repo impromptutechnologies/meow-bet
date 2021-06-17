@@ -220,9 +220,9 @@ module.exports = {
                 }
               }
             }
-          );
+          ).lean();
         }
-      );
+      ).lean();
     } catch (err) {
       console.log(err, "heuy");
     }

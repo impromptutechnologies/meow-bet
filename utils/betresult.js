@@ -65,7 +65,6 @@ const betResult = (id, Discord, client) => {
             if (data.response[0].teams.home.winner == true) {
               console.log(code1);
               Bet.find({ Code: code1 }, (err, successes) => {
-                console.log(successes);
                 successes.forEach((success) => {
                   const creatorID = success.creatorID;
                   const guildID = success.serverID;

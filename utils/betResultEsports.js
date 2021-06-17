@@ -15,7 +15,6 @@ const betResultEsports = (id, Discord, client, option) => {
           if (outcomeData.length == 0) {
             return console.log("no bets placed");
           } else {
-            console.log(option)
             request(option, (error, response, body) => {
               data = JSON.parse(body);
               if (error) throw new Error(error);
@@ -38,7 +37,6 @@ const betResultEsports = (id, Discord, client, option) => {
                   .substring(0, 3)
                   .replace(/\s+/g, "")
                   .toUpperCase()}2`;
-                  console.log(code1, code2)
 
                 if (data[0].winner_id == data[0].opponents[0].opponent.id) {
                     console.log(code1)
@@ -60,7 +58,6 @@ const betResultEsports = (id, Discord, client, option) => {
                     }else{
                       successes.forEach((success) => {
                         const creatorID = success.creatorID;
-                        console.log(successes);
                           const betAmount = success.betAmount;
                           const channelID = success.channelID;
                           const guildID = success.serverID;
@@ -122,7 +119,6 @@ const betResultEsports = (id, Discord, client, option) => {
                                       if (error) {
                                         console.log(error);
                                       }
-                                      console.log("deleted");
                                     }
                                   );
                                 });
@@ -162,7 +158,6 @@ const betResultEsports = (id, Discord, client, option) => {
                     }else{
                       successes.forEach((success) => {                     
                         const creatorID = success.creatorID;
-                        console.log(successes);
                           const betAmount = success.betAmount;
                           const channelID = success.channelID;
                           const guildID = success.serverID;
@@ -225,7 +220,6 @@ const betResultEsports = (id, Discord, client, option) => {
                                       if (error) {
                                         console.log(error);
                                       }
-                                      console.log("deleted");
                                     }
                                   );
                                 });
