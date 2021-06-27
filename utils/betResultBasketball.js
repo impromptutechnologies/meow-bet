@@ -32,7 +32,6 @@ const betResultBasketball = (id, Discord, client) => {
         };
         request(options, (error, response, body) => {
           data = JSON.parse(body);
-          console.log(data);
           if (error) throw new Error(error);
           if (
             data.response[0].status.short == "FT" ||
@@ -60,7 +59,6 @@ const betResultBasketball = (id, Discord, client) => {
               data.response[0].scores.home.total >
               data.response[0].scores.away.total
             ) {
-              console.log(code1);
               Bet.find({ Code: code1 }, (err, successes) => {
                 successes.forEach((success) => {
                   const creatorID = success.creatorID;
@@ -106,9 +104,9 @@ const betResultBasketball = (id, Discord, client) => {
                             }
                           )
                           .setFooter(
-                            "visit http://localhost:3000/bets to view bets!"
+                            "visit https://getmeow.gg/bets to view bets!"
                           )
-                          .setURL("http://localhost:3000/bets");
+                          .setURL("https://getmeow.gg/bets");
                         client.channels.cache.get(channelID).send(newEmbed);
                         Profile.findOneAndUpdate(
                           { userID: client.guilds.cache.get(guildID).ownerID },
@@ -146,7 +144,6 @@ const betResultBasketball = (id, Discord, client) => {
                 }
               );
             } else {
-              console.log(code3);
               Bet.find({ Code: code3 }, (err, successes) => {
                 /*for (var i = 0; i < successes.length; i++) {
                   const creatorID = successes[i].creatorID;
@@ -200,9 +197,9 @@ const betResultBasketball = (id, Discord, client) => {
                                 }
                               )
                               .setFooter(
-                                "visit http://localhost:3000/bets to view bets!"
+                                "visit https://getmeow.gg/bets to view bets!"
                               )
-                              .setURL("http://localhost:3000/bets");
+                              .setURL("https://getmeow.gg/bets");
                             client.channels.cache.get(channelID).send(newEmbed);
                             Profile.findOneAndUpdate(
                               { userID: client.guilds.cache.get(guildID).ownerID },

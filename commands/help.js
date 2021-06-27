@@ -8,7 +8,7 @@ module.exports = {
         .setDescription("Our website contains all the info you need!")
         .addFields({ name: "Check Bankroll", value: "!bankroll" }, { name: "Command/Bets", value: "getmeow.gg/bets" },{ name: "Get Tokens", value: "getmeow.gg/tokens" },
         { name: "Contact", value: `contact@getmeow.gg` }, { name: "T&C", value: "getmeow.gg/terms" })
-        .setURL("http://localhost:3000/bet")
+        .setURL("https://getmeow.gg/bets")
       message.channel.send(newEmbed);
     },
   };

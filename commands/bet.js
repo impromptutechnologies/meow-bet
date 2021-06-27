@@ -65,12 +65,11 @@ module.exports = {
                     `Please place your bet commands before matches begin.`
                   )
                   .setFooter(
-                    "visit http://localhost:3000/bets to view more bets!"
+                    "visit https://getmeow.gg/bets to view more bets!"
                   )
-                  .setURL("http://localhost:3000/bets ");
+                  .setURL("https://getmeow.gg/bets ");
                 return message.channel.send(newEmbed);
               }
-              console.log(outcomeData);
               if (outcomeData) {
                 if (err) {
                   return console.log(err);
@@ -113,9 +112,9 @@ module.exports = {
                           { name: "Code", value: code }
                         )                        
                         .setFooter(
-                          "visit http://localhost:3000/bet to view more bets!"
+                          "visit https://getmeow.gg/bets to view more bets!"
                         )
-                        .setURL("http://localhost:3000/bet");
+                        .setURL("https://getmeow.gg/bets");
                       message.channel.send(newEmbed);
                     }
                   );
@@ -157,13 +156,10 @@ module.exports = {
                           { name: "Bet Amount", value: amt },
                           { name: "Code", value: code }
                         )
-                        .setImage(
-                          "https://i.ibb.co/rb7tvdr/meowbasketball-copy.png"
-                        )
                         .setFooter(
-                          "visit http://localhost:3000/bet to view more bets!"
+                          "visit https://getmeow.gg/bets to view more bets!"
                         )
-                        .setURL("http://localhost:3000/bet");
+                        .setURL("https://getmeow.gg/bets");
                       message.channel.send(newEmbed);
                     }
                   );
@@ -189,7 +185,6 @@ module.exports = {
                         return console.log(err);
                       }
                       res.save();
-                      const file = new Discord.MessageAttachment('./images/meowsoccer copy.png');
                       const newEmbed = new Discord.MessageEmbed()
                         .setColor("#304281")
                         .setTitle(`Bet Ticket`)
@@ -206,14 +201,10 @@ module.exports = {
                           { name: "Bet Amount", value: amt },
                           { name: "Code", value: code }
                         )
-                        .setImage(
-                          "https://i.ibb.co/rb7tvdr/meowbasketball-copy.png"
-                        )
-                      
                         .setFooter(
-                          "visit http://localhost:3000/bet to view more bets!"
+                          "visit https://getmeow.gg/bets to view more bets!"
                         )
-                        .setURL("http://localhost:3000/bet");
+                        .setURL("https://getmeow.gg/bets");
                       message.channel.send(newEmbed);
                     }
                   );

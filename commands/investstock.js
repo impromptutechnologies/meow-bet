@@ -145,8 +145,6 @@ module.exports = {
     var date2 = moment.utc().format(`${month}-${day} 21:35`);
     var stillUtc = moment.utc(date1).toDate();
     var stillUtc2 = moment.utc(date2).toDate();
-    var local = moment(stillUtc).local().format("hh:mm A");
-    var local2 = moment(stillUtc2).local().format("hh:mm A");
     var today = new Date();
     if (date > date1 && date < date2 && today.getDay() !== 6 && today.getDay() !== 0) {
       const newEmbed = new Discord.MessageEmbed()
@@ -160,9 +158,9 @@ module.exports = {
           `The US stock market opens from 9:30am to 4pm ET so place your commands before the market opens.`
         )
         .setFooter(
-          "visit http://localhost:3000/betsst to view more investments!"
+          "visit https://getmeow.gg/betsst to view more investments!"
         )
-        .setURL("http://localhost:3000/betsst");
+        .setURL("https://getmeow.gg/betsst");
       return message.channel.send(newEmbed);
     }
     if (today.getDay() == 6 || today.getDay() == 0) {
@@ -177,9 +175,9 @@ module.exports = {
           `Please place your investment commands on weekdays.`
         )
         .setFooter(
-          "visit http://localhost:3000/betsst to view more investments!"
+          "visit https://getmeow.gg/betsst to view more investments!"
         )
-        .setURL("http://localhost:3000/betsst");
+        .setURL("https://getmeow.gg/betsst");
       return message.channel.send(newEmbed);
     }
     if (!code) {
@@ -246,17 +244,17 @@ module.exports = {
                           { name: "Stock", value: code }
                         )
                         .setFooter(
-                          "visit http://localhost:3000/betsst to view more stocks!"
+                          "visit https://getmeow.gg/betsst to view more stocks!"
                         )
-                        .setURL("http://localhost:3000/betsst");
+                        .setURL("https://getmeow.gg/betsst");
                       message.channel.send(newEmbed);
                     }
                   );
               }
             }
-          );
+          ).lean();
         }
-      );
+      ).lean();
     } catch (err) {
       console.log(err, "hey");
     }

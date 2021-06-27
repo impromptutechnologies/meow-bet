@@ -8,15 +8,14 @@ module.exports = {
     try {
       Invest.find({ creatorID: message.author.id }).exec(function (err, investments) {
         if (!investments.length) {
-          console.log("nonexist");
           const newEmbed = new Discord.MessageEmbed()
             .setColor("#304281")
             .setTitle("Error")
             .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
             .setDescription("No Investments :(")
             .addFields({ name: "For Invest commands", value: "visit link" })
-            .setFooter("visit http://localhost:3000/betsst to view investments!")
-            .setURL("http://localhost:3000/betsst");
+            .setFooter("visit https://getmeow.gg/betsst to view investments!")
+            .setURL("https://getmeow.gg/betsst");
           return message.channel.send(newEmbed);
         }
         let yourinvestments = "";
@@ -37,8 +36,8 @@ module.exports = {
             { name: "Code", value: yourinvestments, inline: true },
             { name: "Tokens", value: tokens, inline: true },
           )
-          .setFooter("visit http://localhost:3000/betsst to view more investmentss!")
-          .setURL("http://localhost:3000/betsst");
+          .setFooter("visit https://getmeow.gg/betsst to view more investmentss!")
+          .setURL("https://getmeow.gg/betsst");
         message.channel.send(newEmbed);
       });
     } catch (e) {

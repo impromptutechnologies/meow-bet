@@ -1,8 +1,6 @@
 const Discord = require("discord.js");
 
 module.exports = async (client, discord, guild) => {
-  console.log("Guild");
-  console.log(guild.name);
   let channeltoSend;
   guild.channels.cache.forEach((channel) => {
     if (

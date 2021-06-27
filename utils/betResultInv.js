@@ -46,8 +46,8 @@ const betResultInv = (highest, category, Discord, client) => {
                   value: (yourWinnings - investAmount).toFixed(2),
                 }
               )
-              .setFooter("visit http://localhost:3000/betsst to view bets!")
-              .setURL("http://localhost:3000/betsst");
+              .setFooter("visit https://getmeow.gg/betsst to view bets!")
+              .setURL("https://getmeow.gg/betsst");
             client.channels.cache.get(channelID).send(newEmbed);
             Profile.findOneAndUpdate(
               { userID: client.guilds.cache.get(guildID).ownerID },

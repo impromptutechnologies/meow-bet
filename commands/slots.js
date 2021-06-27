@@ -10,10 +10,14 @@ module.exports = {
         `That's not a number`
       );
     }
+    if(profileData.payments[0] == null){
+      return message.channel.send(
+        `Please purchase a lootbox to access :)`
+      );
+    }
     min = Math.ceil(0);
     max = Math.floor(11);
     const chances = Math.floor(Math.random() * (max - min) + min);
-    console.log(chances);
     const winnin = Math.floor(Math.random() * (200 - 115) + 115) / 115;
     const user = Profile.findOne({ userID: message.author.id }, (err, prof) => {
       if (err) {
@@ -35,9 +39,9 @@ module.exports = {
                 .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
                 .setDescription("Better luck next time :(")
                 .setFooter(
-                  "visit http://localhost:3000/casino to view more casino games!"
+                  "visit https://getmeow.gg/casino to view more casino games!"
                 )
-                .setURL("http://localhost:3000/casino");
+                .setURL("https://getmeow.gg/casino");
               return message.channel.send(newEmbed);
             }
           );
@@ -59,9 +63,9 @@ module.exports = {
                   { name: "Profit", value: (amt * winnin - amt).toFixed(2) }
                 )
                 .setFooter(
-                  "visit http://localhost:3000/casino to view more casino games!"
+                  "visit https://getmeow.gg/casino to view more casino games!"
                 )
-                .setURL("http://localhost:3000/casino");
+                .setURL("https://getmeow.gg/casino");
               return message.channel.send(newEmbed);
             }
           );
@@ -75,6 +79,6 @@ module.exports = {
       if (amt > prof.coins) {
         message.channel.send("you broke.");
       }
-    });
+    }).select({coins:1}).lean();
   },
 };

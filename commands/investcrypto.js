@@ -149,9 +149,9 @@ module.exports = {
           Meow crypto bets follows the same hours of the stock market when judging returns.`
         )
         .setFooter(
-          "visit http://localhost:3000/betscr to view more crypto!"
+          "visit https://getmeow.gg/betscr to view more crypto!"
         )
-        .setURL("http://localhost:3000/betscr");
+        .setURL("https://getmeow.gg/betscr");
       return message.channel.send(newEmbed);
     }
     if (!code) {
@@ -218,17 +218,17 @@ module.exports = {
                           { name: "Crypto", value: code }
                         )
                         .setFooter(
-                          "visit http://localhost:3000/betscr to view more cryptos!"
+                          "visit https://getmeow.gg/betscr to view more cryptos!"
                         )
-                        .setURL("http://localhost:3000/betscr");
+                        .setURL("https://getmeow.gg/betscr");
                       message.channel.send(newEmbed);
                     }
                   );
               }
             }
-          );
+          ).lean();
         }
-      );
+      ).lean();
     } catch (err) {
       console.log(err, "hey");
     }

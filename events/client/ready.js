@@ -25,14 +25,17 @@ module.exports = async (Discord, client) => {
         type: "PLAYING" //PLAYING: WATCHING: LISTENING: STREAMING:
     } 
   });
-  console.log("bot online");
+
+
+
+
   const updateMatches = async () => {
     var date = moment.utc().format("MM-DD HH:mm");
     const outcomes = await Outcome.find({ timeEnd: { $lt: date } });
-    console.log(outcomes);
     if (outcomes.length == 0) {
       console.log("no finished matches across the board");
     } else {
+      console.log(outcomes);
       outcomes.forEach((element) => {
         if (element.category == "esportscod") {
           betResultEsports(element.outcomeID, Discord, client, {
@@ -96,75 +99,12 @@ module.exports = async (Discord, client) => {
 
 
 
-
-  const newMatches = async () => {
-    //newMatchesEsports();
-    newMatchesBasketball("1");
-    newMatchesBasketball("2");
-    newMatchesBasketball("3");
-    //newMatchesSoccer("euros");
-    //setTimeout(newMatchesBasketball.bind(null, '2'), 60000)
-    //setTimeout(newMatchesBasketball.bind(null, '3'), 120000)
-    //setTimeout(newMatchesSoccer.bind(null, 'prem'), 60000)
-    //setTimeout(newMatchesSoccer.bind(null, 'champ'), 120000)
-    //setTimeout(newMatchesSoccer.bind(null, 'seriea'), 180000)
-    //setTimeout(newMatchesSoccer.bind(null, 'euros'), 180000)
-  }
- schedule.scheduleJob('0 */6 * * *', ()=>{
-    newMatches();
-  })
-
-
-
-
-
-
-const checkOdds = async () => {
-  Outcome.find(
-    {
-      category: "soccer",
-      option1: { $exists: true, $eq: [] },
-    },
-    (err, res) => {
-      console.log(res);
-      res.forEach((element) => {
-        setOdds(element.league, element.outcomeID);
-      });
-    }
-  );
-Outcome.find(
-    {
-      category: "basketball",
-      option1: { $exists: true, $eq: [] },
-    },
-    (err, res) => {
-      console.log(res);
-      res.forEach((element) => {
-        setOddsB(element.outcomeID);
-      });
-    }
-  );
-}
-schedule.scheduleJob('55 */1 * * *', ()=>{
-  checkOdds();
-})
-
-  
-
-
-
-
-
-
-
   const checkReturn = async () => {
     var day = moment.utc().format("DD");
     var month = moment.utc().format("MM");
     var date = moment.utc().format("MM-DD HH:mm");
     const investmentstock = await Invest.find({ category: "stocks" });
     const investmentcrypto = await Invest.find({ category: "crypto" });
-    console.log("stock invests total:", investmentstock.length);
-    console.log("crypto invests total:", investmentcrypto.length);
 
     if (
       date == moment.utc().format(`${month}-${day} 13:28`) &&
@@ -203,10 +143,108 @@ schedule.scheduleJob('55 */1 * * *', ()=>{
     ) {
       const higheststock = await Stock.findOne({}).sort({return:-1}).limit(1);;
       const highestcrypto = await Crypto.findOne({}).sort({return:-1}).limit(1);;
-      console.log(highestcrypto.symbol, higheststock.ticker);
       betResultInv(higheststock.ticker, "stocks", Discord, client);
       betResultInv(highestcrypto.symbol, "crypto", Discord, client);
     };
   };
   setInterval(checkReturn, 60000);
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  const newMatches = async () => {
+    newMatchesEsports();
+    newMatchesBasketball("1");
+    newMatchesBasketball("2");
+    newMatchesBasketball("3");
+    newMatchesSoccer("euros");
+    //setTimeout(newMatchesBasketball.bind(null, '2'), 60000)
+    //setTimeout(newMatchesBasketball.bind(null, '3'), 120000)
+    //setTimeout(newMatchesSoccer.bind(null, 'prem'), 60000)
+    //setTimeout(newMatchesSoccer.bind(null, 'champ'), 120000)
+    //setTimeout(newMatchesSoccer.bind(null, 'seriea'), 180000)
+    //setTimeout(newMatchesSoccer.bind(null, 'euros'), 180000)
+  }
+ schedule.scheduleJob('0 */6 * * *', ()=>{
+    newMatches();
+  })
+
+
+
+
+
+
+/*const checkOdds = async () => {
+  Outcome.find(
+    {
+      category: "soccer",
+      option1: { $exists: true, $eq: [] },
+    },
+    (err, res) => {
+      console.log(res);
+      res.forEach((element) => {
+        setOdds(element.league, element.outcomeID);
+      });
+    }
+  );
+Outcome.find(
+    {
+      category: "basketball",
+      option1: { $exists: true, $eq: [] },
+    },
+    (err, res) => {
+      console.log(res);
+      res.forEach((element) => {
+        setOddsB(element.outcomeID);
+      });
+    }
+  );
+}*/
+//schedule.scheduleJob('55 */1 * * *', ()=>{
+  //checkOdds();
+//})
+
+  
+
+
+
+

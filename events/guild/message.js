@@ -7,12 +7,10 @@ const cooldown = new Map();
 module.exports = async (Discord, client, message) => {
   const prefix = process.env.PREFIX;
   if (!message.content.startsWith(prefix) || message.author.bot) return;
-
   let profileData;
   try {
     profileData = await Profile.findOne({ userID: message.author.id }).lean();
     if (!profileData) {
-      console.log(message.guild.id)
       let profile = await Profile.create({
         userID: message.author.id,
         username: message.author.tag,

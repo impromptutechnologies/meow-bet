@@ -7,7 +7,7 @@ const newMatchesSoccer = (choice) => {
 
   var date = moment.utc().format("YYYY-MM-DD");
   var date2 = moment.utc(date).add(3, "weeks").format("YYYY-MM-DD")
-  var date1 = moment.utc(date).add(3, "days").add().format("YYYY-MM-DD")
+  var date1 = moment.utc(date).add(7, "days").add().format("YYYY-MM-DD")
     //Maybe get all matches for the next two weeks?? and fill our the odds yourself or have a fucntion chekc for the matches of the day and then fill out the odds.
     //Might be a good idea. yuppio
 
@@ -115,9 +115,7 @@ const newMatchesSoccer = (choice) => {
           if (error) throw new Error(error);
           
           datai.response.forEach((element) => {
-            console.log(element);
               Outcome.findOne({outcomeID: element.fixture.id}, (err, res) => {
-                console.log(res);
                 if(element.fixture.status.long == 'Not Started' && res == null){
                 Outcome.create(
                   {
@@ -159,10 +157,8 @@ const newMatchesSoccer = (choice) => {
         request(optionsc, (error, response, body) => {
           datai = JSON.parse(body);
           if (error) throw new Error(error);
-          console.log(datai)
           datai.response.forEach((element) => {
               Outcome.findOne({outcomeID: element.fixture.id}, (err, res) => {
-                console.log(res);
                 if(element.fixture.status.long == 'Not Started' && res == null
               ){
                 Outcome.create(
@@ -205,10 +201,8 @@ const newMatchesSoccer = (choice) => {
         request(optionse, (error, response, body) => {
           datai = JSON.parse(body);
           if (error) throw new Error(error);
-          console.log(datai)
           datai.response.forEach((element) => {
               Outcome.findOne({outcomeID: element.fixture.id}, (err, res) => {
-                console.log(res);
                 if(element.fixture.status.long == 'Not Started' && res == null
               ){
                 Outcome.create(
@@ -251,10 +245,8 @@ const newMatchesSoccer = (choice) => {
         request(optionsi, (error, response, body) => {
           datai = JSON.parse(body);
           if (error) throw new Error(error);
-          console.log(datai)
           datai.response.forEach((element) => {
               Outcome.findOne({outcomeID: element.fixture.id}, (err, res) => {
-                console.log(res);
                 if(element.fixture.status.long == 'Not Started' && res == null
                 
                 &&
@@ -303,10 +295,8 @@ const newMatchesSoccer = (choice) => {
         request(optionss, (error, response, body) => {
           datai = JSON.parse(body);
           if (error) throw new Error(error);
-          console.log(datai)
           datai.response.forEach((element) => {
               Outcome.findOne({outcomeID: element.fixture.id}, (err, res) => {
-                console.log(res);
                 if(element.fixture.status.long == 'Not Started' && res == null
                 &&
                 (element.teams.home.name == 'Atletico Madrid' || element.teams.home.name == 'Real Madrid' || element.teams.home.name == 'Barcelona'

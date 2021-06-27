@@ -23,9 +23,13 @@ module.exports = {
         `Ur too broke....`
       );
     }
+    if(profileData.payments[0] == null){
+      return message.channel.send(
+        `Please purchase a lootbox to access :)`
+      );
+    }
     
     const chances = Math.floor(Math.random() * (max - min) + min);
-    console.log(chances);
     min1 = Math.ceil(50);
     max1 = Math.floor(70);
     const hint = Math.floor(Math.random() * (max1 - min1) + min1);
@@ -37,7 +41,7 @@ module.exports = {
         `A random number between 1-100 has been generated. Your hint is ${hint}, Respond with "High", "Low", or "Bingo".\n
     Choose whether you think the hidden number is higher, lower, or the same number as the hint.`
       )
-      .setURL("http://localhost:3000/casino");
+      .setURL("https://getmeow.gg/casino");
     const filter = (m) => m.author.id === message.author.id;
     message.channel.send(newEmbed);
     message.channel
@@ -78,9 +82,9 @@ module.exports = {
               { name: "Profit", value: (amt * 1.5 - amt).toFixed(2) }
             )
             .setFooter(
-              "visit http://localhost:3000/casino to view more casino games!"
+              "visit https://getmeow.gg/casino to view more casino games!"
             )
-            .setURL("http://localhost:3000/casino");
+            .setURL("https://getmeow.gg/casino");
           return message.channel.send(newEmbed);
         }
         if (messageReceived == "low" && chances < hint) {
@@ -106,9 +110,9 @@ module.exports = {
               { name: "Profit", value: (amt * 1.5 - amt).toFixed(2) }
             )
             .setFooter(
-              "visit http://localhost:3000/casino to view more casino games!"
+              "visit https://getmeow.gg/casino to view more casino games!"
             )
-            .setURL("http://localhost:3000/casino");
+            .setURL("https://getmeow.gg/casino");
           return message.channel.send(newEmbed);
         }
         if (messageReceived == "bingo" && chances == hint) {
@@ -134,9 +138,9 @@ module.exports = {
               { name: "Profit", value: (amt * 7.5 - amt).toFixed(2) }
             )
             .setFooter(
-              "visit http://localhost:3000/casino to view more casino games!"
+              "visit https://getmeow.gg/casino to view more casino games!"
             )
-            .setURL("http://localhost:3000/casino");
+            .setURL("https://getmeow.gg/casino");
           return message.channel.send(newEmbed);
         } else {
           Profile.findOneAndUpdate(

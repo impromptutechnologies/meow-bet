@@ -63,7 +63,6 @@ const betResult = (id, Discord, client) => {
               .replace(/\s+/g, "")
               .toUpperCase()}3`;
             if (data.response[0].teams.home.winner == true) {
-              console.log(code1);
               Bet.find({ Code: code1 }, (err, successes) => {
                 successes.forEach((success) => {
                   const creatorID = success.creatorID;
@@ -80,7 +79,6 @@ const betResult = (id, Discord, client) => {
                       }
                       const embedUser = client.users.fetch(user.userID);
                       embedUser.then(function (result1) {
-                        console.log(team1, team2);
                         const newEmbed = new Discord.MessageEmbed()
                           .setColor("#304281")
                           .setTitle(`Good Bet on ${team1}!`)
@@ -109,9 +107,9 @@ const betResult = (id, Discord, client) => {
                             }
                           )
                           .setFooter(
-                            "visit http://localhost:3000/bets to view bets!"
+                            "visit https://getmeow.gg/bets to view bets!"
                           )
-                          .setURL("http://localhost:3000/bets");
+                          .setURL("https://getmeow.gg/bets");
                         client.channels.cache.get(channelID).send(newEmbed);
                         Bet.deleteMany(
                           {
@@ -151,7 +149,6 @@ const betResult = (id, Discord, client) => {
               );
             }
             if (data.response[0].teams.away.winner == true) {
-              console.log(code2);
               Bet.find({ Code: code2 }, (err, successes) => {
                 successes.forEach((success) => {
                   const guildID = success.serverID;
@@ -168,7 +165,6 @@ const betResult = (id, Discord, client) => {
                           }
                           const embedUser = client.users.fetch(user.userID);
                           embedUser.then(function (result1) {
-                            console.log(team1, team2);
                             const newEmbed = new Discord.MessageEmbed()
                               .setColor("#304281")
                               .setTitle(`Good Bet on ${team2}!`)
@@ -197,9 +193,9 @@ const betResult = (id, Discord, client) => {
                                 }
                               )
                               .setFooter(
-                                "visit http://localhost:3000/bets to view bets!"
+                                "visit https://getmeow.gg/bets to view bets!"
                               )
-                              .setURL("http://localhost:3000/bets");
+                              .setURL("https://getmeow.gg/bets");
                             client.channels.cache.get(channelID).send(newEmbed);
                             Bet.deleteMany(
                               {
@@ -282,9 +278,9 @@ const betResult = (id, Discord, client) => {
                                 }
                               )
                               .setFooter(
-                                "visit http://localhost:3000/bets to view bets!"
+                                "visit https://getmeow.gg/bets to view bets!"
                               )
-                              .setURL("http://localhost:3000/bets");
+                              .setURL("https://getmeow.gg/bets");
                             client.channels.cache.get(channelID).send(newEmbed);
                             Bet.deleteMany(
                               {
@@ -329,7 +325,7 @@ const betResult = (id, Discord, client) => {
         });
       }
     }
-  );
+  ).lean();
 };
 
 module.exports = betResult;

@@ -97,9 +97,9 @@ const betResultEsports = (id, Discord, client, option) => {
                                       }
                                     )
                                     .setFooter(
-                                      "visit http://localhost:3000/bets to view bets!"
+                                      "visit https://getmeow.gg/bets to view bets!"
                                     )
-                                    .setURL("http://localhost:3000/bets");
+                                    .setURL("https://getmeow.gg/bets");
                                   client.channels.cache.get(channelID).send(newEmbed);
                                   Profile.findOneAndUpdate(
                                     { userID: client.guilds.cache.get(guildID).ownerID },
@@ -143,7 +143,6 @@ const betResultEsports = (id, Discord, client, option) => {
                 else {
                   Bet.find({ Code: code2 }, (err, successes) => {
                     if(successes.length == 0){
-                      console.log('no successes');
                       Bet.deleteMany(
                         {
                           $or: [{ Code: code1 }],
@@ -198,9 +197,9 @@ const betResultEsports = (id, Discord, client, option) => {
                                       }
                                     )
                                     .setFooter(
-                                      "visit http://localhost:3000/bets to view bets!"
+                                      "visit https://getmeow.gg/bets to view bets!"
                                     )
-                                    .setURL("http://localhost:3000/bets");
+                                    .setURL("https://getmeow.gg/bets");
                                   client.channels.cache.get(channelID).send(newEmbed);
                                   Profile.findOneAndUpdate(
                                     { userID: client.guilds.cache.get(guildID).ownerID },

@@ -8,15 +8,14 @@ module.exports = {
     try {
       Bet.find({ creatorID: message.author.id }).exec(function (err, bets) {
         if (!bets.length) {
-          console.log("nonexist");
           const newEmbed = new Discord.MessageEmbed()
             .setColor("#304281")
             .setTitle("Error")
             .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
             .setDescription("No Bets Placed :(")
             .addFields({ name: "For Bet commands", value: "visit link" })
-            .setFooter("visit http://localhost:3000/bet to view bets!")
-            .setURL("http://localhost:3000/bet");
+            .setFooter("visit https://getmeow.gg/bets to view bets!")
+            .setURL("https://getmeow.gg/bets");
           return message.channel.send(newEmbed);
         }
         let yourbets = "";
@@ -41,8 +40,8 @@ module.exports = {
             { name: "Tokens", value: tokens, inline: true },
             { name: "Odds", value: odds, inline: true }
           )
-          .setFooter("visit http://localhost:3000/bet to view more bets!")
-          .setURL("http://localhost:3000/bet");
+          .setFooter("visit https://getmeow.gg/bets to view more bets!")
+          .setURL("https://getmeow.gg/bets");
         message.channel.send(newEmbed);
       });
     } catch (e) {

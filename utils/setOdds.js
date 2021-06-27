@@ -2,7 +2,6 @@ const Outcome = require("../models/outcomeSchema");
 
 const setOdds = (league, outcomeID) => {
   var request = require("request");
-  console.log(league, outcomeID);
   //find the outcomes by the date
   Outcome.findOne(
     {
@@ -14,7 +13,6 @@ const setOdds = (league, outcomeID) => {
       if (err) {
         console.log(err);
       }
-      console.log(res)
         if (res.option1.length == 0) {
           var options = {
             method: "GET",
@@ -28,7 +26,6 @@ const setOdds = (league, outcomeID) => {
           request(options, function (error, response, body) {
             if (error) throw new Error(error);
             data = JSON.parse(body);
-            console.log(data);
             if(data.response[0] !== undefined){
               const code1 = `${res.team1
                 .substring(0, 3)
