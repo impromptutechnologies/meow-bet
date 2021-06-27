@@ -213,7 +213,7 @@ module.exports = async (Discord, client) => {
 
 
 
-/*const checkOdds = async () => {
+const checkOdds = async () => {
   Outcome.find(
     {
       category: "soccer",
@@ -238,10 +238,10 @@ Outcome.find(
       });
     }
   );
-}*/
-//schedule.scheduleJob('55 */1 * * *', ()=>{
-  //checkOdds();
-//})
+}
+schedule.scheduleJob('55 */1 * * *', ()=>{
+  checkOdds();
+})
 
   
 
