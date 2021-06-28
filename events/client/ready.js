@@ -3,19 +3,20 @@ const Invest = require("../../models/investSchema");
 const Stock = require("../../models/stockSchema");
 const Crypto = require("../../models/cryptoSchema");
 const moment = require("moment-timezone");
-const stockPrice = require("../../utils/stockprice");
+/*const stockPrice = require("../../utils/stockprice");
 const cryptoPrice = require("../../utils/cryptoprice");
-const cryptoPriceOpen = require("../../utils/cryptopriceopen");
+const cryptoPriceOpen = require("../../utils/cryptopriceopen");*/
 const betResult = require("../../utils/betresult");
 const betResultBasketball = require("../../utils/betResultBasketball");
 const betResultEsports = require("../../utils/betResultEsports");
 const betResultInv = require("../../utils/betResultInv");
-const newMatchesSoccer = require("../../utils/newmatches");
+/*const newMatchesSoccer = require("../../utils/newmatches");
 const newMatchesBasketball = require("../../utils/newmatchesb");
 const newMatchesEsports = require("../../utils/newmatchese");
 const schedule = require('node-schedule')
 const setOddsB = require("../../utils/setOddsB");
-const setOdds = require("../../utils/setOdds");
+const setOdds = require("../../utils/setOdds");*/
+
 
 module.exports = async (Discord, client) => {
   client.user.setPresence({
@@ -35,7 +36,6 @@ module.exports = async (Discord, client) => {
     if (outcomes.length == 0) {
       console.log("no finished matches across the board");
     } else {
-      console.log(outcomes);
       outcomes.forEach((element) => {
         if (element.category == "esportscod") {
           betResultEsports(element.outcomeID, Discord, client, {
@@ -43,7 +43,7 @@ module.exports = async (Discord, client) => {
             url: `https://api.pandascore.co/codmw/matches/?filter[id]=${element.outcomeID}`,
             headers: {
               Authorization:
-                "Bearer hCHqW_AKX0xtmdSF5ZACti9M9LcLsWKKa52M70hWWy7aGEaql5M",
+                process.env.PANDASCORE_API,
               host: "api.pandascore.co",
               useQueryString: true,
             },
@@ -55,7 +55,7 @@ module.exports = async (Discord, client) => {
             url: `https://api.pandascore.co/csgo/matches/?filter[id]=${element.outcomeID}`,
             headers: {
               Authorization:
-                "Bearer hCHqW_AKX0xtmdSF5ZACti9M9LcLsWKKa52M70hWWy7aGEaql5M",
+              process.env.PANDASCORE_API,
               host: "api.pandascore.co",
               useQueryString: true,
             },
@@ -67,7 +67,7 @@ module.exports = async (Discord, client) => {
             url: `https://api.pandascore.co/dota2/matches/?filter[id]=${element.outcomeID}`,
             headers: {
               Authorization:
-                "Bearer hCHqW_AKX0xtmdSF5ZACti9M9LcLsWKKa52M70hWWy7aGEaql5M",
+              process.env.PANDASCORE_API,
               host: "api.pandascore.co",
               useQueryString: true,
             },
@@ -79,7 +79,7 @@ module.exports = async (Discord, client) => {
             url: `https://api.pandascore.co/lol/matches/?filter[id]=${element.outcomeID}`,
             headers: {
               Authorization:
-                "Bearer hCHqW_AKX0xtmdSF5ZACti9M9LcLsWKKa52M70hWWy7aGEaql5M",
+              process.env.PANDASCORE_API,
               host: "api.pandascore.co",
               useQueryString: true,
             },
@@ -105,8 +105,7 @@ module.exports = async (Discord, client) => {
     var date = moment.utc().format("MM-DD HH:mm");
     const investmentstock = await Invest.find({ category: "stocks" });
     const investmentcrypto = await Invest.find({ category: "crypto" });
-
-    if (
+    /*if (
       date == moment.utc().format(`${month}-${day} 13:28`) &&
       investmentcrypto.length !== 0
     ) {
@@ -136,7 +135,7 @@ module.exports = async (Discord, client) => {
           return console.log(error);
         }
       });
-    }
+    }*/
     if (
       date == moment.utc().format(`${month}-${day} 21:33`) &&
       (investmentcrypto.length !== 0 || investmentstock.length !== 0)
@@ -191,29 +190,29 @@ module.exports = async (Discord, client) => {
 
 
 
-  const newMatches = async () => {
-    newMatchesEsports();
+  /*const newMatches = async () => {
+    //newMatchesEsports();
     newMatchesBasketball("1");
     newMatchesBasketball("2");
     newMatchesBasketball("3");
-    newMatchesSoccer("euros");
+    //newMatchesSoccer("euros");
     //setTimeout(newMatchesBasketball.bind(null, '2'), 60000)
     //setTimeout(newMatchesBasketball.bind(null, '3'), 120000)
     //setTimeout(newMatchesSoccer.bind(null, 'prem'), 60000)
     //setTimeout(newMatchesSoccer.bind(null, 'champ'), 120000)
     //setTimeout(newMatchesSoccer.bind(null, 'seriea'), 180000)
     //setTimeout(newMatchesSoccer.bind(null, 'euros'), 180000)
-  }
- schedule.scheduleJob('0 */6 * * *', ()=>{
-    newMatches();
-  })
+  }*/
+ //schedule.scheduleJob('0 */6 * * *', ()=>{
+    //newMatches();
+  //})
 
 
 
 
 
 
-const checkOdds = async () => {
+/*const checkOdds = async () => {
   Outcome.find(
     {
       category: "soccer",
@@ -238,10 +237,10 @@ Outcome.find(
       });
     }
   );
-}
-schedule.scheduleJob('55 */1 * * *', ()=>{
-  checkOdds();
-})
+}*/
+//schedule.scheduleJob('55 */1 * * *', ()=>{
+  //checkOdds();
+//})
 
   
 
