@@ -21,7 +21,7 @@ module.exports = {
             return console.log(err);
           }
           if (bet[0] == null){
-            return message.channel.send('No Unclaimed Winnings.')
+            return message.channel.send('No Unclaimed Bet Winnings.')
           }
           bet.forEach((bet) => {
             const creatorID = bet.creatorID;
