@@ -9,128 +9,6 @@ module.exports = {
   cooldown: 1,
   description: "Invest stock!",
   execute(client, message, args, Discord, profileData) {
-    /*const checkForPosts = async () => {
-      var day = moment.utc().format("DD");
-      var month = moment.utc().format("MM");
-      var date = moment.utc().format("MM-DD HH:mm");
-      var date1 = moment.utc().format(`${month}-${day} 13:30`);
-      var date2 = moment.utc().format(`${month}-${day} 20:00`);
-      const investments = await Invest.find({ creatorID: message.author.id, category:"stocks"});
-      console.log(`myinvests - ${message.author.tag} -`, investments.length)
-      
-      if (
-        date == moment.utc().format(`${month}-${day} 20:32`) &&
-        investments.length !== 0
-      ) {
-        Stock.find({}, (error, highest) => {
-          if (error) {
-            return console.log(error);
-          }
-          console.log(highest)
-
-          Invest.find({ Code: highest[0].ticker }, (err, successes) => {
-            for (const success of successes) {
-              const creatorID = success.creatorID;
-              console.log(successes)
-
-              Profile.findOne({ userID: creatorID }, (err, profile) => {
-                const coinz = profile.coins;
-                const investAmount = success.investAmount;
-                const channelID = success.channelID;
-                if (profile) {
-                  Stock.findOne({ ticker: success.Code }, (err, inv) => {
-                    const yourWinnings = 3 * investAmount
-                    Profile.findOneAndUpdate(
-                      { userID: creatorID },
-                      { coins: yourWinnings + coinz },
-                      (err, user) => {
-                        if (err) {
-                          return console.log(err);
-                        }
-                        const embedUser = client.users.fetch(user.userID);
-                        embedUser.then(function (result1) {
-                          const newEmbed = new Discord.MessageEmbed()
-                            .setColor("#304281")
-                            .setTitle(`Good Investment!`)
-                            .setAuthor(
-                              result1.username,
-                              result1.displayAvatarURL({
-                                format: "png",
-                                dynamic: true,
-                              })
-                            )
-                            .addFields(
-                              {
-                                name: "Invest Amount",
-                                value: investAmount,
-                              },
-                              {
-                                name: "Winnings",
-                                value: yourWinnings.toFixed(2),
-                              },
-                              {
-                                name: "Profit",
-                                value: (yourWinnings - investAmount).toFixed(2),
-                              }
-                            )
-                            .setFooter(
-                              "visit http://localhost:3000/betsst to view bets!"
-                            )
-                            .setURL("http://localhost:3000/betsst");
-                          client.channels.cache.get(channelID).send(newEmbed);
-                          Invest.deleteMany({creatorID: creatorID, category:"stocks"}, (error, deleted) => {
-                            if(error){
-                              console.log(error)
-                            }
-                            console.log('deleted with winnings')
-                          });
-                        });
-                        
-                        
-                      }
-                    );
-                  });
-                } 
-                Invest.deleteMany({creatorID: message.author.id, category:"stocks"}, (error, deleted) => {
-                  if(error){
-                    console.log(error)
-                  }
-                  console.log('deleted')
-                });
-                
-              });
-              
-
-            }
-          });
-          
-          Invest.deleteMany({creatorID: message.author.id, category:"stocks"}, (error, deleted) => {
-            if(error){
-              console.log(error)
-            }
-            console.log('deleted')
-          });
-          
-          
-        }).sort({return:-1}).limit(1);
-
-
-        
-      }
-      setTimeout(checkForPosts, 1000 * 10);
-    };*/
-    
-
-
-
-
-
-
-
-
-
-
-    
     const code = args[1];
     const amt = parseInt(args[0]);
     if(isNaN(amt)){
@@ -218,6 +96,7 @@ module.exports = {
                       channelID: message.channel.id,
                       category: "stocks",
                       creatorName: message.author.username,
+                      status: "unchanged",
                       investAmount: amt,
                       Code: code,
                     },
@@ -260,35 +139,3 @@ module.exports = {
     }
   },
 };
-
-
-
-/*if (
-        date == moment.utc().format(`${month}-${day} 00:11`) &&
-        investments.length !== 0
-      ) {
-        Stock.find({}, (error, highest) => {
-          if(error){
-            console.log(error)
-          }
-          if(highest[0].return==0){
-            stockPrice((error, highest) => {
-              if (error) {
-                return console.log(error);
-              }
-            });
-          }
-        }).limit(1);
-      }
-      
-
-       For Bets:
-        Set a forloop for each outcome, and then just check if the end date matches the current date. 
-        For sports its predictable, but for esports maybe we need to say its done. Once again depends.
-        
-        This should ideally be done inside the actual investstock and investcrypto files
-
-
-        
-      
-      */

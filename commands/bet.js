@@ -46,8 +46,6 @@ module.exports = {
                 return message.channel.send("Perhaps the betCode is wrong?");
               }
               const amt = parseInt(args[0]);
-              var day = moment.utc().format("DD");
-              var month = moment.utc().format("MM");
               var date = moment.utc().format("MM-DD HH:mm");
               var date1 = outcomeData.timeStart;
               if (date > date1) {
@@ -84,6 +82,7 @@ module.exports = {
                       serverID: message.guild.id,
                       channelID: message.channel.id,
                       creatorName: message.author.username,
+                      status: 'unchanged',
                       outcomeID: outcomeData.outcomeID,
                       betAmount: amt,
                       Code: code,
@@ -129,6 +128,7 @@ module.exports = {
                       serverID: message.guild.id,
                       channelID: message.channel.id,
                       creatorName: message.author.username,
+                      status: 'unchanged',
                       outcomeID: outcomeData.outcomeID,
                       betAmount: amt,
                       Code: code,
@@ -174,6 +174,7 @@ module.exports = {
                       serverID: message.guild.id,
                       channelID: message.channel.id,
                       creatorName: message.author.username,
+                      status: 'unchanged',
                       outcomeID: outcomeData.outcomeID,
                       betAmount: amt,
                       Code: code,

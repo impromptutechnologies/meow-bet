@@ -9,117 +9,6 @@ module.exports = {
   cooldown: 1,
   description: "Invest in Crypto!",
   execute(client, message, args, Discord, profileData) {
-    /*const checkForPosts = async () => {
-      var day = moment.utc().format("DD");
-      var month = moment.utc().format("MM");
-      var date = moment.utc().format("MM-DD HH:mm");
-      var date1 = moment.utc().format(`${month}-${day} 13:30`);
-      var date2 = moment.utc().format(`${month}-${day} 20:00`);
-      const investments = await Invest.find({ creatorID: message.author.id, category:"crypto"});
-      console.log(`myinvestscrypto - ${message.author.tag} -`, investments.length)
-      
-      if (
-        date == moment.utc().format(`${month}-${day} 20:32`) &&
-        investments.length !== 0
-      ) {
-        Crypto.find({}, (error, highest) => {
-          if (error) {
-            return console.log(error);
-          }
-          console.log(highest)
-
-          Invest.find({ Code: highest[0].symbol }, (err, successes) => {
-            successes.forEach((success) => {
-              const creatorID = success.creatorID;
-              console.log(successes)
-
-              Profile.findOne({ userID: creatorID }, (err, profile) => {
-                const coinz = profile.coins;
-                const investAmount = success.investAmount;
-                const channelID = success.channelID;
-                console.log(profile)
-                if (profile) {
-                  Crypto.findOne({ symbol: success.Code }, (err, inv) => {
-                    const yourWinnings = 3 * investAmount
-                    Profile.findOneAndUpdate(
-                      { userID: creatorID },
-                      { coins: yourWinnings + coinz },
-                      (err, user) => {
-                        if (err) {
-                          return console.log(err);
-                        }
-                        const embedUser = client.users.fetch(user.userID);
-                        embedUser.then(function (result1) {
-                          const newEmbed = new Discord.MessageEmbed()
-                            .setColor("#304281")
-                            .setTitle(`Good Investment!`)
-                            .setAuthor(
-                              result1.username,
-                              result1.displayAvatarURL({
-                                format: "png",
-                                dynamic: true,
-                              })
-                            )
-                            .addFields(
-                              {
-                                name: "Invest Amount",
-                                value: investAmount,
-                              },
-                              {
-                                name: "Winnings",
-                                value: yourWinnings.toFixed(2),
-                              },
-                              {
-                                name: "Profit",
-                                value: (yourWinnings - investAmount).toFixed(2),
-                              }
-                            )
-                            .setFooter(
-                              "visit http://localhost:3000/betsst to view bets!"
-                            )
-                            .setURL("http://localhost:3000/betsst");
-                          client.channels.cache.get(channelID).send(newEmbed);
-                          Invest.deleteMany({creatorID: creatorID, category:"crypto"}, (error, deleted) => {
-                            if(error){
-                              console.log(error)
-                            }
-                            console.log('deleted with winning')
-                          });
-                        });
-                        
-                      }
-                    );
-                  });
-                }
-                Invest.deleteMany({creatorID: message.author.id, category:"crypto"}, (error, deleted) => {
-                  if(error){
-                    console.log(error)
-                  }
-                  console.log('deleted')
-                });
-              });
-              
-
-            });
-          });
-          Invest.deleteMany({creatorID: message.author.id, category:"crypto"}, (error, deleted) => {
-            if(error){
-              console.log(error)
-            }
-            console.log('deleted')
-          });
-          
-        }).sort({return:-1}).limit(1);
-
-
-        
-      }
-      setTimeout(checkForPosts, 1000 * 10);
-    };*/
-    
-
-
-
     const code = args[1];
     const amt = parseInt(args[0]);
     if(isNaN(amt)){
@@ -132,10 +21,6 @@ module.exports = {
     var date = moment.utc().format("MM-DD HH:mm");
     var date1 = moment.utc().format(`${month}-${day} 13:30`);
     var date2 = moment.utc().format(`${month}-${day} 21:35`);
-    var stillUtc = moment.utc(date1).toDate();
-    var stillUtc2 = moment.utc(date2).toDate();
-    var local = moment(stillUtc).local().format("hh:mm A");
-    var local2 = moment(stillUtc2).local().format("hh:mm A");
     if (date > date1 && date < date2) {
       const newEmbed = new Discord.MessageEmbed()
         .setColor("#304281")
@@ -193,6 +78,7 @@ module.exports = {
                       channelID: message.channel.id,
                       category: "crypto",
                       creatorName: message.author.username,
+                      status: "unchanged",
                       investAmount: amt,
                       Code: code,
                     },
