@@ -14,7 +14,6 @@ module.exports = {
             .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
             .setDescription("No Investments :(")
             .addFields({ name: "For Invest commands", value: "visit link" })
-            .setFooter("visit https://getmeow.gg/betsst to view investments!")
             .setURL("https://getmeow.gg/betsst");
           return message.channel.send(newEmbed);
         }

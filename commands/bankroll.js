@@ -7,7 +7,7 @@ module.exports = {
       .setTitle(`Your Bankroll`)
       .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
       .setDescription("Your current bankroll")
-      .setThumbnail('https://altvaton.sirv.com/Images/187021818_235092514616298_5622261190586926658_n.png')
+      .setThumbnail('https://altvaton.sirv.com/Images/coin.png')
       .addFields({ name: "Bankroll", value: profileData.coins.toFixed(2) })
     message.channel.send(newEmbed);
   },
