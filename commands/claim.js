@@ -16,7 +16,6 @@ module.exports = {
           ],
         },
         (err, bet) => {
-            console.log(bet);
           if (err) {
             return console.log(err);
           }
@@ -105,7 +104,6 @@ module.exports = {
           ],
         },
         (err, invest) => {
-            console.log(invest);
           if (err) {
             return console.log(err);
           }

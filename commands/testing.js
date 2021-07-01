@@ -1,11 +1,5 @@
-const stockPrice = require("../utils/stockprice");
-const newMatchesSoccer = require("../utils/newmatches");
-const newMatchesBasketball = require("../utils/newmatchesb");
-const newMatchesEsports = require("../utils/newmatchese");
-const betResult = require("../utils/betresult");
-const setOddsB = require("../utils/setOddsB");
-const Bet = require("../models/stockSchema");
 
+const Bet = require("../models/stockSchema");
 const Stock = require("../models/stockSchema");
 const Crypto = require("../models/cryptoSchema");
 const Invest = require("../models/investSchema");
@@ -13,12 +7,7 @@ const Outcome = require("../models/outcomeSchema");
 const Profile = require("../models/profileSchema");
 
 const moment = require("moment-timezone");
-const cryptoPriceOpen = require("../utils/cryptopriceopen");
-const cryptoPrice = require("../utils/cryptoprice");
-const betResultBasketball = require("../utils/betResultBasketball");
-const betResultInv = require("../utils/betResultInv");
 var request = require("request");
-const setOdds = require("../utils/setOdds");
 
 module.exports = {
   name: "testing",

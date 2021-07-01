@@ -1,7 +1,5 @@
 const Invest = require("../models/investSchema");
 const moment = require("moment-timezone");
-const Profile = require("../models/profileSchema");
-const stockPrice = require("../utils/stockprice");
 const Stock = require("../models/stockSchema");
 
 module.exports = {

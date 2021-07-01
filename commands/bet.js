@@ -1,7 +1,6 @@
 const Bet = require("../models/betSchema");
 const Outcome = require("../models/outcomeSchema");
 const moment = require("moment-timezone");
-const Profile = require("../models/profileSchema");
 
 module.exports = {
   name: "bet",
