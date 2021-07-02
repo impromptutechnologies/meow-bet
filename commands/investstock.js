@@ -9,9 +9,9 @@ module.exports = {
   execute(client, message, args, Discord, profileData) {
     const code = args[1];
     const amt = parseInt(args[0]);
-    if(isNaN(amt)){
+    if (isNaN(amt) || !code || amt > profileData.coins) {
       return message.channel.send(
-        `That's not a number`
+        `Error: please check the command again or your bankroll.`
       );
     }
     var day = moment.utc().format("DD");
@@ -19,10 +19,13 @@ module.exports = {
     var date = moment.utc().format("MM-DD HH:mm");
     var date1 = moment.utc().format(`${month}-${day} 13:30`);
     var date2 = moment.utc().format(`${month}-${day} 21:35`);
-    var stillUtc = moment.utc(date1).toDate();
-    var stillUtc2 = moment.utc(date2).toDate();
     var today = new Date();
-    if (date > date1 && date < date2 && today.getDay() !== 6 && today.getDay() !== 0) {
+    if (
+      date > date1 &&
+      date < date2 &&
+      today.getDay() !== 6 &&
+      today.getDay() !== 0
+    ) {
       const newEmbed = new Discord.MessageEmbed()
         .setColor("#304281")
         .setTitle(`Market Already Open!`)
@@ -31,36 +34,11 @@ module.exports = {
           message.author.displayAvatarURL({ format: "png", dynamic: true })
         )
         .setDescription(
-          `The US stock market opens from 9:30am to 4pm ET so place your commands before the market opens.`
+          `The US stock market opens from 9:30am to 4pm ET so place your commands before the market opens. Weekdays Only.`
         )
-        .setFooter(
-          "visit https://getmeow.gg/betsst to view more investments!"
-        )
+        .setFooter("visit https://getmeow.gg/betsst to view more investments!")
         .setURL("https://getmeow.gg/betsst");
       return message.channel.send(newEmbed);
-    }
-    if (today.getDay() == 6 || today.getDay() == 0) {
-      const newEmbed = new Discord.MessageEmbed()
-        .setColor("#304281")
-        .setTitle(`Its the Weekend!`)
-        .setAuthor(
-          message.author.username,
-          message.author.displayAvatarURL({ format: "png", dynamic: true })
-        )
-        .setDescription(
-          `Please place your investment commands on weekdays.`
-        )
-        .setFooter(
-          "visit https://getmeow.gg/betsst to view more investments!"
-        )
-        .setURL("https://getmeow.gg/betsst");
-      return message.channel.send(newEmbed);
-    }
-    if (!code) {
-      return message.channel.send(`No Code Provided`);
-    }
-    if (amt > profileData.coins) {
-      return message.channel.send(`Not Enough tokens...`);
     }
     try {
       Invest.findOne(
@@ -68,65 +46,67 @@ module.exports = {
         (err, invest) => {
           if (err) {
             return console.log(err);
-          } if (invest) {
+          }
+          if (invest) {
             return message.channel.send("Investment Exists");
           }
           Stock.findOne(
             {
-              ticker: code
+              ticker: code,
             },
             (err, stockData) => {
               if (err) {
-                return message.channel.send("Wrong Code")
+                return message.channel.send("Wrong Code");
               }
               if (stockData) {
-                  if (message.guild === null) {
-                    return message.author.send(
-                      "This particular command must be placed in a server"
-                    );
-                  }
-                  profileData.coins = profileData.coins - amt;
-                  profileData.save();
-                  Invest.create(
-                    {
-                      creatorID: message.author.id,
-                      serverID: message.guild.id,
-                      channelID: message.channel.id,
-                      category: "stocks",
-                      creatorName: message.author.username,
-                      status: "unchanged",
-                      investAmount: amt,
-                      Code: code,
-                    },
-                    (err, res) => {
-                      if (err) {
-                        return console.log(err);
-                      }
-                      res.save();
-                      const newEmbed = new Discord.MessageEmbed()
-                        .setColor("#304281")
-                        .setTitle(`Investment Ticket`)
-                        .setThumbnail("https://altvaton.sirv.com/Images/194312417_1218343265288417_112965584957259991_n.png")
-                        .setAuthor(
-            
-                          message.author.username,
-                          message.author.displayAvatarURL({
-                            format: "png",
-                            dynamic: true,
-                          })
-                        )
-                        .setDescription("Good Luck :)")
-                        .addFields(
-                          { name: "Invested Amount", value: amt },
-                          { name: "Stock", value: code }
-                        )
-                        .setFooter(
-                          "visit https://getmeow.gg/betsst to view more stocks!"
-                        )
-                        .setURL("https://getmeow.gg/betsst");
-                      message.channel.send(newEmbed);
-                    }
+                if (message.guild === null) {
+                  return message.author.send(
+                    "This particular command must be placed in a server"
                   );
+                }
+                profileData.coins = profileData.coins - amt;
+                profileData.save();
+                Invest.create(
+                  {
+                    creatorID: message.author.id,
+                    serverID: message.guild.id,
+                    channelID: message.channel.id,
+                    category: "stocks",
+                    creatorName: message.author.username,
+                    status: "unchanged",
+                    investAmount: amt,
+                    Code: code,
+                  },
+                  (err, res) => {
+                    if (err) {
+                      return console.log(err);
+                    }
+                    res.save();
+                    const newEmbed = new Discord.MessageEmbed()
+                      .setColor("#304281")
+                      .setTitle(`Investment Ticket`)
+                      .setThumbnail(
+                        "https://altvaton.sirv.com/Images/194312417_1218343265288417_112965584957259991_n.png"
+                      )
+                      .setAuthor(
+                        message.author.username,
+                        message.author.displayAvatarURL({
+                          format: "png",
+                          dynamic: true,
+                        })
+                      )
+                      .setDescription("Good Luck :)")
+                      .addFields(
+                        { name: "Invested Amount", value: amt },
+                        { name: "Stock", value: code }
+                      )
+                      .setFooter(
+                        "visit https://getmeow.gg/betsst to view more stocks!"
+                      )
+                      .setURL("https://getmeow.gg/betsst");
+                    message.channel.send(newEmbed);
+                  }
+                );
               }
             }
           ).lean();

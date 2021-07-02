@@ -11,7 +11,10 @@ module.exports = {
           const newEmbed = new Discord.MessageEmbed()
             .setColor("#304281")
             .setTitle("Error")
-            .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
+            .setAuthor(
+              message.author.username,
+              message.author.displayAvatarURL({ format: "png", dynamic: true })
+            )
             .setDescription("No Bets Placed :(")
             .addFields({ name: "For Bet commands", value: "visit link" })
             .setFooter("visit https://getmeow.gg/bets to view bets!")
@@ -33,7 +36,10 @@ module.exports = {
         const newEmbed = new Discord.MessageEmbed()
           .setColor("#304281")
           .setTitle("Open Bets")
-          .setAuthor(message.author.username, message.author.displayAvatarURL({ format: "png", dynamic: true }))
+          .setAuthor(
+            message.author.username,
+            message.author.displayAvatarURL({ format: "png", dynamic: true })
+          )
           .setDescription("Your Open Bets :)")
           .addFields(
             { name: "Code", value: yourbets, inline: true },

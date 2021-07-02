@@ -9,13 +9,10 @@ module.exports = {
   execute(client, message, args, Discord, profileData) {
     const code = args[1];
     const amt = args[0];
-    if (!code) {
-      return message.channel.send(`No Code Provided`);
-    } if (amt > profileData.coins) {
-      return message.channel.send(`Not Enough tokens...`);
-    }
-    if (isNaN(amt)) {
-      return message.channel.send(`That's not a number`);
+    if (!code || amt > profileData.coins || isNaN(amt)) {
+      return message.channel.send(
+        `Error: please check the command again or your bankroll.`
+      );
     }
     try {
       Bet.findOne(
@@ -61,9 +58,7 @@ module.exports = {
                   .setDescription(
                     `Please place your bet commands before matches begin.`
                   )
-                  .setFooter(
-                    "visit https://getmeow.gg/bets to view more bets!"
-                  )
+                  .setFooter("visit https://getmeow.gg/bets to view more bets!")
                   .setURL("https://getmeow.gg/bets ");
                 return message.channel.send(newEmbed);
               }
@@ -71,9 +66,30 @@ module.exports = {
                 if (err) {
                   return console.log(err);
                 }
+                const newEmbed = new Discord.MessageEmbed()
+                  .setColor("#304281")
+                  .setTitle(`Bet Ticket`)
+                  .setThumbnail(
+                    "https://altvaton.sirv.com/Images/187021818_235092514616298_5622261190586926658_n.png"
+                  )
+                  .setAuthor(
+                    message.author.username,
+                    message.author.displayAvatarURL({
+                      format: "png",
+                      dynamic: true,
+                    })
+                  )
+                  .setDescription("Good Luck :)")
+                  .addFields(
+                    { name: "Bet Amount", value: amt },
+                    { name: "Code", value: code }
+                  )
+                  .setFooter("visit https://getmeow.gg/bets to view more bets!")
+                  .setURL("https://getmeow.gg/bets");
                 if (outcomeData.option1[0].Code == code) {
                   const odds = outcomeData.option1[0].odds;
                   profileData.coins = profileData.coins - amt;
+                  profileData.bettokens = profileData.bettokens + amt;
                   profileData.save();
                   Bet.create(
                     {
@@ -81,7 +97,7 @@ module.exports = {
                       serverID: message.guild.id,
                       channelID: message.channel.id,
                       creatorName: message.author.username,
-                      status: 'unchanged',
+                      status: "unchanged",
                       outcomeID: outcomeData.outcomeID,
                       betAmount: amt,
                       Code: code,
@@ -93,26 +109,6 @@ module.exports = {
                         return console.log(err);
                       }
                       res.save();
-                      const newEmbed = new Discord.MessageEmbed()
-                        .setColor("#304281")
-                        .setTitle(`Bet Placed!`)
-                        .setThumbnail("https://altvaton.sirv.com/Images/187021818_235092514616298_5622261190586926658_n.png")
-                        .setAuthor(
-                          message.author.username,
-                          message.author.displayAvatarURL({
-                            format: "png",
-                            dynamic: true,
-                          })
-                        )
-                        .setDescription("Good Luck :)")
-                        .addFields(
-                          { name: "Bet Amount", value: amt },
-                          { name: "Code", value: code }
-                        )                        
-                        .setFooter(
-                          "visit https://getmeow.gg/bets to view more bets!"
-                        )
-                        .setURL("https://getmeow.gg/bets");
                       message.channel.send(newEmbed);
                     }
                   );
@@ -120,6 +116,7 @@ module.exports = {
                 if (outcomeData.option1[0].Code2 == code) {
                   const odds = outcomeData.option1[0].odds2;
                   profileData.coins = profileData.coins - amt;
+                  profileData.bettokens = profileData.bettokens + amt;
                   profileData.save();
                   Bet.create(
                     {
@@ -127,7 +124,7 @@ module.exports = {
                       serverID: message.guild.id,
                       channelID: message.channel.id,
                       creatorName: message.author.username,
-                      status: 'unchanged',
+                      status: "unchanged",
                       outcomeID: outcomeData.outcomeID,
                       betAmount: amt,
                       Code: code,
@@ -139,26 +136,7 @@ module.exports = {
                         return console.log(err);
                       }
                       res.save();
-                      const newEmbed = new Discord.MessageEmbed()
-                        .setColor("#304281")
-                        .setTitle(`Bet Ticket`)
-                        .setThumbnail("https://altvaton.sirv.com/Images/187021818_235092514616298_5622261190586926658_n.png")
-                        .setAuthor(
-                          message.author.username,
-                          message.author.displayAvatarURL({
-                            format: "png",
-                            dynamic: true,
-                          })
-                        )
-                        .setDescription("Good Luck :)")
-                        .addFields(
-                          { name: "Bet Amount", value: amt },
-                          { name: "Code", value: code }
-                        )
-                        .setFooter(
-                          "visit https://getmeow.gg/bets to view more bets!"
-                        )
-                        .setURL("https://getmeow.gg/bets");
+
                       message.channel.send(newEmbed);
                     }
                   );
@@ -166,6 +144,7 @@ module.exports = {
                 if (outcomeData.option1[0].Code3 == code) {
                   const odds = outcomeData.option1[0].odds3;
                   profileData.coins = profileData.coins - amt;
+                  profileData.bettokens = profileData.bettokens + amt;
                   profileData.save();
                   Bet.create(
                     {
@@ -173,7 +152,7 @@ module.exports = {
                       serverID: message.guild.id,
                       channelID: message.channel.id,
                       creatorName: message.author.username,
-                      status: 'unchanged',
+                      status: "unchanged",
                       outcomeID: outcomeData.outcomeID,
                       betAmount: amt,
                       Code: code,
@@ -185,26 +164,6 @@ module.exports = {
                         return console.log(err);
                       }
                       res.save();
-                      const newEmbed = new Discord.MessageEmbed()
-                        .setColor("#304281")
-                        .setTitle(`Bet Ticket`)
-                        .setThumbnail("https://altvaton.sirv.com/Images/187021818_235092514616298_5622261190586926658_n.png")
-                        .setAuthor(
-                          message.author.username,
-                          message.author.displayAvatarURL({
-                            format: "png",
-                            dynamic: true,
-                          })
-                        )
-                        .setDescription("Good Luck :)")
-                        .addFields(
-                          { name: "Bet Amount", value: amt },
-                          { name: "Code", value: code }
-                        )
-                        .setFooter(
-                          "visit https://getmeow.gg/bets to view more bets!"
-                        )
-                        .setURL("https://getmeow.gg/bets");
                       message.channel.send(newEmbed);
                     }
                   );
