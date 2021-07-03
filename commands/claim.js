@@ -33,7 +33,7 @@ module.exports = {
               { userID: message.author.id },
               {
                 $inc: {
-                  returntokens: (res[0].wonamount - (res[0].wonamount * 0.05))-res[0].betamount,
+                  returntokens: (res[0].wonamount - (res[0].wonamount * 0.05)),
                   tokens: res[0].wonamount - res[0].wonamount * 0.05,
                 },
               },
@@ -123,7 +123,7 @@ module.exports = {
               { userID: message.author.id },
               {
                 $inc: {
-                  returntokens: (wonamount - (wonamount * 0.05))-res[0].betamount,
+                  returntokens: (wonamount - (wonamount * 0.05)),
                   tokens: wonamount - wonamount * 0.05,
                 },
               },
