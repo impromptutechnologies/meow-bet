@@ -10,7 +10,7 @@ module.exports = {
     min1 = Math.ceil(17);
     max1 = Math.floor(21);
     const amt = args[0];
-    if (!amt || amt >= profileData.coins || isNaN(amt)) {
+    if (!amt || amt >= profileData.tokens || isNaN(amt)) {
       return message.channel.send(
         `Error: please check the command again or your bankroll.`
       );
@@ -18,10 +18,10 @@ module.exports = {
     if (profileData.payments[0] == null) {
       return message.channel.send(`Please purchase a lootbox to access :)`);
     }
-    const coinz = profileData.coins - amt;
+    const coinz = profileData.tokens - amt;
     Profile.findOneAndUpdate(
       { userID: message.author.id },
-      { coins: coinz },
+      { tokens: coinz },
       (err, user) => {
         if (err) {
           return console.log(err);
@@ -58,7 +58,7 @@ module.exports = {
                   `The response was not one of either "hit" or "stay". \n Please re-enter the command.`
                 );
               }
-              const coinz = user.coins - amt;
+              const coinz = user.tokens - amt;
               let total = parseInt(dealt1) + parseInt(dealt2);
 
               if (messageReceived == "hit") {
@@ -72,7 +72,7 @@ module.exports = {
                 if (total == 21 && dealer_hand != 21) {
                   Profile.findOneAndUpdate(
                     { userID: message.author.id },
-                    { coins: amt * 1.3 + coinz },
+                    { tokens: amt * 1.3 + coinz },
                     (err, user) => {
                       if (err) {
                         return console.log(err);
@@ -143,7 +143,7 @@ module.exports = {
                       if (total < 22 && total > 19 && total > dealer_hand) {
                         Profile.findOneAndUpdate(
                           { userID: message.author.id },
-                          { coins: amt * 1.3 + coinz },
+                          { tokens: amt * 1.3 + coinz },
                           (err, user) => {
                             if (err) {
                               return console.log(err);
@@ -218,7 +218,7 @@ module.exports = {
                             if (total == 21 && dealer_hand != 21) {
                               Profile.findOneAndUpdate(
                                 { userID: message.author.id },
-                                { coins: amt * 1.3 + coinz },
+                                { tokens: amt * 1.3 + coinz },
                                 (err, user) => {
                                   if (err) {
                                     return console.log(err);
@@ -262,7 +262,7 @@ module.exports = {
                             if (total < 21) {
                               Profile.findOneAndUpdate(
                                 { userID: message.author.id },
-                                { coins: amt * 1.3 + coinz },
+                                { tokens: amt * 1.3 + coinz },
                                 (err, user) => {
                                   if (err) {
                                     return console.log(err);
@@ -293,7 +293,7 @@ module.exports = {
                             if (total == 21 && dealer_hand != 21) {
                               Profile.findOneAndUpdate(
                                 { userID: message.author.id },
-                                { coins: amt * 1.3 + coinz },
+                                { tokens: amt * 1.3 + coinz },
                                 (err, user) => {
                                   if (err) {
                                     return console.log(err);
@@ -337,7 +337,7 @@ module.exports = {
                             if (total < 21 && total > dealer_hand) {
                               Profile.findOneAndUpdate(
                                 { userID: message.author.id },
-                                { coins: amt * 1.3 + coinz },
+                                { tokens: amt * 1.3 + coinz },
                                 (err, user) => {
                                   if (err) {
                                     return console.log(err);
@@ -383,7 +383,7 @@ module.exports = {
                             if (total == dealer_hand) {
                               Profile.findOneAndUpdate(
                                 { userID: message.author.id },
-                                { coins: coinz },
+                                { tokens: coinz },
                                 (err, user) => {
                                   if (err) {
                                     return console.log(err);
@@ -413,7 +413,7 @@ module.exports = {
                       if (total > dealer_hand && total < 22) {
                         Profile.findOneAndUpdate(
                           { userID: message.author.id },
-                          { coins: amt * 1.3 + coinz },
+                          { tokens: amt * 1.3 + coinz },
                           (err, user) => {
                             if (err) {
                               return console.log(err);
@@ -458,7 +458,7 @@ module.exports = {
                       } else {
                         Profile.findOneAndUpdate(
                           { userID: message.author.id },
-                          { coins: coinz },
+                          { tokens: coinz },
                           (err, user) => {
                             if (err) {
                               return console.log(err);
@@ -489,7 +489,7 @@ module.exports = {
                 if (total > dealer_hand && total <= 21) {
                   Profile.findOneAndUpdate(
                     { userID: message.author.id },
-                    { coins: amt * 1.3 + coinz },
+                    { tokens: amt * 1.3 + coinz },
                     (err, user) => {
                       if (err) {
                         return console.log(err);
@@ -518,7 +518,7 @@ module.exports = {
                 if (total == dealer_hand) {
                   Profile.findOneAndUpdate(
                     { userID: message.author.id },
-                    { coins: coinz },
+                    { tokens: coinz },
                     (err, user) => {
                       if (err) {
                         return console.log(err);

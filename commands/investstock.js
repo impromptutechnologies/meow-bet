@@ -9,9 +9,14 @@ module.exports = {
   execute(client, message, args, Discord, profileData) {
     const code = args[1];
     const amt = parseInt(args[0]);
-    if (isNaN(amt) || !code || amt > profileData.coins) {
+    if (isNaN(amt) || !code || amt > profileData.tokens) {
       return message.channel.send(
         `Error: please check the command again or your bankroll.`
+      );
+    }
+    if (message.guild === null) {
+      return message.author.send(
+        "This particular command must be placed in a server"
       );
     }
     var day = moment.utc().format("DD");
@@ -41,15 +46,6 @@ module.exports = {
       return message.channel.send(newEmbed);
     }
     try {
-      Invest.findOne(
-        { creatorID: message.author.id, Code: code },
-        (err, invest) => {
-          if (err) {
-            return console.log(err);
-          }
-          if (invest) {
-            return message.channel.send("Investment Exists");
-          }
           Stock.findOne(
             {
               ticker: code,
@@ -59,12 +55,7 @@ module.exports = {
                 return message.channel.send("Wrong Code");
               }
               if (stockData) {
-                if (message.guild === null) {
-                  return message.author.send(
-                    "This particular command must be placed in a server"
-                  );
-                }
-                profileData.coins = profileData.coins - amt;
+                profileData.tokens = profileData.tokens - amt;
                 profileData.save();
                 Invest.create(
                   {
@@ -110,8 +101,6 @@ module.exports = {
               }
             }
           ).lean();
-        }
-      ).lean();
     } catch (err) {
       console.log(err, "hey");
     }

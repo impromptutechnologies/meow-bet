@@ -7,13 +7,13 @@ module.exports = {
       .setTitle(`Useful Resources`)
       .setDescription("Our website contains all the info you need!")
       .addFields(
-        { name: "Homepage", value: "getmeow.gg/bets" },
+        { name: "Homepage", value: "https://getmeow.gg/" },
         { name: "Check Bankroll", value: "!bankroll" },
         { name: "Claim Winnings", value: "!claim" },
-        { name: "Command/Bets", value: "getmeow.gg/bets" },
-        { name: "Get Tokens", value: "getmeow.gg/tokens" },
+        { name: "Command/Bets", value: "https://getmeow.gg/bets" },
+        { name: "Get Tokens", value: "https://getmeow.gg/tokens" },
         { name: "Contact", value: `contact@getmeow.gg` },
-        { name: "T&C", value: "getmeow.gg/terms" }
+        { name: "T&C", value: "https://getmeow.gg/terms" }
       )
       .setURL("https://getmeow.gg/bets");
     message.channel.send(newEmbed);

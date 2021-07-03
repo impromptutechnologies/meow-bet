@@ -11,7 +11,7 @@ module.exports = {
       )
       .setDescription("Your current bankroll")
       .setThumbnail("https://altvaton.sirv.com/Images/coin.png")
-      .addFields({ name: "Bankroll", value: profileData.coins.toFixed(2) })
+      .addFields({ name: "Bankroll", value: profileData.tokens.toFixed(2) })
       .setURL("https://getmeow.gg/tokens");
     message.channel.send(newEmbed);
   },

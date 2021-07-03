@@ -8,7 +8,7 @@ module.exports = {
     min = Math.ceil(1);
     max = Math.floor(101);
     const amt = args[0];
-    if (isNaN(amt) || !amt || amt >= profileData.coins) {
+    if (isNaN(amt) || !amt || amt >= profileData.tokens) {
       return message.channel.send(
         `Error: please check the command again or your bankroll.`
       );
@@ -16,7 +16,11 @@ module.exports = {
     if (profileData.payments[0] == null) {
       return message.channel.send(`Please purchase a lootbox to access :)`);
     }
-
+    if (message.guild === null) {
+      return message.author.send(
+        "This particular command must be placed in a server"
+      );
+    }
     const chances = Math.floor(Math.random() * (max - min) + min);
     min1 = Math.ceil(50);
     max1 = Math.floor(70);
@@ -49,11 +53,11 @@ module.exports = {
             `The response was not one of either "HIGH', "LOW", or "BINGO". \n Please re-enter the command.`
           );
         }
-        const coinz = profileData.coins;
+        const coinz = profileData.tokens;
         if (messageReceived == "high" && chances > hint) {
           Profile.findOneAndUpdate(
             { userID: message.author.id },
-            { coins: amt * 1.4 - amt + coinz },
+            { tokens: amt * 1.4 - amt + coinz },
             (err, user) => {
               if (err) {
                 return console.log(err);
@@ -84,7 +88,7 @@ module.exports = {
         if (messageReceived == "low" && chances < hint) {
           Profile.findOneAndUpdate(
             { userID: message.author.id },
-            { coins: amt * 1.5 - amt + coinz },
+            { tokens: amt * 1.5 - amt + coinz },
             (err, user) => {
               if (err) {
                 return console.log(err);
@@ -115,7 +119,7 @@ module.exports = {
         if (messageReceived == "bingo" && chances == hint) {
           Profile.findOneAndUpdate(
             { userID: message.author.id },
-            { coins: amt * 1.5 - amt + coinz },
+            { tokens: amt * 1.5 - amt + coinz },
             (err, user) => {
               if (err) {
                 return console.log(err);
@@ -145,7 +149,7 @@ module.exports = {
         } else {
           Profile.findOneAndUpdate(
             { userID: message.author.id },
-            { coins: coinz - amt },
+            { tokens: coinz - amt },
             (err, user) => {
               if (err) {
                 return console.log(err);
