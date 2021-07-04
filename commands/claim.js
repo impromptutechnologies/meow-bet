@@ -7,7 +7,6 @@ module.exports = {
   cooldown: 1,
   description: "Claim Winnings!",
   execute(client, message, args, Discord, profileData) {
-    console.time('start')
     if (message.guild === null) {
       return message.author.send(
         "This particular command must be placed in a server"
@@ -197,7 +196,6 @@ module.exports = {
     } catch (err) {
       console.log(err, "heuy");
     }
-    console.timeEnd('start')
   },
 };
 
