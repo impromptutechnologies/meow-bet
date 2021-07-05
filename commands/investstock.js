@@ -56,6 +56,7 @@ module.exports = {
               }
               if (stockData) {
                 profileData.tokens = profileData.tokens - amt;
+                profileData.bettokens = profileData.bettokens + amt;
                 profileData.save();
                 Invest.create(
                   {
