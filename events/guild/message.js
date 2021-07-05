@@ -35,6 +35,7 @@ module.exports = async (Discord, client, message) => {
 
   const args = message.content.slice(prefix.length).trim().split(/ +/);
   const cmd = args.shift().toLowerCase();
+  //const cmd = 'maintanence'
   const command = client.commands.get(cmd);
   if (!cooldown.has(command.name)) {
     cooldown.set(command.name, new Discord.Collection());
