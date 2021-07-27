@@ -33,7 +33,8 @@ module.exports = {
               {
                 $inc: {
                   returntokens: (res[0].wonamount - (res[0].wonamount * 0.05)),
-                  tokens: res[0].wonamount - res[0].wonamount * 0.05,
+                  tokens: res[0].wonamount - (res[0].wonamount * 0.05),
+                  bettokens: res[0].betamount,
                 },
               },
               (err, user) => {

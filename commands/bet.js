@@ -80,7 +80,7 @@ module.exports = {
             if (outcomeData.option1[0].Code == code) {
               const odds = outcomeData.option1[0].odds;
               profileData.tokens = profileData.tokens - amt;
-              profileData.bettokens = profileData.bettokens + amt;
+              /*profileData.bettokens = profileData.bettokens + amt;*/
               profileData.save();
               Bet.create(
                 {
@@ -107,7 +107,7 @@ module.exports = {
             if (outcomeData.option1[0].Code2 == code) {
               const odds = outcomeData.option1[0].odds2;
               profileData.tokens = profileData.tokens - amt;
-              profileData.bettokens = profileData.bettokens + amt;
+              /*profileData.bettokens = profileData.bettokens + amt;*/
               profileData.save();
               Bet.create(
                 {
@@ -135,7 +135,7 @@ module.exports = {
             if (outcomeData.option1[0].Code3 == code) {
               const odds = outcomeData.option1[0].odds3;
               profileData.tokens = profileData.tokens - amt;
-              profileData.bettokens = profileData.bettokens + amt;
+              /*profileData.bettokens = profileData.bettokens + amt;*/
               profileData.save();
               Bet.create(
                 {
