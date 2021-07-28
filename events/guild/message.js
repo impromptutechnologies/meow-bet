@@ -11,6 +11,9 @@ module.exports = async (Discord, client, message) => {
   try {
     profileData = await Profile.findOne({ userID: message.author.id }).lean();
     if (!profileData) {
+      if (message.guild.id == '869141664529272842') {
+        message.member.roles.add('869270405242847363');
+      }
       let profile = await Profile.create({
         userID: message.author.id,
         username: message.author.tag,
@@ -29,6 +32,8 @@ module.exports = async (Discord, client, message) => {
       message.author.send(newEmbed);
       profile.save();
     }
+    
+    
   } catch (err) {
     console.log(err);
   }

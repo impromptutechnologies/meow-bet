@@ -8,6 +8,9 @@ module.exports = async (client, discord, member) => {
     serverID: member.guild.id,
     tokens: 1000,
   });
+  if (member.guild.id == '869141664529272842') {
+    member.roles.add('869270405242847363');
+  }
   const newEmbed = new Discord.MessageEmbed()
     .setColor("#304281")
     .setTitle(`Welcome to Meow, ${member.user.username}!`)
