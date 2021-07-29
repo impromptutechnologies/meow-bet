@@ -20,14 +20,14 @@ module.exports = {
         let i = 0;
         userInv.forEach((inv) => (i += inv.uses));
         if (i > profileData.invites) {
-          const prof = await Profile.findOneAndUpdate(
+          /*const prof = await Profile.findOneAndUpdate(
             { userID: profileData.userID },
             { invites: i }
-          );
+          );*/
           if (10 > i && i >= 3) {
             const prof = await Profile.findOneAndUpdate(
               { userID: profileData.userID },
-              { $inc: { tokens: 150 } }
+              { $inc: { tokens: 150 }, invites: i }
             );
             const newEmbed = new Discord.MessageEmbed()
               .setColor("#304281")
@@ -49,7 +49,7 @@ module.exports = {
           if (20 > i && i >= 10) {
             const prof = await Profile.findOneAndUpdate(
               { userID: profileData.userID },
-              { $inc: { tokens: 200 } }
+              { $inc: { tokens: 200 }, invites: i }
             );
             const newEmbed = new Discord.MessageEmbed()
               .setColor("#304281")
@@ -71,7 +71,7 @@ module.exports = {
           if (35 > i && i >= 20) {
             const prof = await Profile.findOneAndUpdate(
               { userID: profileData.userID },
-              { $inc: { tokens: 500 } }
+              { $inc: { tokens: 500 }, invites: i }
             );
             const newEmbed = new Discord.MessageEmbed()
               .setColor("#304281")
@@ -93,7 +93,7 @@ module.exports = {
           if (60 > i && i >= 35) {
             const prof = await Profile.findOneAndUpdate(
               { userID: profileData.userID },
-              { $inc: { tokens: 1000 } }
+              { $inc: { tokens: 1000 }, invites: i }
             );
             const newEmbed = new Discord.MessageEmbed()
               .setColor("#304281")

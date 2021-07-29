@@ -1,6 +1,8 @@
 const Bet = require("../models/betSchema");
 const Outcome = require("../models/outcomeSchema");
 const moment = require("moment-timezone");
+const Profile = require("../models/profileSchema");
+
 
 module.exports = {
   name: "bet",
@@ -79,9 +81,14 @@ module.exports = {
               .setURL("https://getmeow.gg/bets");
             if (outcomeData.option1[0].Code == code) {
               const odds = outcomeData.option1[0].odds;
-              profileData.tokens = profileData.tokens - amt;
-              /*profileData.bettokens = profileData.bettokens + amt;*/
-              profileData.save();
+              /*profileData.tokens = profileData.tokens - amt;
+              profileData.bettokens = profileData.bettokens + amt;
+              profileData.save();*/
+              const prof = Profile.findOneAndUpdate(
+                { userID: profileData.userID },
+                { $inc: { tokens: -amt } }, (req, res) => {
+              });
+              
               Bet.create(
                 {
                   creatorID: message.author.id,
@@ -106,9 +113,13 @@ module.exports = {
             }
             if (outcomeData.option1[0].Code2 == code) {
               const odds = outcomeData.option1[0].odds2;
-              profileData.tokens = profileData.tokens - amt;
-              /*profileData.bettokens = profileData.bettokens + amt;*/
-              profileData.save();
+              /*profileData.tokens = profileData.tokens - amt;
+              profileData.bettokens = profileData.bettokens + amt;
+              profileData.save();*/
+              const prof = Profile.findOneAndUpdate(
+                { userID: profileData.userID },
+                { $inc: { tokens: -amt } }, (req, res) => {
+              });
               Bet.create(
                 {
                   creatorID: message.author.id,
@@ -134,9 +145,13 @@ module.exports = {
             }
             if (outcomeData.option1[0].Code3 == code) {
               const odds = outcomeData.option1[0].odds3;
-              profileData.tokens = profileData.tokens - amt;
-              /*profileData.bettokens = profileData.bettokens + amt;*/
-              profileData.save();
+              /*profileData.tokens = profileData.tokens - amt;
+              profileData.bettokens = profileData.bettokens + amt;
+              profileData.save();*/
+              const prof = Profile.findOneAndUpdate(
+                { userID: profileData.userID },
+                { $inc: { tokens: -amt } }, (req, res) => {
+              });
               Bet.create(
                 {
                   creatorID: message.author.id,

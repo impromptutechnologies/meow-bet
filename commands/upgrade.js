@@ -9,7 +9,7 @@ module.exports = {
         .setColor("#304281")
         .setTitle(`Thank You!`)
         .setDescription(
-          "Thank you for purchasing a lootbox. Your role has been upgraded to Noble."
+          "Thank you for purchasing a lootbox. Your role has been upgraded to Duke."
         )
         .setURL("https://getmeow.gg/tokens");
       message.channel.send(newEmbed);
@@ -18,7 +18,7 @@ module.exports = {
         .setColor("#304281")
         .setTitle(`Please Purchase Lootbox`)
         .setDescription(
-          "Purchase a lootbox at getmeow.gg/tokens in order to become a Noble."
+          "Purchase a lootbox at getmeow.gg/tokens in order to become a Duke."
         )
         .setURL("https://getmeow.gg/tokens");
       message.channel.send(newEmbed);

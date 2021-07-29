@@ -1,6 +1,7 @@
 const Invest = require("../models/investSchema");
 const moment = require("moment-timezone");
 const Crypto = require("../models/cryptoSchema");
+const Profile = require("../models/profileSchema");
 
 module.exports = {
   name: "invcrypto",
@@ -52,9 +53,13 @@ module.exports = {
                 return message.channel.send("Wrong Code");
               }
               if (stockData) {
-                profileData.tokens = profileData.tokens - amt;
+                /*profileData.tokens = profileData.tokens - amt;
                 profileData.bettokens = profileData.bettokens + amt;
-                profileData.save();
+                profileData.save();*/
+                const prof = Profile.findOneAndUpdate(
+                  { userID: profileData.userID },
+                  { $inc: { tokens: -amt } }, (req, res) => {
+                });
                 Invest.create(
                   {
                     creatorID: message.author.id,

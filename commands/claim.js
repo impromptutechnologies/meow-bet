@@ -89,7 +89,7 @@ module.exports = {
                     }
                   );
 
-            Profile.findOneAndUpdate(
+            /*Profile.findOneAndUpdate(
               { userID: client.guilds.cache.get(guildID).ownerID },
               { $inc: { tokens: yourWinnings * 0.05 } },
               (err, user) => {
@@ -97,7 +97,7 @@ module.exports = {
                   return console.log(err);
                 }
               }
-            );
+            );*/
           });
         }
       ).lean();
@@ -117,14 +117,14 @@ module.exports = {
             { $match: { creatorID: message.author.id, status: "won" }},
             { $group: { _id: null, betamount: { $sum: "$investAmount" } } }
             ], (err, res) => {
-            console.log(res);
             const wonamount = res.betamount * 3;
             Profile.findOneAndUpdate(
               { userID: message.author.id },
               {
                 $inc: {
                   returntokens: (wonamount - (wonamount * 0.05)),
-                  tokens: wonamount - wonamount * 0.05,
+                  tokens: wonamount - (wonamount * 0.05),
+                  bettokens: res.betamount,
                 },
               },
               (err, user) => {
@@ -182,7 +182,7 @@ module.exports = {
                     }
                   );
 
-            Profile.findOneAndUpdate(
+            /*Profile.findOneAndUpdate(
               { userID: client.guilds.cache.get(guildID).ownerID },
               { $inc: { tokens: yourWinnings * 0.05 } },
               (err, user) => {
@@ -190,7 +190,8 @@ module.exports = {
                   return console.log(err);
                 }
               }
-            );
+            );*/
+            
           });
         }
       ).lean();
