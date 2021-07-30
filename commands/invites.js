@@ -24,7 +24,7 @@ module.exports = {
             { userID: profileData.userID },
             { invites: i }
           );*/
-          if (10 > i && i >= 3) {
+          if (10 > i && i >= 3 && 3 >= profileData.invites) {
             const prof = await Profile.findOneAndUpdate(
               { userID: profileData.userID },
               { $inc: { tokens: 150 }, invites: i }
@@ -46,7 +46,7 @@ module.exports = {
               .setURL("https://getmeow.gg/tokens");
             message.channel.send(newEmbed);
           }
-          if (20 > i && i >= 10) {
+          if (20 > i && i >= 10 && 10 >= profileData.invites) {
             const prof = await Profile.findOneAndUpdate(
               { userID: profileData.userID },
               { $inc: { tokens: 200 }, invites: i }
@@ -68,7 +68,7 @@ module.exports = {
               .setURL("https://getmeow.gg/tokens");
             message.channel.send(newEmbed);
           }
-          if (35 > i && i >= 20) {
+          if (35 > i && i >= 20 && 20 >= profileData.invites) {
             const prof = await Profile.findOneAndUpdate(
               { userID: profileData.userID },
               { $inc: { tokens: 500 }, invites: i }
@@ -90,7 +90,7 @@ module.exports = {
               .setURL("https://getmeow.gg/tokens");
             message.channel.send(newEmbed);
           }
-          if (60 > i && i >= 35) {
+          if (60 > i && i >= 35 && 35 >= profileData.invites) {
             const prof = await Profile.findOneAndUpdate(
               { userID: profileData.userID },
               { $inc: { tokens: 1000 }, invites: i }
