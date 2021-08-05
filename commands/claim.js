@@ -38,7 +38,6 @@ module.exports = {
                 },
               },
               (err, user) => {
-                console.log(user);
               });
           })
           bet.forEach((bet) => {
@@ -117,19 +116,18 @@ module.exports = {
             { $match: { creatorID: message.author.id, status: "won" }},
             { $group: { _id: null, betamount: { $sum: "$investAmount" } } }
             ], (err, res) => {
-            const wonamount = res.betamount * 3;
+            const wonamount = res[0].betamount * 3;
             Profile.findOneAndUpdate(
               { userID: message.author.id },
               {
                 $inc: {
                   returntokens: (wonamount - (wonamount * 0.05)),
-                  tokens: wonamount - (wonamount * 0.05),
-                  bettokens: res.betamount,
+                  tokens: (wonamount - (wonamount * 0.05)),
+                  bettokens: res[0].betamount,
                 },
               },
               (err, user) => {
-                console.log(user);
-              });
+            });
           })
           invest.forEach((invest) => {
             const creatorID = invest.creatorID;
@@ -142,7 +140,7 @@ module.exports = {
 
                   const newEmbed = new Discord.MessageEmbed()
                     .setColor("#304281")
-                    .setTitle(`Good Bet on ${bet.Code}!`)
+                    .setTitle(`Good Bet on ${invest.Code}!`)
                     .setAuthor(
                       message.author.username,
                       message.author.displayAvatarURL({
