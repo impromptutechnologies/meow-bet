@@ -1,4 +1,4 @@
-const Profile = require("../models/profileSchema");
+/*const Profile = require("../models/profileSchema");
 
 module.exports = {
   name: "invites",
@@ -24,7 +24,7 @@ module.exports = {
           /*const prof = await Profile.findOneAndUpdate(
             { userID: profileData.userID },
             { invites: i }
-          );*/
+          );*//*
           console.log(i, profileData.invites)
           if (10 > i && i >= 3 && 3 >= profileData.invites) {
             console.log('hey1')
@@ -183,4 +183,4 @@ module.exports = {
     }
   },
 };
-
+*/

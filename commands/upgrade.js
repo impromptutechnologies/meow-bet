@@ -1,4 +1,4 @@
-module.exports = {
+/*module.exports = {
   name: "upgrade",
   description: "upgrade role",
   execute(client, message, args, Discord, profileData) {
@@ -24,4 +24,4 @@ module.exports = {
       message.channel.send(newEmbed);
     }
   },
-};
+};*/
