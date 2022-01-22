@@ -10,6 +10,9 @@ module.exports = {
         `Error: please check the command again or your bankroll.`
       );
     }
+    if (profileData.payments[0] == null) {
+      return message.channel.send(`Please purchase a lootbox to access :)`);
+    }
     min = Math.ceil(0);
     max = Math.floor(11);
     const chances = Math.floor(Math.random() * (max - min) + min);
