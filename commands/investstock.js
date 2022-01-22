@@ -70,7 +70,7 @@ module.exports = {
                     channelID: message.channel.id,
                     category: "stocks",
                     creatorName: message.author.username,
-                    status: "unchanged",
+                    status: "open",
                     investAmount: amt,
                     Code: code,
                   },
