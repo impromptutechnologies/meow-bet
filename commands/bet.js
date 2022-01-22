@@ -32,7 +32,7 @@ module.exports = {
         },
         (err, outcomeData) => {
           if (!outcomeData) {
-            return message.channel.send("Perhaps the betCode is wrong?");
+            return message.channel.send("Perhaps the betCode is wrong or game has started?");
           }
           const amt = parseInt(args[0]);
           var date = moment.utc().format("MM-DD HH:mm");
