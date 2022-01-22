@@ -1,7 +1,7 @@
 const Invest = require("../models/investSchema");
 
 module.exports = {
-  name: "myinvest",
+  name: "myinvests",
   cooldown: 1,
   description: "Your investments!",
   execute(client, message, args, Discord, profileData) {

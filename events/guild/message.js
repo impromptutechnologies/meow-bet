@@ -10,6 +10,7 @@ module.exports = async (Discord, client, message) => {
   let profileData;
   try {
     profileData = await Profile.findOne({ userID: message.author.id }).lean();
+    
     if (!profileData) {
       /*if (message.guild.id == '869141664529272842') {
         message.member.roles.add('869270405242847363');
@@ -20,6 +21,7 @@ module.exports = async (Discord, client, message) => {
         serverID: message.guild.id,
         tokens: 1000,
       });
+
       const newEmbed = new Discord.MessageEmbed()
         .setColor("#304281")
         .setTitle(`Welcome to Meow, ${message.author.username}!`)
