@@ -13,9 +13,9 @@ module.exports = {
         `Error: please check the command again or your bankroll.`
       );
     }
-    if (profileData.payments[0] == null) {
+    /*if (profileData.payments[0] == null) {
       return message.channel.send(`Please purchase a lootbox to access :)`);
-    }
+    }*/
     if (message.guild === null) {
       return message.author.send(
         "This particular command must be placed in a server"

@@ -4,7 +4,7 @@ const transferEth = require("../utils/transferEth");
 const Profile = require("../models/profileSchema");
 
 module.exports = {
-  name: "refreshbal",
+  name: "refresh",
   description: "refresh balance",
   execute(client, message, args, Discord, profileData) {
     if(!profileData.privateKey){
@@ -32,12 +32,12 @@ module.exports = {
               const value = String(data - 0.001);
               console.log(value);
               transferEth(String(value), profileData.privateKey, async (data) => {
-                const newTokens = ((parseFloat(value) * 3000)/0.00015)
+                const newTokens = ((parseFloat(value) * 3000)/0.00015)+(profileData.tokens)
                 console.log(newTokens)
                 const portfolio = await Profile.findOneAndUpdate({
-                    customerID: portfolioData.customerID,
+                    customerID: profileData.customerID,
                 }, {tokens: newTokens});
-                console.log(data);
+                console.log(portfolio);
                 const newEmbed = new Discord.MessageEmbed()
                 .setColor("#304281")
                 .setTitle(`Balance Updated! Deposit has gone through.`)
@@ -52,7 +52,7 @@ module.exports = {
                 .setThumbnail("https://altvaton.sirv.com/Images/coin.png")
                 .addFields({
                   name: "Bankroll",
-                  value: profileData.tokens.toFixed(2),
+                  value: portfolio.tokens.toFixed(2),
                 })
                 .setURL("https://getmeow.gg/tokens");
                  return message.channel.send(newEmbed);

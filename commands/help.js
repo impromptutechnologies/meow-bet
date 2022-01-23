@@ -12,6 +12,8 @@ module.exports = {
         { name: "Open Bets", value: "!mybets" },
         { name: "Open Invests", value: "!myinvests" },
         { name: "Claim Winnings", value: "!claim" },
+        { name: "ETH Deposit Address", value: "!deposit" },
+        { name: "Refresh Bankroll", value: "!refresh" },
         { name: "Your Account", value: "https://getmeow.gg/account" },
         { name: "Command/Bets", value: "https://getmeow.gg/bets" },
         { name: "Get Tokens", value: "https://getmeow.gg/tokens" },

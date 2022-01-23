@@ -15,9 +15,9 @@ module.exports = {
         `Error: please check the command again or your bankroll.`
       );
     }
-    if (profileData.payments[0] == null) {
+    /*if (profileData.payments[0] == null) {
       return message.channel.send(`Please purchase a lootbox to access :)`);
-    }
+    }*/
     const coinz = profileData.tokens - amt;
     Profile.findOneAndUpdate(
       { userID: message.author.id },
