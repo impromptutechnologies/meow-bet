@@ -1,16 +1,17 @@
 const http = require("https");
 const Profile = require("../models/profileSchema");
 
-const depositAddress = () => {
+const depositAddress = (data, callback) => {
 
-const options = {
-    "method": "GET",
+  const options = {
+    "method": "POST",
     "hostname": "api-us-west1.tatum.io",
     "port": null,
-    "path": "/v3/ethereum/address/xpub6EGmMwZZGCQ6bN88khrrqNsgwqv8R47ZnEUP9MkYbDVSmgrekTC49QdJpezvgmrJB4qVdCNGWJfiPoa6yhwig7zvXshGoFtirDbE7cUeV6v/0",
+    "path": `/v3/offchain/account/${data}/address`,
     "headers": {
-        "x-testnet-type": "ethereum-ropsten",
-        "x-api-key": process.env.API_TATUM,
+      "x-testnet-type": "ethereum-ropsten",
+      "content-type": "application/json",
+      "x-api-key": process.env.API_TATUM,
     }
   };
   
@@ -23,16 +24,21 @@ const options = {
   
     res.on("end", function () {
       const body = Buffer.concat(chunks);
-      console.log(body.toString());
-      const bob = JSON.parse(body.toString())
-      console.log(bob.address)
-      const coinUpdate = Profile.findOneAndUpdate(
-        { userID:'834304396673679411'},
+      const jsonify = JSON.parse(body.toString())
+
+      console.log(jsonify)
+      callback({
+        depositAddress: jsonify.address,
+        customerID: data,
+        derivationKey: jsonify.derivationKey
+      })
+      /*const coinUpdate = Profile.findOneAndUpdate(
+        { customerID:data},
         { depositAddress: bob.address }, (req, res) => {
             console.log(res)
         }
         
-      );
+      );*/
     });
   });
   

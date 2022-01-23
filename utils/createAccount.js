@@ -33,8 +33,6 @@ const req = http.request(options, function (res) {
 
   res.on("end", function () {
     const body = Buffer.concat(chunks);
-    console.log(body.toString());
-    console.log(uuidchose);
     const jsonify = JSON.parse(body.toString())
     console.log(jsonify[0].id, id, username, serverID)
     /*const coinUpdate = Profile.findOneAndUpdate(
@@ -47,16 +45,17 @@ const req = http.request(options, function (res) {
         }
         
       );*/
-      const coinUpdate = Profile.create(
-        {
-          userID: id,
+      const coinUpdate = Profile.findOneAndUpdate(
+        { userID: id,
           username: username,
           serverID: serverID,
-          tokens: 1000,
+          tokens: 1000,},
+        {
           customerID: jsonify[0].id,
         }, (req, res, error) => {
-            callback(jsonify[0].id)
-            if(error){
+          console.log(res)
+          callback(jsonify[0].id)
+          if(error){
               console.log(error)
             }
             //return done(null, res)
@@ -92,3 +91,7 @@ req.end();
 
 
 module.exports = createAccount;
+
+
+
+

@@ -10,52 +10,53 @@ const privKey = require("../../utils/privKey");
 module.exports = async (Discord, client, message) => {
   const prefix = process.env.PREFIX;
   if (!message.content.startsWith(prefix) || message.author.bot) return;
+
   let profileData;
   try {
-    profileData = await Profile.findOne({ userID: message.author.id }).lean();
-
+    profileData = await Profile.findOne({ userID: message.author.id });
     if (!profileData) {
-      /*if (message.guild.id == '869141664529272842') {
-        message.member.roles.add('869270405242847363');
-      }
+      console.log(message.guild.id)
       let profile = await Profile.create({
         userID: message.author.id,
         username: message.author.tag,
         serverID: message.guild.id,
         tokens: 1000,
-      });*/
+      });
+      const newEmbed = new Discord.MessageEmbed()
+      .setColor("#304281")
+      .setTitle(`Welcome to Meow, ${message.author.username}!`)
+      .setThumbnail(`https://altvaton.sirv.com/Images/heart.png`)
+      .setDescription(`Our bot allows you to bet on major sports matches, stock/crypto prices, 
+      and a host of cool casino games such as blackjack, dice, slots and more! We give you 100 free tokens a day or you can purchase a lootbox containing tokens, premium commands and the monthly giveaway/lottery. 
+      You can access the list of commands on our website ([meowmeow.gg/bets](http://meow-web.herokuapp.com)) along with the latest events you can bet on.`)
+      .setURL("http://localhost:3000/bet");
+      message.author.send(newEmbed)
+      profile.save();
+
 
       createAccount(
         message.author.id,
         message.author.tag,
         message.guild.id,
         (data) => {
-          console.log("hello");
-          console.log(data);
-          depositAddress(data, (data) => {
+          depositAddress(data, async (data) => {
+            //console.log(data)
             privKey(
               data.customerID,
               data.depositAddress,
               data.derivationKey,
               (data) => {
-                console.log(data);
-                const newEmbed = new Discord.MessageEmbed()
-                  .setColor("#304281")
-                  .setTitle(`Welcome to Meow, ${message.author.username}!`)
-                  .setThumbnail(`https://altvaton.sirv.com/Images/heart.png`)
-                  .setDescription(
-                    `Our bot allows you to bet on major sports matches and stock/crypto prices. We give you 1000 free tokens or you can purchase a lootbox containing tokens and cool casino commands! 
-          \nYou can access the list of commands on our website ([getmeow.gg/bets](https://getmeow.gg/bets)) along with the latest events you can bet on.`
-                  )
-                  .setURL("https://getmeow.gg/bets");
-                message.author.send(newEmbed);
-                profile.save();
+                
+                console.log("PrivateLEY", data);
+             
               }
             );
             //return res.render('dgx3', {email: req.user.email, MAGIC_PUBLISHABLE_KEY, customerID: data.customerID, depositAddress: data.depositAddress })
           });
         }
       );
+
+
     }
   } catch (err) {
     console.log(err);
@@ -63,7 +64,6 @@ module.exports = async (Discord, client, message) => {
 
   const args = message.content.slice(prefix.length).trim().split(/ +/);
   const cmd = args.shift().toLowerCase();
-  //const cmd = 'maintanence'
   const command = client.commands.get(cmd);
   if (!cooldown.has(command.name)) {
     cooldown.set(command.name, new Discord.Collection());
