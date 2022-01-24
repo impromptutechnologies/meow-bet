@@ -11,7 +11,7 @@ module.exports = {
           message.author.displayAvatarURL({ format: "png", dynamic: true })
         )
         .setDescription("Login via discord at getmeow.gg/account to check your new address!")
-        .setThumbnail("https://altvaton.sirv.com/Images/coin.png")
+        .setThumbnail("https://altvaton.sirv.com/Images/gem-stone_1f48e.png")
         .setURL("https://getmeow.gg/tokens");
         message.channel.send(newEmbed);
       }else{
@@ -23,7 +23,7 @@ module.exports = {
           message.author.displayAvatarURL({ format: "png", dynamic: true })
         )
         .setDescription("Enter !refresh after you deposit ETH to update your tokens!")
-        .setThumbnail("https://altvaton.sirv.com/Images/coin.png")
+        .setThumbnail("https://altvaton.sirv.com/Images/gem-stone_1f48e.png")
         .addFields({ name: "Ethereum Deposit Address", value: profileData.depositAddress })
         .setURL("https://getmeow.gg/tokens");
         message.channel.send(newEmbed);

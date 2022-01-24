@@ -16,7 +16,7 @@ module.exports = {
                     message.author.displayAvatarURL({ format: "png", dynamic: true })
                   )
                   .setDescription("Your current bankroll")
-                  .setThumbnail("https://altvaton.sirv.com/Images/coin.png")
+                  .setThumbnail("https://altvaton.sirv.com/Images/gem-stone_1f48e.png")
                   .addFields({
                     name: "Bankroll",
                     value: profileData.tokens.toFixed(2),
@@ -49,7 +49,7 @@ module.exports = {
                   })
                 )
                 .setDescription("Your new bankroll")
-                .setThumbnail("https://altvaton.sirv.com/Images/coin.png")
+                .setThumbnail("https://altvaton.sirv.com/Images/gem-stone_1f48e.png")
                 .addFields({
                   name: "Bankroll",
                   value: newTokens,
@@ -68,7 +68,7 @@ module.exports = {
                     message.author.displayAvatarURL({ format: "png", dynamic: true })
                   )
                   .setDescription("Your current bankroll")
-                  .setThumbnail("https://altvaton.sirv.com/Images/coin.png")
+                  .setThumbnail("https://altvaton.sirv.com/Images/gem-stone_1f48e.png")
                   .addFields({
                     name: "Bankroll",
                     value: profileData.tokens.toFixed(2),
