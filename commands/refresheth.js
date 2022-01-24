@@ -26,7 +26,7 @@ module.exports = {
     }else{
         getEthBalance(profileData.depositAddress, async (data) => {
             console.log(data);
-            if (data > 0.005) {
+            if (data >= 0.005) {
               console.log("hello");
               //const value = String(data - (data * 0.05))
               const value = String(data - 0.001);
