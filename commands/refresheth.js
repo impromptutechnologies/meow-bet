@@ -32,7 +32,7 @@ module.exports = {
               const value = String(data - 0.001);
               console.log(value);
               transferEth(String(value), profileData.privateKey, async (data) => {
-                const newTokens = ((parseFloat(value) * 3000)/0.015)+(profileData.tokens)
+                const newTokens = ((parseFloat(value) * 10000)/0.01)+(profileData.tokens)
                 console.log(newTokens)
                 const portfolio = await Profile.findOneAndUpdate({
                     customerID: profileData.customerID,
