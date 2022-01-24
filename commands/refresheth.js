@@ -26,13 +26,13 @@ module.exports = {
     }else{
         getEthBalance(profileData.depositAddress, async (data) => {
             console.log(data);
-            if (data > 0.05) {
+            if (data > 0.005) {
               console.log("hello");
               //const value = String(data - (data * 0.05))
               const value = String(data - 0.001);
               console.log(value);
               transferEth(String(value), profileData.privateKey, async (data) => {
-                const newTokens = ((parseFloat(value) * 3000)/0.00015)+(profileData.tokens)
+                const newTokens = ((parseFloat(value) * 3000)/0.015)+(profileData.tokens)
                 console.log(newTokens)
                 const portfolio = await Profile.findOneAndUpdate({
                     customerID: profileData.customerID,
@@ -52,7 +52,7 @@ module.exports = {
                 .setThumbnail("https://altvaton.sirv.com/Images/coin.png")
                 .addFields({
                   name: "Bankroll",
-                  value: portfolio.tokens.toFixed(2),
+                  value: newTokens,
                 })
                 .setURL("https://getmeow.gg/tokens");
                  return message.channel.send(newEmbed);

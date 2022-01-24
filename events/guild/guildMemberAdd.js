@@ -16,7 +16,7 @@ module.exports = async (client, discord, member) => {
     .setTitle(`Welcome to Meow, ${member.user.username}!`)
     .setThumbnail(`https://altvaton.sirv.com/Images/heart.png`)
     .setDescription(
-      `Our bot allows you to bet on major sports matches and stock/crypto prices. We give you 1000 free tokens or you can deposit ETH or BTC for more! 
+      `Our bot allows you to bet on major sports matches and stock/crypto prices. We give you 1000 free tokens or you can deposit ETH for more! 
       \nYou can access the list of commands on our website ([getmeow.gg/bets](https://getmeow.gg/bets)) along with the latest events you can bet on.`
     )
     .setURL("https://getmeow.gg/bets");
