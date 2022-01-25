@@ -5,7 +5,7 @@ module.exports = {
       const newEmbed = new Discord.MessageEmbed()
         .setColor("#304281")
         .setTitle(`Under Maintanence!`)
-        .setDescription("Sorry, Meowbot is currently under maintanence. We'll be back shortly!")
+        .setDescription("Sorry, Churro is currently under maintanence. We'll be back shortly!")
         .setURL("https://getmeow.gg/");
       message.channel.send(newEmbed);
     },

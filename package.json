@@ -1,7 +1,7 @@
 {
-  "name": "meow-bot",
+  "name": "churro-bot",
   "version": "1.0.0",
-  "description": "Meow Bet Bot",
+  "description": "Churro Bet Bot",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

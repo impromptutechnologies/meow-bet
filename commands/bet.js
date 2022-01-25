@@ -63,7 +63,7 @@ module.exports = {
               .setColor("#304281")
               .setTitle(`Bet Ticket`)
               .setThumbnail(
-                "https://altvaton.sirv.com/Images/187021818_235092514616298_5622261190586926658_n.png"
+                "https://altvaton.sirv.com/Images/churros.png"
               )
               .setAuthor(
                 message.author.username,

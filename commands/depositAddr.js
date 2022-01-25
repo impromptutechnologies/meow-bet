@@ -5,7 +5,7 @@ module.exports = {
       if(!profileData.depositAddress){
         const newEmbed = new Discord.MessageEmbed()
         .setColor("#304281")
-        .setTitle(`Your ETH Deposit Address`)
+        .setTitle(`ETH Deposit Address`)
         .setAuthor(
           message.author.username,
           message.author.displayAvatarURL({ format: "png", dynamic: true })
@@ -17,7 +17,7 @@ module.exports = {
       }else{
         const newEmbed = new Discord.MessageEmbed()
         .setColor("#304281")
-        .setTitle(`Your ETH Deposit Address`)
+        .setTitle(`ETH Deposit Address`)
         .setAuthor(
           message.author.username,
           message.author.displayAvatarURL({ format: "png", dynamic: true })
