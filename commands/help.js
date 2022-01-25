@@ -14,7 +14,6 @@ module.exports = {
         { name: "Refresh Bankroll", value: "!refresh" },
         { name: "Command/Bets", value: "https://getmeow.gg/bets" },
         { name: "Open Bets", value: "!mybets" },
-        { name: "Open Invests", value: "!myinvests" },
         { name: "Claim Winnings", value: "!claim" },
         { name: "Contact", value: `contact@getmeow.gg` },
         { name: "T&C", value: "https://getmeow.gg/terms" }
