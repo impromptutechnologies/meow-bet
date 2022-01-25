@@ -22,7 +22,7 @@ module.exports = {
           message.author.username,
           message.author.displayAvatarURL({ format: "png", dynamic: true })
         )
-        .setDescription("Enter !refresh after you deposit ETH to update your tokens!")
+        .setDescription("Enter !refresh after you deposit ETH to update your Gems!")
         .setThumbnail("https://altvaton.sirv.com/Images/gem-stone_1f48e.png")
         .addFields({ name: "Ethereum Deposit Address", value: profileData.depositAddress })
         .setURL("https://getmeow.gg/tokens");

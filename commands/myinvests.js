@@ -42,7 +42,7 @@ module.exports = {
           .setDescription("Your Investments :)")
           .addFields(
             { name: "Code", value: yourinvestments, inline: true },
-            { name: "Tokens", value: tokens, inline: true }
+            { name: "Gems", value: tokens, inline: true }
           )
           .setFooter(
             "visit https://getmeow.gg/betsst to view more investmentss!"
