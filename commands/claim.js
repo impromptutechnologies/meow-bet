@@ -165,7 +165,7 @@ module.exports = {
                         value: change.toFixed(2),
                       },
                       {
-                        name: "50th Percentile (%)",
+                        name: "50th Percentile Pick Return (%)",
                         value: percentile.toFixed(2),
                       },
                       {
