@@ -11,7 +11,6 @@ const privateKey = (customerID, address, index, callback) => {
         "port": null,
         "path": "/v3/ethereum/wallet/priv",
         "headers": {
-          "x-testnet-type": "ethereum-ropsten",
           "content-type": "application/json",
           "x-api-key": process.env.API_TATUM
         }

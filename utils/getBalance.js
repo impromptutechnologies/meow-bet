@@ -10,7 +10,6 @@ const options = {
     "port": null,
     "path": `https://api-us-west1.tatum.io/v3/ledger/account/${id}/balance`,
     "headers": {
-      "x-testnet-type": "ethereum-ropsten",
       "content-type": "application/json",
       "x-api-key": process.env.API_TATUM,
     }

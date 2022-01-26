@@ -9,7 +9,6 @@ const depositAddress = (data, callback) => {
     "port": null,
     "path": `/v3/offchain/account/${data}/address`,
     "headers": {
-      "x-testnet-type": "ethereum-ropsten",
       "content-type": "application/json",
       "x-api-key": process.env.API_TATUM,
     }
