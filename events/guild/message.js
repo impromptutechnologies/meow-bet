@@ -26,7 +26,7 @@ module.exports = async (Discord, client, message) => {
       .setColor("#304281")
       .setTitle(`Welcome to Churro, ${message.author.username}!`)
       .setThumbnail(`https://altvaton.sirv.com/Images/churros.png`)
-      .setDescription(`Our bot allows you to bet on Soccer and NBA matches! We give you 1000 free gems or you can deposit ETH for more!. 
+      .setDescription(`Our bot allows you to bet on Soccer and NBA matches! We give you 1000 free gems or you can deposit ETH/Buy a Lootbox for more!. 
       You can access the list of commands on our website ([churro.gg/bets](http://meow-web.herokuapp.com)) along with the latest matches you can bet on.`)
       .setURL("http://localhost:3000/bet");
       message.author.send(newEmbed)
