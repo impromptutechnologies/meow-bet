@@ -8,8 +8,8 @@ module.exports = {
   cooldown: 1,
   description: "Invest stock!",
   execute(client, message, args, Discord, profileData) {
-    const code = args[1];
-    const amt = parseInt(args[0]);
+    const code = args[0];
+    const amt = 5000;
     if (isNaN(amt) || !code || amt > profileData.tokens) {
       return message.channel.send(
         `Error: please check the command again or your bankroll.`
@@ -47,15 +47,7 @@ module.exports = {
       return message.channel.send(newEmbed);
     }
     try {
-          Stock.findOne(
-            {
-              ticker: code,
-            },
-            (err, stockData) => {
-              if (err) {
-                return message.channel.send("Wrong Code");
-              }
-              if (stockData) {
+          
                 /*profileData.tokens = profileData.tokens - amt;
                 profileData.bettokens = profileData.bettokens + amt;
                 profileData.save();*/
@@ -83,7 +75,7 @@ module.exports = {
                       .setColor("#304281")
                       .setTitle(`Investment Ticket`)
                       .setThumbnail(
-                        "https://altvaton.sirv.com/Images/194312417_1218343265288417_112965584957259991_n.png"
+                        "https://altvaton.sirv.com/Images/gem-stone_1f48e.png"
                       )
                       .setAuthor(
                         message.author.username,
@@ -104,9 +96,7 @@ module.exports = {
                     message.channel.send(newEmbed);
                   }
                 );
-              }
-            }
-          ).lean();
+            
     } catch (err) {
       console.log(err, "hey");
     }

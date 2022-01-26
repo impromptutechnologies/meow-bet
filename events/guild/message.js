@@ -79,7 +79,7 @@ module.exports = async (Discord, client, message) => {
       return message.reply(
         `Please wait: ${time_left.toFixed(
           1
-        )} seconds before sending another command (Spam prevention)`
+        )} seconds before sending this command (Spam prevention)`
       );
     }
   }

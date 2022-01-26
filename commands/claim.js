@@ -116,7 +116,7 @@ module.exports = {
             { $match: { creatorID: message.author.id, status: "won" }},
             { $group: { _id: null, betamount: { $sum: "$investAmount" } } }
             ], (err, res) => {
-            const wonamount = res[0].betamount * 3;
+            const wonamount = res[0].betamount * 2;
             Profile.findOneAndUpdate(
               { userID: message.author.id },
               {
@@ -133,7 +133,10 @@ module.exports = {
             const creatorID = invest.creatorID;
             const guildID = invest.serverID;
             const betAmount = invest.investAmount;
-            const yourWinnings = betAmount * 3;
+            const change = invest.change;
+            const code = invest.Code;
+            const percentile = invest.percentile;
+            const yourWinnings = betAmount * 2;
                 if (err) {
                   return console.log(err);
                 }
@@ -156,6 +159,14 @@ module.exports = {
                       {
                         name: "Winnings",
                         value: yourWinnings.toFixed(2),
+                      },
+                      {
+                        name: `${code} Return (%)`,
+                        value: change.toFixed(2),
+                      },
+                      {
+                        name: "50th Percentile (%)",
+                        value: percentile.toFixed(2),
                       },
                       {
                         name: "Profit",
