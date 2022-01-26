@@ -54,7 +54,7 @@ module.exports = async (Discord, client, message) => {
                   .setTitle(`Welcome to Churro, ${message.author.username}!`)
                   .setThumbnail(`https://altvaton.sirv.com/Images/churros.png`)
                   .setDescription(
-                    `Our bot allows you to bet on major sports matches and stock/crypto prices. We give you 1000 free tokens or you can deposit ETH for more! 
+                    `Our bot allows you to bet on major sports matches and stock/crypto prices. We give you 1000 free Gems or you can deposit ETH for more! 
           \nYou can access the list of commands on our website ([getmeow.gg/bets](https://getmeow.gg/bets)) along with the latest events you can bet on.`
                   )
                   .setURL("https://getmeow.gg/bets");
