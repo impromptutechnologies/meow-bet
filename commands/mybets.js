@@ -17,8 +17,8 @@ module.exports = {
             )
             .setDescription("No Bets Placed :(")
             .addFields({ name: "For Bet commands", value: "visit link" })
-            .setFooter("visit https://getmeow.gg/bets to view bets!")
-            .setURL("https://getmeow.gg/bets");
+            .setFooter("visit https://churro.gg/bets to view bets!")
+            .setURL("https://churro.gg/bets");
           return message.channel.send(newEmbed);
         }
         let yourbets = "";
@@ -46,8 +46,8 @@ module.exports = {
             { name: "Gems 💎", value: tokens, inline: true },
             { name: "Odds", value: odds, inline: true }
           )
-          .setFooter("visit https://getmeow.gg/bets to view more bets!")
-          .setURL("https://getmeow.gg/bets");
+          .setFooter("visit https://churro.gg/bets to view more bets!")
+          .setURL("https://churro.gg/bets");
         message.channel.send(newEmbed);
       });
     } catch (e) {

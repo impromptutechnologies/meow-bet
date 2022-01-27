@@ -72,8 +72,8 @@ module.exports = {
                         value: (yourWinnings - betAmount).toFixed(2),
                       }
                     )
-                    .setFooter("visit https://getmeow.gg/bets to view bets!")
-                    .setURL("https://getmeow.gg/bets");
+                    .setFooter("visit https://churro.gg/bets to view bets!")
+                    .setURL("https://churro.gg/bets");
                   message.channel.send(newEmbed);
                   Bet.deleteOne(
                     {
@@ -174,9 +174,9 @@ module.exports = {
                       }
                     )
                     .setFooter(
-                      "visit https://getmeow.gg/betsst to view more stocks!"
+                      "visit https://churro.gg/betsst to view more stocks!"
                     )
-                    .setURL("https://getmeow.gg/betsst");
+                    .setURL("https://churro.gg/betsst");
                   message.channel.send(newEmbed);
                   Invest.deleteOne(
                     {
@@ -288,8 +288,8 @@ module.exports = {
                         value: (yourWinnings - betAmount).toFixed(2),
                       }
                     )
-                    .setFooter("visit https://getmeow.gg/bets to view bets!")
-                    .setURL("https://getmeow.gg/bets");
+                    .setFooter("visit https://churro.gg/bets to view bets!")
+                    .setURL("https://churro.gg/bets");
                   message.channel.send(newEmbed);
                   Bet.deleteOne(
                     {
@@ -375,9 +375,9 @@ module.exports = {
                       }
                     )
                     .setFooter(
-                      "visit https://getmeow.gg/betsst to view more stocks!"
+                      "visit https://churro.gg/betsst to view more stocks!"
                     )
-                    .setURL("https://getmeow.gg/betsst");
+                    .setURL("https://churro.gg/betsst");
                   message.channel.send(newEmbed);
                   Invest.deleteOne(
                     {

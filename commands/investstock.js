@@ -42,8 +42,8 @@ module.exports = {
         .setDescription(
           `The US stock market opens from 9:30am to 4pm ET so place your commands before the market opens. Weekdays Only.`
         )
-        .setFooter("visit https://getmeow.gg/betsst to view more investments!")
-        .setURL("https://getmeow.gg/betsst");
+        .setFooter("visit https://churro.gg/betsst to view more investments!")
+        .setURL("https://churro.gg/betsst");
       return message.channel.send(newEmbed);
     }
     try {
@@ -90,9 +90,9 @@ module.exports = {
                         { name: "Stock Ticker", value: code }
                       )
                       .setFooter(
-                        "visit https://getmeow.gg/betsst to view more stocks!"
+                        "visit https://churro.gg/betsst to view more stocks!"
                       )
-                      .setURL("https://getmeow.gg/betsst");
+                      .setURL("https://churro.gg/betsst");
                     message.channel.send(newEmbed);
                   }
                 );

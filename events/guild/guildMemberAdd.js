@@ -17,9 +17,9 @@ module.exports = async (client, discord, member) => {
     .setThumbnail(`https://altvaton.sirv.com/Images/churros.png`)
     .setDescription(
       `Our bot allows you to bet on major NBA and Soccer matches. We give you 1000 free Gems 💎 or you can deposit ETH/Buy a Lootbox for more! 
-      \nYou can access the list of commands on our website ([getmeow.gg/bets](https://getmeow.gg/bets)) along with the latest events you can bet on.`
+      \nYou can access the list of commands on our website ([churro.gg/bets](https://churro.gg/bets)) along with the latest events you can bet on.`
     )
-    .setURL("https://getmeow.gg/bets");
+    .setURL("https://churro.gg/bets");
   member.user.send(newEmbed);
   profile.save();
 };

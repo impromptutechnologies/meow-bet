@@ -6,7 +6,7 @@ module.exports = {
         .setColor("#304281")
         .setTitle(`Under Maintanence!`)
         .setDescription("Sorry, Churro is currently under maintanence. We'll be back shortly!")
-        .setURL("https://getmeow.gg/");
+        .setURL("https://churro.gg/");
       message.channel.send(newEmbed);
     },
   };

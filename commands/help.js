@@ -7,19 +7,19 @@ module.exports = {
       .setTitle(`Useful Resources`)
       .setDescription("Our website contains all the info you need!")
       .addFields(
-        { name: "Homepage", value: "https://getmeow.gg/" },
+        { name: "Homepage", value: "https://churro.gg/" },
         { name: "Invite Links", value: "!invite" },
         { name: "Check Bankroll", value: "!bankroll" },
         { name: "ETH Deposit Address", value: "!deposit" },
-        { name: "Your Account", value: "https://getmeow.gg/account" },
+        { name: "Your Account", value: "https://churro.gg/account" },
         { name: "Refresh Bankroll", value: "!refresh" },
-        { name: "Command/Bets", value: "https://getmeow.gg/bets" },
+        { name: "Command/Bets", value: "https://churro.gg/bets" },
         { name: "Open Bets", value: "!mybets" },
         { name: "Claim Winnings", value: "!claim" },
-        { name: "Contact", value: `contact@getmeow.gg` },
-        { name: "T&C", value: "https://getmeow.gg/terms" }
+        { name: "Contact", value: `contact@churro.gg` },
+        { name: "T&C", value: "https://churro.gg/terms" }
       )
-      .setURL("https://getmeow.gg/bets");
+      .setURL("https://churro.gg/bets");
     message.channel.send(newEmbed);
   },
 };

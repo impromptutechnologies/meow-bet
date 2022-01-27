@@ -36,7 +36,7 @@ module.exports = {
         `A random number between 1-100 has been generated. Your hint is ${hint}, Respond with "High", "Low", or "Bingo".\n
     Choose whether you think the hidden number is higher, lower, or the same number as the hint.`
       )
-      .setURL("https://getmeow.gg/casino");
+      .setURL("https://churro.gg/casino");
     const filter = (m) => m.author.id === message.author.id;
     message.channel.send(newEmbed);
     message.channel
@@ -80,9 +80,9 @@ module.exports = {
               { name: "Profit", value: (amt * 1.5 - amt).toFixed(2) }
             )
             .setFooter(
-              "visit https://getmeow.gg/casino to view more casino games!"
+              "visit https://churro.gg/casino to view more casino games!"
             )
-            .setURL("https://getmeow.gg/casino");
+            .setURL("https://churro.gg/casino");
           return message.channel.send(newEmbed);
         }
         if (messageReceived == "low" && chances < hint) {
@@ -111,9 +111,9 @@ module.exports = {
               { name: "Profit", value: (amt * 1.5 - amt).toFixed(2) }
             )
             .setFooter(
-              "visit https://getmeow.gg/casino to view more casino games!"
+              "visit https://churro.gg/casino to view more casino games!"
             )
-            .setURL("https://getmeow.gg/casino");
+            .setURL("https://churro.gg/casino");
           return message.channel.send(newEmbed);
         }
         if (messageReceived == "bingo" && chances == hint) {
@@ -142,9 +142,9 @@ module.exports = {
               { name: "Profit", value: (amt * 7.5 - amt).toFixed(2) }
             )
             .setFooter(
-              "visit https://getmeow.gg/casino to view more casino games!"
+              "visit https://churro.gg/casino to view more casino games!"
             )
-            .setURL("https://getmeow.gg/casino");
+            .setURL("https://churro.gg/casino");
           return message.channel.send(newEmbed);
         } else {
           Profile.findOneAndUpdate(

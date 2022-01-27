@@ -20,7 +20,7 @@ module.exports = {
             )
             .setDescription("No Investments :(")
             .addFields({ name: "For Invest commands", value: "visit link" })
-            .setURL("https://getmeow.gg/betsst");
+            .setURL("https://churro.gg/betsst");
           return message.channel.send(newEmbed);
         }
         let yourinvestments = "";
@@ -45,9 +45,9 @@ module.exports = {
             { name: "Gems 💎", value: tokens, inline: true }
           )
           .setFooter(
-            "visit https://getmeow.gg/betsst to view more investmentss!"
+            "visit https://churro.gg/betsst to view more investmentss!"
           )
-          .setURL("https://getmeow.gg/betsst");
+          .setURL("https://churro.gg/betsst");
         message.channel.send(newEmbed);
       });
     } catch (e) {

@@ -42,9 +42,9 @@ module.exports = {
             )
             .setDescription("Better luck next time :(")
             .setFooter(
-              "visit https://getmeow.gg/casino to view more casino games!"
+              "visit https://churro.gg/casino to view more casino games!"
             )
-            .setURL("https://getmeow.gg/casino");
+            .setURL("https://churro.gg/casino");
           return message.channel.send(newEmbed);
         }
       );
@@ -72,9 +72,9 @@ module.exports = {
               })
             )
             .setFooter(
-              "visit https://getmeow.gg/casino to view more casino games!"
+              "visit https://churro.gg/casino to view more casino games!"
             )
-            .setURL("https://getmeow.gg/casino");
+            .setURL("https://churro.gg/casino");
           return message.channel.send(newEmbed);
         }
       );

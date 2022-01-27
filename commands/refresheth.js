@@ -21,7 +21,7 @@ module.exports = {
                     name: "Bankroll",
                     value: profileData.tokens.toFixed(2),
                   })
-                  .setURL("https://getmeow.gg/lootbox");
+                  .setURL("https://churro.gg/lootbox");
                 return message.channel.send(newEmbed);
     }else{
         getEthBalance(profileData.depositAddress, async (data) => {
@@ -54,7 +54,7 @@ module.exports = {
                   name: "Bankroll",
                   value: newTokens,
                 })
-                .setURL("https://getmeow.gg/lootbox");
+                .setURL("https://churro.gg/lootbox");
                  return message.channel.send(newEmbed);
                 
               });
@@ -73,7 +73,7 @@ module.exports = {
                     name: "Bankroll",
                     value: profileData.tokens.toFixed(2),
                   })
-                  .setURL("https://getmeow.gg/lootbox");
+                  .setURL("https://churro.gg/lootbox");
                 return message.channel.send(newEmbed);
             }
           });

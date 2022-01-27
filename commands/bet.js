@@ -51,8 +51,8 @@ module.exports = {
               .setDescription(
                 `Please place your bet commands before matches begin.`
               )
-              .setFooter("visit https://getmeow.gg/bets to view more bets!")
-              .setURL("https://getmeow.gg/bets");
+              .setFooter("visit https://churro.gg/bets to view more bets!")
+              .setURL("https://churro.gg/bets");
             return message.channel.send(newEmbed);
           }
           if (outcomeData) {
@@ -77,8 +77,8 @@ module.exports = {
                 { name: "Bet Amount", value: amt },
                 { name: "Code", value: code }
               )
-              .setFooter("visit https://getmeow.gg/bets to view more bets!")
-              .setURL("https://getmeow.gg/bets");
+              .setFooter("visit https://churro.gg/bets to view more bets!")
+              .setURL("https://churro.gg/bets");
             if (outcomeData.option1[0].Code == code) {
               const odds = outcomeData.option1[0].odds;
               /*profileData.tokens = profileData.tokens - amt;
