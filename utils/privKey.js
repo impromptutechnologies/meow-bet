@@ -28,7 +28,6 @@ const privateKey = (customerID, address, index, callback) => {
             //console.log(body.toString());
             const jsonify = JSON.parse(body.toString())
             //console.log(jsonify.key)
-            console.log(jsonify)
             const coinUpdate = Profile.findOneAndUpdate(
                 { customerID: customerID},
                 { depositAddress: address, derivationKey: index, privateKey: jsonify.key}, (req, res, error) => {

@@ -43,7 +43,7 @@ module.exports = {
           .setDescription("Your Open Bets :)")
           .addFields(
             { name: "Code", value: yourbets, inline: true },
-            { name: "Gems", value: tokens, inline: true },
+            { name: "Gems 💎", value: tokens, inline: true },
             { name: "Odds", value: odds, inline: true }
           )
           .setFooter("visit https://getmeow.gg/bets to view more bets!")

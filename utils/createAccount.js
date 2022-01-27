@@ -9,7 +9,6 @@ const {
 
 const createAccount = async (id, username, serverID, callback) => {
 const uuidchose = uuidv4()
-console.log(uuidchose)
 const http = require("https");
 
 const options = {
@@ -33,7 +32,6 @@ const req = http.request(options, function (res) {
   res.on("end", function () {
     const body = Buffer.concat(chunks);
     const jsonify = JSON.parse(body.toString())
-    console.log(jsonify[0].id, id, username, serverID)
     /*const coinUpdate = Profile.findOneAndUpdate(
         { issuer:"did:ethr:0xD4dE8D990d31fb2523aca2570A2b40Ce7c77e0CA"},
         { customerID: jsonify[0].id, externalID: uuidchose}, (req, res, error) => {
@@ -52,7 +50,6 @@ const req = http.request(options, function (res) {
         {
           customerID: jsonify[0].id,
         }, (req, res, error) => {
-          console.log(res)
           callback(jsonify[0].id)
           if(error){
               console.log(error)

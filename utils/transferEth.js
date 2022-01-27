@@ -24,10 +24,8 @@ const options = {
   
     res.on("end", function () {
       const body = Buffer.concat(chunks);
-      console.log(body.toString());
       const jsonify = JSON.parse(body.toString())
-      console.log(jsonify.txId)
-      callback(jsonify.txId)
+=      callback(jsonify.txId)
     });
   });
   

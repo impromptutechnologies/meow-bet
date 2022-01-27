@@ -29,7 +29,7 @@ module.exports = {
         const newVal = data;
         if (data > profileData.lastTransaction) {
           //const value = String(data - (data * 0.05))
-          const value = (data - profileData.lastTransaction) - 0.001;
+          const value = (data - profileData.lastTransaction) - 0.002;
           console.log(value, profileData.lastTransaction);
           const excess = 0.004-value
           if(value > 0.004){

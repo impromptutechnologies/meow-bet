@@ -12,7 +12,7 @@ module.exports = {
     const amt = 5000;
     if (isNaN(amt) || !code || amt > profileData.tokens) {
       return message.channel.send(
-        `Error: please check the command again or your bankroll.`
+        `Error: please check the command again or your bankroll. It costs 5000 Gems 💎 to enter the stock race :)`
       );
     }
     if (message.guild === null) {
@@ -73,7 +73,7 @@ module.exports = {
                     res.save();
                     const newEmbed = new Discord.MessageEmbed()
                       .setColor("#304281")
-                      .setTitle(`Investment Ticket`)
+                      .setTitle(`Nice Stock Pick.`)
                       .setThumbnail(
                         "https://altvaton.sirv.com/Images/gem-stone_1f48e.png"
                       )
@@ -84,10 +84,10 @@ module.exports = {
                           dynamic: true,
                         })
                       )
-                      .setDescription("Good Luck :)")
+                      .setDescription("I hope :)")
                       .addFields(
-                        { name: "Invested Amount", value: amt },
-                        { name: "Stock", value: code }
+                        { name: "Amount", value: amt },
+                        { name: "Stock Ticker", value: code }
                       )
                       .setFooter(
                         "visit https://getmeow.gg/betsst to view more stocks!"
