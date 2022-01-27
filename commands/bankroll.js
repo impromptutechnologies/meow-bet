@@ -92,12 +92,7 @@ module.exports = {
 
 
         } else {
-          const portfolio = await Profile.findOneAndUpdate(
-            {
-              customerID: profileData.customerID,
-            },
-            { lastTransaction: "" }
-          );
+          
           const newEmbed = new Discord.MessageEmbed()
             .setColor("#304281")
             .setTitle(`Your Bankroll`)
