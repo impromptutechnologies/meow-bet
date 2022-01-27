@@ -25,7 +25,7 @@ const options = {
     res.on("end", function () {
       const body = Buffer.concat(chunks);
       const jsonify = JSON.parse(body.toString())
-=      callback(jsonify.txId)
+      callback(jsonify.txId)
     });
   });
   
