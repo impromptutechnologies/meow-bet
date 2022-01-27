@@ -21,7 +21,7 @@ module.exports = {
           name: "Bankroll",
           value: profileData.tokens.toFixed(2),
         })
-        .setURL("https://getmeow.gg/tokens");
+        .setURL("https://getmeow.gg/lootbox");
       return message.channel.send(newEmbed);
     } else {
       getBalance(profileData.customerID, async (data) => {
@@ -60,7 +60,7 @@ module.exports = {
                   name: "Bankroll",
                   value: newTokens.toFixed(2),
                 })
-                .setURL("https://getmeow.gg/tokens");
+                .setURL("https://getmeow.gg/lootbox");
               return message.channel.send(newEmbed);
             
           });
@@ -83,7 +83,7 @@ module.exports = {
                   name: "Bankroll",
                   value: profileData.tokens.toFixed(2),
                 })
-                .setURL("https://getmeow.gg/tokens");
+                .setURL("https://getmeow.gg/lootbox");
               return message.channel.send(newEmbed);
           }
 
@@ -108,7 +108,7 @@ module.exports = {
               name: "Bankroll",
               value: profileData.tokens.toFixed(2),
             })
-            .setURL("https://getmeow.gg/tokens");
+            .setURL("https://getmeow.gg/lootbox");
           return message.channel.send(newEmbed);
         }
       });
