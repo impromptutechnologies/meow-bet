@@ -24,12 +24,15 @@ module.exports = {
         .setURL("https://getmeow.gg/tokens");
       return message.channel.send(newEmbed);
     } else {
-      getEthBalance(profileData.depositAddress, async (data) => {
+      getBalance(profileData.customerID, async (data) => {
         console.log(data);
-        if (data >= 0.005) {
+        const newVal = data;
+        if (data > profileData.lastTransaction) {
           //const value = String(data - (data * 0.05))
-          const value = String(data - 0.001);
-          if(profileData.lastTransaction == ""){
+          const value = (data - profileData.lastTransaction) - 0.001;
+          console.log(value, profileData.lastTransaction);
+          const excess = 0.004-value
+          if(value > 0.004){
             transferEth(String(value), profileData.privateKey, async (data) => {
               const newTokens =
                 ((parseFloat(value) * 3000)*1000) + profileData.tokens;
@@ -37,7 +40,7 @@ module.exports = {
                 {
                   customerID: profileData.customerID,
                 },
-                { tokens: newTokens, lastTransaction: data }
+                { tokens: newTokens, lastTransaction: newVal }
               );
               const newEmbed = new Discord.MessageEmbed()
                 .setColor("#304281")
