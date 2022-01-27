@@ -8,6 +8,7 @@ module.exports = {
       .setDescription("Our website contains all the info you need!")
       .addFields(
         { name: "Homepage", value: "https://getmeow.gg/" },
+        { name: "Invite Links", value: "!invite" },
         { name: "Check Bankroll", value: "!bankroll" },
         { name: "ETH Deposit Address", value: "!deposit" },
         { name: "Your Account", value: "https://getmeow.gg/account" },
