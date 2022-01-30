@@ -19,7 +19,7 @@ const getEthBalance = require("../utils/getEthBalance");
     .addFields(
       { name: "here", value: data },
     )
-    .setURL("https://churro.gg/bets");
+    .setURL("https://churro.gg/lootbox");
   message.channel.send(newEmbed);
     },
   };

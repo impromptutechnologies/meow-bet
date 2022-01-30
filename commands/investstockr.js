@@ -4,15 +4,15 @@ const Stock = require("../models/stockSchema");
 const Profile = require("../models/profileSchema");
 
 module.exports = {
-  name: "invstockr",
+  name: "invstock",
   cooldown: 1,
   description: "Invest stock!",
   execute(client, message, args, Discord, profileData) {
-    const code = args[0];
-    const amt = 5000;
+    const code = args[1];
+    const amt = parseInt(args[0]);
     if (isNaN(amt) || !code || amt > profileData.tokens) {
       return message.channel.send(
-        `Error: please check the command again or your bankroll. It costs 5000 Gems 💎 to enter the stock race :)`
+        `Error: please check the command again or your bankroll.`
       );
     }
     if (message.guild === null) {
@@ -42,12 +42,20 @@ module.exports = {
         .setDescription(
           `The US stock market opens from 9:30am to 4pm ET so place your commands before the market opens. Weekdays Only.`
         )
-        .setFooter("visit https://churro.gg/betsst to view more investments!")
-        .setURL("https://churro.gg/betsst");
+        .setFooter("visit https://getmeow.gg/betsst to view more investments!")
+        .setURL("https://getmeow.gg/betsst");
       return message.channel.send(newEmbed);
     }
     try {
-          
+          Stock.findOne(
+            {
+              ticker: code,
+            },
+            (err, stockData) => {
+              if (err) {
+                return message.channel.send("Wrong Code");
+              }
+              if (stockData) {
                 /*profileData.tokens = profileData.tokens - amt;
                 profileData.bettokens = profileData.bettokens + amt;
                 profileData.save();*/
@@ -73,9 +81,9 @@ module.exports = {
                     res.save();
                     const newEmbed = new Discord.MessageEmbed()
                       .setColor("#304281")
-                      .setTitle(`Nice Stock Pick.`)
+                      .setTitle(`Investment Ticket`)
                       .setThumbnail(
-                        "https://altvaton.sirv.com/Images/gem-stone_1f48e.png"
+                        "https://altvaton.sirv.com/Images/194312417_1218343265288417_112965584957259991_n.png"
                       )
                       .setAuthor(
                         message.author.username,
@@ -84,19 +92,21 @@ module.exports = {
                           dynamic: true,
                         })
                       )
-                      .setDescription("I hope :)")
+                      .setDescription("Good Luck :)")
                       .addFields(
-                        { name: "Amount", value: amt },
-                        { name: "Stock Ticker", value: code }
+                        { name: "Invested Amount", value: amt },
+                        { name: "Stock", value: code }
                       )
                       .setFooter(
-                        "visit https://churro.gg/betsst to view more stocks!"
+                        "visit https://getmeow.gg/betsst to view more stocks!"
                       )
-                      .setURL("https://churro.gg/betsst");
+                      .setURL("https://getmeow.gg/betsst");
                     message.channel.send(newEmbed);
                   }
                 );
-            
+              }
+            }
+          ).lean();
     } catch (err) {
       console.log(err, "hey");
     }
