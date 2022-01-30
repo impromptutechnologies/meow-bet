@@ -81,7 +81,7 @@ module.exports = {
                     res.save();
                     const newEmbed = new Discord.MessageEmbed()
                       .setColor("#304281")
-                      .setTitle(`Investment Ticket`)
+                      .setTitle(`Investment Ticket 📈`)
                       .setThumbnail(
                         "https://altvaton.sirv.com/Images/gem-stone_1f48e.png"
                       )

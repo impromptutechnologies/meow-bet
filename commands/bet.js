@@ -61,7 +61,7 @@ module.exports = {
             }
             const newEmbed = new Discord.MessageEmbed()
               .setColor("#304281")
-              .setTitle(`Bet Ticket`)
+              .setTitle(`Bet Ticket ⚽️🏀`)
               .setThumbnail(
                 "https://altvaton.sirv.com/Images/churros.png"
               )
