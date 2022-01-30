@@ -83,7 +83,7 @@ module.exports = {
                       .setColor("#304281")
                       .setTitle(`Investment Ticket`)
                       .setThumbnail(
-                        "https://altvaton.sirv.com/Images/194312417_1218343265288417_112965584957259991_n.png"
+                        "https://altvaton.sirv.com/Images/gem-stone_1f48e.png"
                       )
                       .setAuthor(
                         message.author.username,
