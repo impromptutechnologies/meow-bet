@@ -28,6 +28,7 @@ module.exports = {
             { $match: { creatorID: message.author.id, status: "won" }},
             { $group: { _id: null, wonamount: { $sum: "$possibleWinnings" }, betamount: { $sum: "$betAmount" } } }
             ], (err, res) => {
+              console.log(res)
             Profile.findOneAndUpdate(
               { userID: message.author.id },
               {

@@ -11,6 +11,7 @@ module.exports = {
         { name: "Invite Links", value: "!invite" },
         { name: "Check Bankroll", value: "!bankroll" },
         { name: "ETH Deposit Address", value: "!deposit" },
+        { name: "Lootbox Link", value: "!lootbox" },
         { name: "Your Account", value: "https://churro.gg/account" },
         { name: "Refresh Bankroll", value: "!refresh" },
         { name: "Command/Bets", value: "https://churro.gg/bets" },
