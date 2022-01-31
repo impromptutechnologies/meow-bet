@@ -34,7 +34,7 @@ const options = {
     to: '0x5fE0b0102562911495d5af34a2dF728fd0D439c8',
     currency: 'ETH',
     fee: {gasLimit: '21000', gasPrice: '227'},
-    amount: "0.006",
+    amount: amount,
     fromPrivateKey: privateKey
   }));
   req.end();
