@@ -39,7 +39,7 @@ module.exports = {
                 ((parseFloat(value) * 3000)*1000) + profileData.tokens;
                 console.log(data)
 
-                if(data.statusCode == 403){
+                if(data == null){
                   const portfolio = await Profile.findOneAndUpdate(
                     {
                       customerID: profileData.customerID,
