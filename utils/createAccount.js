@@ -67,7 +67,7 @@ req.write(JSON.stringify({
   accounts: [
     {
         currency: 'ETH',
-        xpub: 'xpub6DkFB88p6KuxpwP4ceRdph1aFHj8hxHULFrbKdSB5pQ9BJkfcMki7ubQUaj3gHJRQYDcnbxAW1PNodKRjprRo3wzcN8V6vbzraCGx4UtKEs',
+        xpub: 'xpub6FC2usJQjPvQEjSPSjA6dowd51nmgviS7yVF5NyH1iowLRoJfdVprGNoL6ZrAWhk2acyVXZMHTeBoCAmfjq3KFSmfpfYz7ABaCcSqpCtu4g',
         customer: {
           externalId: uuidchose,
         },

@@ -48,7 +48,7 @@ const privateKey = (customerID, address, index, callback) => {
       
       req.write(JSON.stringify({
         index: index,
-        mnemonic: 'sibling fetch flavor hub pioneer party right april seek border admit exile fragile humble imitate craft spring magic accident meadow novel shove daring earn'
+        mnemonic: 'chunk edit success fruit attitude oyster lazy flag together glass belt mass fiber state series silver tip click satisfy bundle mushroom buddy reopen hub'
       }));
       req.end();
 }
