@@ -44,7 +44,6 @@ module.exports = async (Discord, client, message) => {
               data.derivationKey,
               (data) => {
                 
-                console.log("PrivateLEY", data);
              
               }
             );
