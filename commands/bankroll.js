@@ -38,33 +38,38 @@ module.exports = {
               const newTokens =
                 ((parseFloat(value) * 3000)*1000) + profileData.tokens;
                 console.log(data)
-              const portfolio = await Profile.findOneAndUpdate(
-                {
-                  customerID: profileData.customerID,
-                },
-                { tokens: newTokens, lastTransaction: newVal }
-              );
-              const newEmbed = new Discord.MessageEmbed()
-                .setColor("#304281")
-                .setTitle(`Balance Updated! Deposit has gone through.`)
-                .setAuthor(
-                  message.author.username,
-                  message.author.displayAvatarURL({
-                    format: "png",
-                    dynamic: true,
-                  })
-                )
-                .setDescription("Your new bankroll")
-                .setThumbnail(
-                  "https://altvaton.sirv.com/Images/gem-stone_1f48e.png"
-                )
-                .addFields({
-                  name: "Bankroll",
-                  value: newTokens.toFixed(2),
-                })
-                .setURL("https://churro.gg/lootbox");
-              return message.channel.send(newEmbed);
-            
+
+                if(data.statusCode == 403){
+                  const portfolio = await Profile.findOneAndUpdate(
+                    {
+                      customerID: profileData.customerID,
+                    },
+                    { tokens: newTokens, lastTransaction: newVal }
+                  );
+                  const newEmbed = new Discord.MessageEmbed()
+                    .setColor("#304281")
+                    .setTitle(`Balance Updated! Deposit has gone through.`)
+                    .setAuthor(
+                      message.author.username,
+                      message.author.displayAvatarURL({
+                        format: "png",
+                        dynamic: true,
+                      })
+                    )
+                    .setDescription("Your new bankroll")
+                    .setThumbnail(
+                      "https://altvaton.sirv.com/Images/gem-stone_1f48e.png"
+                    )
+                    .addFields({
+                      name: "Bankroll",
+                      value: newTokens.toFixed(2),
+                    })
+                    .setURL("https://churro.gg/lootbox");
+                  return message.channel.send(newEmbed);
+                
+                }
+
+              
           });
           }else{
             const newEmbed = new Discord.MessageEmbed()
