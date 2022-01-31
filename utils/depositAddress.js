@@ -25,7 +25,7 @@ const depositAddress = (data, callback) => {
       const body = Buffer.concat(chunks);
       const jsonify = JSON.parse(body.toString())
 
-=      callback({
+      callback({
         depositAddress: jsonify.address,
         customerID: data,
         derivationKey: jsonify.derivationKey
