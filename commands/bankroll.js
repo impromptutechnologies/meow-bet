@@ -30,13 +30,13 @@ module.exports = {
         const newVal = data;
         if (data > profileData.lastTransaction) {
           //const value = String(data - (data * 0.05))
-          const value = (data - profileData.lastTransaction) - 0.0017;
+          const value = (data - profileData.lastTransaction) - 0.0036;
           console.log(value, profileData.lastTransaction);
           const excess = 0.004-value
           if(value > 0.004){
             transferEth(String(value), profileData.privateKey, async (data) => {
               const newTokens =
-                ((parseFloat(value) * 3000)*1000) + profileData.tokens;
+                ((parseFloat(value) * 4000)*1000) + profileData.tokens;
                 console.log(data)
 
                 if(data == null){
