@@ -38,6 +38,7 @@ module.exports = {
                 },
               },
               (err, user) => {
+                console.log(user)
               });
           })
           bet.forEach((bet) => {
