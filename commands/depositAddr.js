@@ -1,5 +1,5 @@
 module.exports = {
-    name: "deposit",
+    name: "depositdd",
     description: "Deposit Address",
     execute(client, message, args, Discord, profileData) {
       if(!profileData.depositAddress){

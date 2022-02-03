@@ -4,7 +4,7 @@ const Stock = require("../models/stockSchema");
 const Profile = require("../models/profileSchema");
 
 module.exports = {
-  name: "invstock",
+  name: "invstockxexe",
   cooldown: 1,
   description: "Invest stock!",
   execute(client, message, args, Discord, profileData) {

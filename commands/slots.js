@@ -1,6 +1,6 @@
 const Profile = require("../models/profileSchema");
 module.exports = {
-  name: "slots",
+  name: "slotsdd",
   cooldown: 1,
   description: "Play the Slots!",
   execute(client, message, args, Discord, profileData) {
