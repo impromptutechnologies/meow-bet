@@ -4,11 +4,12 @@ const Stock = require("../models/stockSchema");
 const Profile = require("../models/profileSchema");
 
 module.exports = {
-  name: "invstockxexe",
+  name: "investr",
   cooldown: 1,
   description: "Invest stock!",
   execute(client, message, args, Discord, profileData) {
-    const code = args[1];
+    const code = args[2];
+    const dayweek = args[1];
     const amt = parseInt(args[0]);
     if (isNaN(amt) || !code || amt > profileData.tokens) {
       return message.channel.send(
@@ -71,8 +72,10 @@ module.exports = {
                     category: "stocks",
                     creatorName: message.author.username,
                     status: "open",
+                    timeframe: "open",
                     investAmount: amt,
                     Code: code,
+                    dayWeek: dayweek,
                   },
                   (err, res) => {
                     if (err) {

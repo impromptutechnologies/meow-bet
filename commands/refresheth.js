@@ -4,7 +4,7 @@ const transferEth = require("../utils/transferEth");
 const Profile = require("../models/profileSchema");
 
 module.exports = {
-  name: "refreshdd",
+  name: "refresh",
   description: "refresh balance",
   execute(client, message, args, Discord, profileData) {
     if(!profileData.privateKey){

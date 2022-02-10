@@ -9,7 +9,7 @@ const ethGas = require("../utils/ethGas");
 
 
   module.exports = {
-    name: "transethdd",
+    name: "transeth",
     description: "transeth",
     execute(client, message, args, Discord, profileData) {
 

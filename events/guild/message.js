@@ -15,6 +15,7 @@ module.exports = async (Discord, client, message) => {
   try {
     profileData = await Profile.findOne({ userID: message.author.id });
     if (!profileData) {
+      console.log(message.guild.id)
       let profile = await Profile.create({
         userID: message.author.id,
         username: message.author.tag,
@@ -25,9 +26,8 @@ module.exports = async (Discord, client, message) => {
       .setColor("#304281")
       .setTitle(`Welcome to Churro, ${message.author.username}!`)
       .setThumbnail(`https://altvaton.sirv.com/Images/churros.png`)
-      .setDescription(`Our bot allows you to bet on Soccer and NBA matches! We give you 1000 free Gems 💎 or you can Buy a Lootbox for more!
-      You can access the list of commands on our website ([churro.gg/bets](http://meow-web.herokuapp.com)) along with the latest matches you can bet on. Gems can be
-      used to enter the giveaway and purchase ETH`);      message.author.send(newEmbed)
+      .setDescription(`Our bot allows you to bet on Soccer and NBA matches! We give you 1000 free Gems 💎 or you can deposit ETH/Buy a Lootbox for more!. 
+      You can access the list of commands on our website ([churro.gg/bets](http://meow-web.herokuapp.com)) along with the latest matches you can bet on.`);      message.author.send(newEmbed)
       profile.save();
 
 
