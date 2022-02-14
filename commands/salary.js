@@ -21,6 +21,7 @@ module.exports = {
           const newEmbed = new Discord.MessageEmbed()
         .setColor("#304281")
         .setTitle(`Your Weekly Salary Paid!`)
+        .setDescription('500 💎 Paid Out. Enter !bankroll to check.')
         .setURL("https://churro.gg/");
       message.channel.send(newEmbed);
     }
