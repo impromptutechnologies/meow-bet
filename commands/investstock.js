@@ -21,6 +21,7 @@ module.exports = {
         "This particular command must be placed in a server"
       );
     }
+    
     if (dayweek !== "day" && dayweek !== "week") {
       return message.channel.send(
         "Day or Week? Like this: !invest day AAPL"
@@ -32,6 +33,12 @@ module.exports = {
     var date1 = moment.utc().format(`${month}-${day} 13:30`);
     var date2 = moment.utc().format(`${month}-${day} 21:35`);
     var today = new Date();
+    if (dayweek === "week" && today.getDay() !== 6 &&
+    today.getDay() !== 0) {
+      return message.author.send(
+        "Week Commands should be placed on the weekends, for the subsequent week."
+      );
+    }
     if (
       date > date1 &&
       date < date2 &&

@@ -12,96 +12,7 @@ module.exports = {
         "This particular command must be placed in a server"
       );
     }
-    try {
-      Bet.find(
-        {
-          creatorID: message.author.id, status: "won" 
-        },
-        (err, bet) => {
-          if (err) {
-            return console.log(err);
-          }
-          if (bet[0] == null) {
-            return message.channel.send("No Unclaimed Bet Winnings.");
-          }
-          Bet.aggregate([
-            { $match: { creatorID: message.author.id, status: "won" }},
-            { $group: { _id: null, wonamount: { $sum: "$possibleWinnings" }, betamount: { $sum: "$betAmount" } } }
-            ], (err, res) => {
-              console.log(res)
-            Profile.findOneAndUpdate(
-              { userID: message.author.id },
-              {
-                $inc: {
-                  returntokens: (res[0].wonamount - (res[0].wonamount * 0.05)),
-                  tokens: res[0].wonamount - (res[0].wonamount * 0.05),
-                  bettokens: res[0].betamount,
-                },
-              },
-              (err, user) => {
-              });
-          })
-          bet.forEach((bet) => {
-            const creatorID = bet.creatorID;
-            const guildID = bet.serverID;
-            const betAmount = bet.betAmount;
-            const yourWinnings = bet.possibleWinnings;
-                if (err) {
-                  return console.log(err);
-                }
-                  const newEmbed = new Discord.MessageEmbed()
-                    .setColor("#304281")
-                    .setTitle(`Good Bet on ${bet.Code}!`)
-                    .setAuthor(
-                      message.author.username,
-                      message.author.displayAvatarURL({
-                        format: "png",
-                        dynamic: true,
-                      })
-                    )
-                    .addFields(
-                      {
-                        name: "Bet Amount",
-                        value: betAmount,
-                      },
-                      {
-                        name: "Winnings",
-                        value: yourWinnings.toFixed(2),
-                      },
-                      {
-                        name: "Profit",
-                        value: (yourWinnings - betAmount).toFixed(2),
-                      }
-                    )
-                    .setFooter("visit https://churro.gg/bets to view bets!")
-                    .setURL("https://churro.gg/bets");
-                  message.channel.send(newEmbed);
-                  Bet.deleteOne(
-                    {
-                      creatorID: creatorID,
-                      _id: bet._id,
-                      status: "won",
-                    },
-                    (error, deleted) => {
-                      if (error) {
-                        console.log(error);
-                      }
-                    }
-                  );
-
-            /*Profile.findOneAndUpdate(
-              { userID: client.guilds.cache.get(guildID).ownerID },
-              { $inc: { tokens: yourWinnings * 0.05 } },
-              (err, user) => {
-                if (err) {
-                  return console.log(err);
-                }
-              }
-            );*/
-          });
-        }
-      ).lean();
-
+    try{
       Invest.find(
         {
           creatorID: message.author.id, status: "won"
@@ -144,7 +55,7 @@ module.exports = {
 
                   const newEmbed = new Discord.MessageEmbed()
                     .setColor("#304281")
-                    .setTitle(`Good Bet on ${invest.Code}!`)
+                    .setTitle(`You made ${yourWinnings} Gems 💎!`)
                     .setAuthor(
                       message.author.username,
                       message.author.displayAvatarURL({
@@ -153,14 +64,6 @@ module.exports = {
                       })
                     )
                     .addFields(
-                      {
-                        name: "Invest Amount",
-                        value: betAmount,
-                      },
-                      {
-                        name: "Winnings",
-                        value: yourWinnings.toFixed(2),
-                      },
                       {
                         name: `${code} Return (%)`,
                         value: change.toFixed(2),
