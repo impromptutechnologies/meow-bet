@@ -35,7 +35,7 @@ module.exports = {
     var today = new Date();
     if (dayweek === "week" && today.getDay() !== 6 &&
     today.getDay() !== 0) {
-      return message.author.send(
+      return message.channel.send(
         "Week Commands should be placed on the weekends, for the subsequent week."
       );
     }
