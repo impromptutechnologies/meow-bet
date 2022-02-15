@@ -36,7 +36,7 @@ module.exports = {
     if (dayweek === "week" && today.getDay() !== 6 &&
     today.getDay() !== 0) {
       return message.channel.send(
-        "Week Commands should be placed on the weekends, for the subsequent week."
+        "Week Commands should be placed on the weekend."
       );
     }
     if (
