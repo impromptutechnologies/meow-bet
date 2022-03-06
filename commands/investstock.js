@@ -8,9 +8,9 @@ module.exports = {
   cooldown: 1,
   description: "Invest stock!",
   execute(client, message, args, Discord, profileData) {
-    const code = args[1].toUpperCase();
-    const dayweek = args[0];
-    const amt = 500;
+    const code = args[0].toUpperCase();
+    //const dayweek = args[0];
+    const amt = 100;
     if (isNaN(amt) || !code || amt > profileData.tokens) {
       return message.channel.send(
         `Error: please check the command again or your bankroll. It costs 500 Gems 💎 to enter the stock race :)`
@@ -22,27 +22,18 @@ module.exports = {
       );
     }
     
-    if (dayweek !== "day" && dayweek !== "week") {
-      return message.channel.send(
-        "Day or Week? Like this: !invest day AAPL"
-      );
-    }
+   
     var day = moment.utc().format("DD");
     var month = moment.utc().format("MM");
     var date = moment.utc().format("MM-DD HH:mm");
     var date1 = moment.utc().format(`${month}-${day} 13:30`);
     var date2 = moment.utc().format(`${month}-${day} 21:35`);
     var today = new Date();
-    if (dayweek === "week" && today.getDay() !== 6 &&
-    today.getDay() !== 0) {
-      return message.channel.send(
-        "Week Commands should be placed on the weekend."
-      );
-    }
+    
     if (today.getDay() == 6 &&
     today.getDay() == 0) {
       return message.channel.send(
-        "Its the weekend bro. Place a weekly command."
+        "Its the weekend bro."
       );
     }
     if (

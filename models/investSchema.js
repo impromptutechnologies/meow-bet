@@ -10,7 +10,7 @@ const investSchema = new mongoose.Schema({
   investAmount: { type: Number, required: true },
   percentile: { type: Number, required: false },
   Code: { type: String, required: true },
-  dayWeek: { type: String, required: true },
+  //dayWeek: { type: String, required: true },
 });
 const Invest = mongoose.model("Invest", investSchema);
 
