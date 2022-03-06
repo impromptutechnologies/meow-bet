@@ -39,6 +39,12 @@ module.exports = {
         "Week Commands should be placed on the weekend."
       );
     }
+    if (today.getDay() == 6 &&
+    today.getDay() == 0) {
+      return message.channel.send(
+        "Its the weekend bro. Place a weekly command."
+      );
+    }
     if (
       date > date1 &&
       date < date2 &&
